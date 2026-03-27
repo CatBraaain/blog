@@ -5,7 +5,7 @@
   import type { LayoutProps } from "./$types";
   import Header from "./Header.svelte";
 
-  // import "../style/global.css";
+  import "../style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";
 
   let { children }: LayoutProps = $props();
