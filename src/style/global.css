@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./theme.css";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  body {
+    @apply font-noto-sans bg-background text-foreground;
+  }
+
+  article {
+    @apply prose dark:prose-invert max-w-full break-all;
+
+    h1 {
+      @apply heading;
+    }
+
+    .expressive-code,
+    [data-slot="alert"] {
+      @apply my-5!;
+    }
+    .expressive-code .header {
+      @apply rounded-t-lg!;
+    }
+    .expressive-code pre {
+      @apply rounded-b-lg!;
+    }
+  }
+
+  a,
+  button {
+    @apply select-none;
+  }
+
+  .os-scrollbar {
+    --os-handle-perpendicular-size: 150% !important;
+    --os-handle-perpendicular-size-hover: 150% !important;
+    --os-handle-perpendicular-size-active: 150% !important;
+  }
+
+  .expressive-code .frame {
+    @apply shadow-none!;
+  }
+  .expressive-code .frame.has-title:not(.is-terminal) .title::after {
+    @apply border-[#30363d]! border-b-0!;
+  }
+}
+
+@layer components {
+  .skeleton-group {
+    [data-slot="pagination"],
+    [data-slot="post-card"] {
+      @apply animate-pulse! rounded-md! bg-muted!;
+    }
+    [data-slot="pagination"] *,
+    [data-slot="post-card"] *,
+    [data-slot="post-card"] *::before {
+      @apply bg-transparent! text-transparent!;
+    }
+  }
+  .skeleton {
+    @apply animate-pulse! rounded-md! bg-muted!;
+    *,
+    *::before,
+    *::placeholder {
+      @apply bg-transparent! text-transparent!;
+    }
+  }
+}
+
+@utility active-button {
+  @apply bg-accent text-accent-foreground dark:bg-accent/50;
+}
+@utility focus-ring {
+  @apply border-ring ring-ring/50 ring-[3px];
+}
+@utility hover-ring {
+  /* @apply ring ring-accent-hover; */
+  @apply ring ring-accent-foreground;
+}
+@utility click-disabled {
+  @apply pointer-events-none opacity-50;
+}
+@utility input-disabled {
+  @apply cursor-not-allowed;
+}
+@utility invalid {
+  @apply ring-destructive/20 dark:ring-destructive/40 border-destructive;
+}
+
+@utility heading {
+  @apply relative m-0 ml-5 before:before-heading;
+}
+@utility before-heading {
+  @apply absolute -left-5 top-px w-1 h-full rounded-md bg-primary;
+}
+
+@utility icon-set {
+  @apply flex items-center gap-2;
+}
+@utility accent-icon-* {
+  @apply flex items-center justify-center rounded-sm bg-accent p-2 text-accent-foreground;
+  /* size-[--value(number)] */
+  width: calc(var(--spacing) * --value(number));
+  height: calc(var(--spacing) * --value(number));
+}
+@utility normal-icon-* {
+  @apply flex items-center justify-center rounded-sm bg-transparent p-2 text-foreground;
+  /* size-[--value(number)] */
+  width: calc(var(--spacing) * --value(number));
+  height: calc(var(--spacing) * --value(number));
+}
