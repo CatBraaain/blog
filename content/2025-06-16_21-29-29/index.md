@@ -1,0 +1,28 @@
+---
+title: github1sが便利そう
+category: Tech
+tags: ["Git"]
+createdAt: 2025-06-16 21:29:29
+updatedAt: 2025-06-16 21:29:29
+noteLink: https://note.com/optim/n/nfd8ee1f700a9
+---
+
+たまたま見つけただけなので、走り書きだけど
+githubのリポジトリをブラウジングするときに、UIが悪いという悩みがあって、ピンポイントで足りない機能は、chrome拡張機能で補ったり、git cloneしてローカルでvscodeで見たりするんだけど
+そのどちらもやっぱり腰が重い
+という問題を解決してくれる
+
+[https://github.com/conwnet/github1s](https://github.com/conwnet/github1s)
+
+URLのドメイン部分に"1s"の文字列を追加するだけで、github repository を vscode ui で探索できる
+いいね
+
+2021年2月にできたっぽいけど
+2021年4月中旬には15kいってる
+大流行りすぎる
+
+![](./nfd8ee1f700a9_1750077049-vIWCVURhPXfkcYaFoq825B9e.png)
+
+vscode for the web でも同じようなことができるんだろうか
+[https://code.visualstudio.com/docs/setup/vscode-web](https://code.visualstudio.com/docs/setup/vscode-web)
+時間があるときに確認してみたい

@@ -1,0 +1,26 @@
+---
+title: ahk のマウスキーのスワップが効かない
+category: Tech
+tags: ["AutoHotkey"]
+createdAt: 2022-01-07 01:45:12
+updatedAt: 2022-01-07 01:45:12
+noteLink: https://note.com/optim/n/nceabdca356f8
+---
+
+ahkのマウスキー
+XButton1：サイドボタン手前
+XButton2：サイドボタン奥
+WheelLeft：スクロールホイールを右にずらす
+WheelRight：スクロールホイールを左にずらす
+
+## 症状
+
+これらが効かない
+KeyHistoryでもフックしていない
+
+## 対策
+
+![](./nceabdca356f8_1641487464957-lYynFpqbaW.png)
+
+ロジクールのソフトが先にフックされて他のキーに置き換えられていたのが原因だったので
+デフォルトに戻すボタンを押すとなおった

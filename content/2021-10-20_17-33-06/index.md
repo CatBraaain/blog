@@ -1,0 +1,27 @@
+---
+title: 英語圏の質問サイトStackOverFlowが非ネイティブでも使いやすい！
+category: Life
+tags: []
+createdAt: 2021-10-20 17:33:06
+updatedAt: 2021-10-20 17:33:06
+noteLink: https://note.com/optim/n/na26195af549a
+---
+
+![画像1](./na26195af549a_picture_pc_686528044a8333937460d417c207c320.jpg)
+
+質問を投稿したら、勝手にミスタイプとか単語・文法を修正提案してくれてる！！
+
+exporer → explorer
+
+didnt → didn't
+
+Thanks for help → Thanks for the help.
+
+it → they
+
+これすごすぎ！！
+
+複数形とか意識する習慣ないから忘れがちだけど、それも修正してくれるので、非ネイティブが適当に文章書いてもOK!
+
+と思ったけどよく見たら、ユーザー？が修正提案してくれるみたい
+なので自動ではなかった

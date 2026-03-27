@@ -1,0 +1,27 @@
+---
+title: mermaidのコメント補助のvscode拡張機能を作った
+category: Tech
+tags: ["VSCode"]
+createdAt: 2024-01-01 11:51:41
+updatedAt: 2024-01-01 11:51:41
+noteLink: https://note.com/optim/n/na7e1e211dd4a
+---
+
+## 拡張機能
+
+[https://marketplace.visualstudio.com/items?itemName=CatBraaain.mermaid-comment](https://marketplace.visualstudio.com/items?itemName=CatBraaain.mermaid-comment)
+
+## 目的
+
+markdownファイル内でデフォルトのトグルコメントをすると<!-- -->で囲まれるが、mermaidコードブロック内では、%%のインラインコメントが簡単にできるようにすること
+
+## この拡張機能で出来ること
+
+同じショートカットで、markdownもmermaidもどちらも適切なコメントができる
+
+## 気づいたことなど
+
+- vsce publishのコマンドを打ってから実際に公開反映されるまで数分だった。反映されるとメールがきた。審査とかないのかな
+- chrome拡張機能はアカウント作成に5ドルかかったが、vscodeは無料で公開できた
+- 公開方法について英語で調べるとよくでてくるPATはPersonal access tokenの略
+- PATはどうやって保管すればいいのか分からないし、デフォルトで有効期限も短く設定されているので、公開するたびに発行する感じにしてみようと思う

@@ -1,0 +1,44 @@
+---
+title: どんな画像ファイルでも右クリックで自由に変換 jpg png pdf heic
+category: Life
+tags: []
+createdAt: 2021-11-25 16:44:35
+updatedAt: 2021-11-25 16:44:35
+noteLink: https://note.com/optim/n/n080121de634b
+---
+
+![](./n080121de634b_b63e3c317da4bd7e879346985878c60d.png)
+
+## 目的
+
+画像ファイルを変換するために
+①オンラインコンバーターを検索して開く
+②アップロード
+③変換ボタン
+④zipダウンロードボタン
+⑤zip解凍して終わり
+という面倒すぎる作業をしていたが、これを右クリックでささっと変換したい
+
+## 最強画像変換ソフト
+
+**画像全般対応：FileConverter**
+[https://file-converter.org/](https://file-converter.org/)
+
+名前が一般的すぎるけど、
+右クリックコンテキストメニューから変換できるソフトの中では
+一番多くのファイル拡張子種類に対応している
+
+ただ、この最強ソフトでも唯一対応していないのがheicというiPhoneで撮影した画像の拡張子
+
+これに関しては、それ専用のソフトをいれる
+
+**Heic対応：CopyTrans**
+[https://www.copytrans.jp/copytransheic/](https://www.copytrans.jp/copytransheic/)
+
+こいつで右クリックでheicからjpgに変換できる
+
+## あとがき
+
+FileConverter最強すぎ
+これははかどる！
+もっと早く調べればよかった

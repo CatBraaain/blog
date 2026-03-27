@@ -1,0 +1,39 @@
+---
+title: VSCodeでmanifest.jsonのコメントエラー表示を無効化する方法
+category: Tech
+tags: ["VSCode"]
+createdAt: 2022-10-08 14:06:16
+updatedAt: 2022-10-08 14:06:16
+noteLink: https://note.com/optim/n/n4adcc82eba7d
+---
+
+## 目的
+
+通常はコメントを入れることができないのがjsonファイルの仕様だが
+拡張機能に使われるmanifest.jsonはコメントを入れることが可能
+VSCodeでは、manifest.jsonのコメントに対してもエラー表示されるのでそれを無効化する
+
+## やりかた
+
+7行目のyodobashiコメントがエラー扱いされている
+
+![](./n4adcc82eba7d_1665205046090-oBWyYRdE42.png)
+
+右下のJSONというボタンを押す
+
+![](./n4adcc82eba7d_1665205195555-877X9955c9.png)
+
+上に入力ボックスが出てくるので"jsonc"と入力して
+下に候補として出てくるJSON with Commentをクリック
+
+![](./n4adcc82eba7d_1665205205159-E8zviwxjpA.png)
+
+エラーがなくなる
+
+![](./n4adcc82eba7d_1665205246225-w0aZhGmzEI.png)
+
+やったね
+
+## 参考
+
+[https://stackoverflow.com/questions/47834825/in-vs-code-disable-error-comments-are-not-permitted-in-json](https://stackoverflow.com/questions/47834825/in-vs-code-disable-error-comments-are-not-permitted-in-json)
