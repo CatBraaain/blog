@@ -4,7 +4,7 @@
   import Header from "$lib/components/Header.svelte";
   import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "$lib/config";
 
-  import "$/style/global.css";
+  import "$lib/style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";
 
   let {
