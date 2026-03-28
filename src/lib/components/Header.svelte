@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import CardBase from "./CardBase.svelte";
+  import CardBase from "$lib/components/CardBase.svelte";
 </script>
 
 <header data-pagefind-ignore="all">
