@@ -1,17 +1,18 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { page } from "$app/state";
+  import Header from "$lib/components/Header.svelte";
   import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "$lib/config";
-  import type { LayoutProps } from "./$types";
-  import Header from "./Header.svelte";
 
-  import "../style/global.css";
+  import "../../style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";
 
-  let { children }: LayoutProps = $props();
+  let {
+    title = SITE_TITLE,
+    description = SITE_DESCRIPTION,
+    children,
+  }: { title?: string; description?: string; children?: any } = $props();
 
-  const title = $derived(page.data.title ?? SITE_TITLE);
-  const description = $derived(page.data.description ?? SITE_DESCRIPTION);
   const canonicalUrl = $derived(new URL(page.url.pathname, SITE_URL).href);
   const url = $derived(new URL(page.url.href, SITE_URL).href);
 
