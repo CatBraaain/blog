@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import CardBase from "$lib/components/CardBase.svelte";
+  import { linkVariants } from "$style/variants";
   import LaHome from "~icons/la/home";
   import SimpleIconsGithub from "~icons/simple-icons/github";
 </script>
@@ -11,8 +12,7 @@
       <div class="justify-self-start">
         <a
           href="/"
-          // TODO: use smartLinkVariants
-          class="flex items-center justify-center rounded-sm text-accent-foreground size-9"
+          class={linkVariants({ variant: "button", size: "icon" })}
           aria-label="Home"
           aria-current={page.url.pathname === "/" ? "page" : undefined}
         >
@@ -25,8 +25,7 @@
       <div class="flex items-center gap-5 justify-self-end">
         <a
           href="https://github.com/withastro/astro"
-          // TODO: use smartLinkVariants
-          class="flex items-center justify-center rounded-sm text-accent-foreground size-9"
+          class={linkVariants({ variant: "button", size: "icon" })}
           aria-label="Go to Astro's GitHub repo"
           target="_blank"
           rel="noopener"

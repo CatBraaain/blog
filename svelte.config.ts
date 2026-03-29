@@ -6,6 +6,7 @@ const config: Config = {
     adapter: adapter(),
     alias: {
       "$/*": "src/*",
+      "$style/*": "src/lib/style/*",
     },
   },
 };
