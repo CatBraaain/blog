@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from "$app/state";
   import CardBase from "$lib/components/CardBase.svelte";
+  import LaHome from "~icons/la/home";
+  import SimpleIconsGithub from "~icons/simple-icons/github";
 </script>
 
 <header data-pagefind-ignore="all">
@@ -10,11 +12,11 @@
         <a
           href="/"
           // TODO: use smartLinkVariants
-          class="flex items-center justify-center rounded-sm bg-accent p-2 text-accent-foreground size-9"
+          class="flex items-center justify-center rounded-sm text-accent-foreground size-9"
           aria-label="Home"
           aria-current={page.url.pathname === "/" ? "page" : undefined}
         >
-          <!-- <LiaHomeSolid className="size-7" /> -->
+          <LaHome class="size-8" />
         </a>
       </div>
 
@@ -24,12 +26,12 @@
         <a
           href="https://github.com/withastro/astro"
           // TODO: use smartLinkVariants
-          class="flex items-center justify-center rounded-sm bg-accent p-2 text-accent-foreground size-9"
+          class="flex items-center justify-center rounded-sm text-accent-foreground size-9"
           aria-label="Go to Astro's GitHub repo"
           target="_blank"
           rel="noopener"
         >
-          <!-- <IoLogoGithub className="size-8" /> -->
+          <SimpleIconsGithub class="size-8" />
         </a>
       </div>
     </nav>
