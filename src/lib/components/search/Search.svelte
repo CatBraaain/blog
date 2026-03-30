@@ -5,11 +5,13 @@
     FieldSeparator,
     FieldSet,
   } from "$lib/components/ui/field";
+  import SearchInputField from "./SearchInputField.svelte";
 </script>
 
 <CardBase>
   <FieldSet>
     <FieldGroup>
+      <SearchInputField />
       <FieldSeparator />
       <FieldSeparator />
     </FieldGroup>
