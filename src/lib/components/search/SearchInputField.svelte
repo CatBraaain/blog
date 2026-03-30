@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
     InputGroup,
@@ -12,8 +14,16 @@
   <FieldLabel for="search">Search</FieldLabel>
   <InputGroup>
     <InputGroupInput
-      // value={query?.word || ""}
+      value={page.url.searchParams.get("q")}
       placeholder="Search..."
+      oninput={(e) => {
+        page.url.searchParams.set("q", e.currentTarget.value);
+        goto(`?${page.url.searchParams}`, {
+          replaceState: true,
+          keepFocus: true,
+          noScroll: true,
+        });
+      }}
     />
     <InputGroupAddon>
       <IonSearchSharp />
