@@ -1,11 +1,12 @@
 <script lang="ts">
   import BaseLayout from "$lib/components/BaseLayout.svelte";
+  import Search from "$lib/components/search/Search.svelte";
 </script>
 
 <BaseLayout title="Home" description="Svelte demo app">
   <div class={"flex gap-5"} data-pagefind-ignore="all">
     <section class={"w-1/3"}>
-      <!-- <Search client:load {posts} /> -->
+      <Search></Search>
     </section>
     <section class={"w-2/3"}>
       <!-- <PostList client:load {posts} /> -->
