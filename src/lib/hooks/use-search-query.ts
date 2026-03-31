@@ -1,63 +1,66 @@
 import { goto } from "$app/navigation";
 import { page } from "$app/state";
 
-export type SearchQuery = {
+export type SearchQueryStruct = {
   word?: string;
   category?: string;
   tag?: string;
 };
 
-export function getSearchQuery(): SearchQuery {
-  const tokens = page.url.searchParams.get("q")?.split(" ") ?? [];
-  const categoryTokens = tokens.filter((e) => e.startsWith("c:"));
-  const tagTokens = tokens.filter((e) => e.startsWith("t:"));
-  const word = tokens
-    .filter((e) => ![...categoryTokens, ...tagTokens].includes(e))
-    .join(" ");
-  return {
-    word,
-    category: categoryTokens.at(0)?.slice(2),
-    tag: tagTokens.at(0)?.slice(2),
-  };
-}
-
-export function mergeSearchQuery(
-  update: SearchQuery,
-  history: "push" | "replace" = "push",
-) {
-  const current = getSearchQuery();
-  const merged = { ...current, ...update };
-  const serialized = serializeSearchQuery(merged);
-  if (serialized) {
-    page.url.searchParams.set("q", serialized);
-  } else {
-    page.url.searchParams.delete("q");
+export class SearchQuery {
+  static get word() {
+    return SearchQuery.getSearchQuery().word;
   }
-  goto(`?${page.url.searchParams.toString().replaceAll("%3A", ":")}`, {
-    replaceState: history === "replace",
-    keepFocus: true,
-    noScroll: true,
-  });
-}
-
-export function buildQueryHref(update: SearchQuery) {
-  const current = getSearchQuery();
-  const merged = { ...current, ...update };
-  const serialized = serializeSearchQuery(merged);
-  if (serialized) {
-    page.url.searchParams.set("q", serialized);
-  } else {
-    page.url.searchParams.delete("q");
+  static get category() {
+    return SearchQuery.getSearchQuery().category;
   }
-  const paramString = page.url.searchParams.toString().replaceAll("%3A", ":");
-  return paramString ? `/?${paramString}` : "/";
-}
+  static get tag() {
+    return SearchQuery.getSearchQuery().tag;
+  }
 
-export function serializeSearchQuery(query: SearchQuery): string | null {
-  const parts = [
-    query.word,
-    query.category ? `c:${encodeURIComponent(query.category)}` : "",
-    query.tag ? `t:${encodeURIComponent(query.tag)}` : "",
-  ].filter(Boolean);
-  return parts.length > 0 ? parts.join(" ") : null;
+  static set word(value) {
+    const href = SearchQuery.buildMergedHref({ word: value });
+    goto(href, {
+      replaceState: true,
+      keepFocus: true,
+      noScroll: true,
+    });
+  }
+
+  private static getSearchQuery(): SearchQueryStruct {
+    const tokens = page.url.searchParams.get("q")?.split(" ") ?? [];
+    const categoryTokens = tokens.filter((e) => e.startsWith("c:"));
+    const tagTokens = tokens.filter((e) => e.startsWith("t:"));
+    const word = tokens
+      .filter((e) => ![...categoryTokens, ...tagTokens].includes(e))
+      .join(" ");
+    return {
+      word,
+      category: categoryTokens.at(0)?.slice(2),
+      tag: tagTokens.at(0)?.slice(2),
+    };
+  }
+
+  public static buildMergedHref(query: SearchQueryStruct): string {
+    const searchQueryString = SearchQuery.serializeSearchQuery({
+      ...SearchQuery.getSearchQuery(),
+      ...query,
+    });
+    const newUrl = new URL(page.url.toString());
+    if (searchQueryString) {
+      newUrl.searchParams.set("q", searchQueryString);
+    } else {
+      newUrl.searchParams.delete("q");
+    }
+    return newUrl.toString().replaceAll("%3A", ":");
+  }
+
+  private static serializeSearchQuery(query: SearchQueryStruct): string | null {
+    const parts = [
+      query.word,
+      query.category ? `c:${encodeURIComponent(query.category)}` : "",
+      query.tag ? `t:${encodeURIComponent(query.tag)}` : "",
+    ].filter(Boolean);
+    return parts.length > 0 ? parts.join(" ") : null;
+  }
 }

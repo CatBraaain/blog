@@ -1,9 +1,5 @@
 <script lang="ts">
-  import {
-    buildQueryHref,
-    getSearchQuery,
-    mergeSearchQuery,
-  } from "$/lib/hooks/use-search-query";
+  import { SearchQuery } from "$/lib/hooks/use-search-query";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
     ToggleGroup,
@@ -12,8 +8,6 @@
   import { CATEGORY_KINDS } from "$lib/config";
   import { linkVariants } from "$lib/style/variants";
   import MdiFolderOutline from "~icons/mdi/folder-outline";
-
-  const query = getSearchQuery();
 </script>
 
 {#if CATEGORY_KINDS.length > 0}
@@ -21,13 +15,7 @@
     <FieldLabel for="categories">Categories</FieldLabel>
     <ToggleGroup
       type="single"
-      value={query.category ?? ""}
-      onValueChange={(newValue) => {
-        mergeSearchQuery({
-          category: newValue || undefined,
-          tag: undefined,
-        });
-      }}
+      value={SearchQuery.category}
       variant={"default"}
       size={"default"}
       spacing={1}
@@ -37,11 +25,11 @@
         <ToggleGroupItem value={category}>
           {#snippet child({ props })}
             <a
-              href={buildQueryHref({
-                category: query?.category === category ? "" : category,
+              href={SearchQuery.buildMergedHref({
+                category: SearchQuery.category === category ? "" : category,
                 tag: "",
               })}
-              data-active={query?.category === category}
+              data-active={SearchQuery.category === category}
               {...props}
               class={linkVariants({
                 variant: "button",
