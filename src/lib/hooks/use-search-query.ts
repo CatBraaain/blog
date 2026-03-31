@@ -40,6 +40,19 @@ export function mergeSearchQuery(
   });
 }
 
+export function buildQueryHref(update: SearchQuery) {
+  const current = getSearchQuery();
+  const merged = { ...current, ...update };
+  const serialized = serializeSearchQuery(merged);
+  if (serialized) {
+    page.url.searchParams.set("q", serialized);
+  } else {
+    page.url.searchParams.delete("q");
+  }
+  const paramString = page.url.searchParams.toString().replaceAll("%3A", ":");
+  return paramString ? `/?${paramString}` : "/";
+}
+
 export function serializeSearchQuery(query: SearchQuery): string | null {
   const parts = [
     query.word,

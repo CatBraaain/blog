@@ -5,6 +5,7 @@
     FieldSeparator,
     FieldSet,
   } from "$lib/components/ui/field";
+  import SearchCategoryField from "./SearchCategoryField.svelte";
   import SearchInputField from "./SearchInputField.svelte";
 </script>
 
@@ -13,6 +14,7 @@
     <FieldGroup>
       <SearchInputField />
       <FieldSeparator />
+      <SearchCategoryField />
       <FieldSeparator />
     </FieldGroup>
   </FieldSet>
