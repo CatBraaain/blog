@@ -5,30 +5,30 @@
     ToggleGroup,
     ToggleGroupItem,
   } from "$lib/components/ui/toggle-group";
-  import { CATEGORY_KINDS } from "$lib/config";
+  import { TAG_KINDS } from "$lib/config";
   import { linkVariants } from "$lib/style/variants";
-  import MdiFolderOutline from "~icons/mdi/folder-outline";
+  import HeroiconsHashtag16Solid from "~icons/heroicons/hashtag-16-solid";
 </script>
 
 <Field>
-  <FieldLabel for="categories">Categories</FieldLabel>
+  <FieldLabel for="tags">Tags</FieldLabel>
   <ToggleGroup
     type="single"
-    value={SearchQuery.category}
+    value={SearchQuery.tag}
     variant={"default"}
     size={"default"}
     spacing={1}
     class="flex flex-col items-start gap-2"
   >
-    {#each CATEGORY_KINDS as category}
-      <ToggleGroupItem value={category}>
+    {#each TAG_KINDS as tag}
+      <ToggleGroupItem value={tag}>
         {#snippet child({ props })}
           <a
             href={SearchQuery.buildMergedHref({
-              category: SearchQuery.category === category ? "" : category,
-              tag: undefined,
+              tag: SearchQuery.tag === tag ? "" : tag,
+              category: undefined,
             })}
-            data-active={SearchQuery.category === category}
+            data-active={SearchQuery.tag === tag}
             {...props}
             class={linkVariants({
               variant: "button",
@@ -38,12 +38,12 @@
             })}
           >
             <div class="icon-set">
-              <MdiFolderOutline className="accent-icon-8" />
-              {category}
+              <HeroiconsHashtag16Solid className="accent-icon-8" />
+              {tag}
             </div>
             <!-- <div class="normal-icon-8">
               {(query?.word ? searchResult : posts).filter(
-                (post) => post.category === category,
+                (post) => post.tag === tag,
               ).length}
             </div> -->
           </a>

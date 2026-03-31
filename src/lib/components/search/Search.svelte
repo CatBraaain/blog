@@ -7,6 +7,7 @@
   } from "$lib/components/ui/field";
   import SearchCategoryField from "./SearchCategoryField.svelte";
   import SearchInputField from "./SearchInputField.svelte";
+  import SearchTagField from "./SearchTagField.svelte";
 </script>
 
 <CardBase>
@@ -16,6 +17,7 @@
       <FieldSeparator />
       <SearchCategoryField />
       <FieldSeparator />
+      <SearchTagField />
     </FieldGroup>
   </FieldSet>
 </CardBase>
