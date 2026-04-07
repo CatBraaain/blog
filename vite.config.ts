@@ -11,6 +11,20 @@ export default defineConfig({
     Icons({
       compiler: "svelte",
     }),
+    {
+      name: "fix-mdsvex-html",
+      enforce: "pre",
+      transform(code, id) {
+        if (id.includes(".md")) {
+          return {
+            code: code.replace(/\{@html\s+`([\s\S]*?)`\s*\}/g, (_, content) => {
+              return `${content}`;
+            }),
+            map: null,
+          };
+        }
+      },
+    },
   ],
   server: {
     fs: {
