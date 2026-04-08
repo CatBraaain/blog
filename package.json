@@ -50,6 +50,8 @@
     "bits-ui": "^2.16.3",
     "dayjs": "^1.11.20",
     "globals": "^17.3.0",
+    "gray-matter": "^4.0.3",
+    "hastscript": "^9.0.1",
     "playwright": "^1.58.2",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",

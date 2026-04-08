@@ -11,9 +11,3 @@ declare global {
     // interface Platform {}
   }
 }
-
-declare module "*.md" {
-  import type { Component } from "svelte";
-  export default Component;
-  export const metadata: Record<string, unknown>;
-}
