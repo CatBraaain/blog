@@ -3,10 +3,7 @@ import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
 import remarkDirective from "remark-directive";
-import {
-  extendedTableHandlers,
-  remarkExtendedTable,
-} from "remark-extended-table";
+import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -14,6 +11,7 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
+import { remarkFenced } from "./remark-fenced.js";
 
 export function md2svelte(): Plugin {
   return {
@@ -26,9 +24,9 @@ export function md2svelte(): Plugin {
       const file = await unified()
         .use(remarkParse)
         .use(remarkEscapeMarkdownContent)
-        .use(remarkDirective)
-        .use(remarkDirective2CustomTag)
         .use(remarkExtendedTable)
+        .use(remarkFenced)
+        .use(remarkFencedHandler)
         .use(remarkFlexibleMarkers)
         .use(remarkGfm)
         .use(remarkRehype, {
@@ -51,14 +49,12 @@ export function md2svelte(): Plugin {
   };
 }
 
-function remarkDirective2CustomTag() {
+function remarkFencedHandler() {
   return (tree: Root) => {
     visit(tree, (node) => {
-      if (node.type === "containerDirective") {
+      if (node.type === "fenced") {
         if (!node.data) node.data = {};
-        const hast = h(node.name, node.attributes || {});
-        node.data.hName = hast.tagName[0].toUpperCase() + hast.tagName.slice(1);
-        node.data.hProperties = hast.properties;
+        node.data.hName = "fenced";
       }
     });
   };
