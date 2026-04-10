@@ -1,11 +1,13 @@
+import type { BlockContent, DefinitionContent, Parent, Root } from "mdast";
 import { codes, constants, types } from "micromark-util-symbol";
-import type { State, Token, TokenizeContext, Code, Effects } from "micromark-util-types";
+import type { Code, Effects, State, Token, TokenizeContext } from "micromark-util-types";
 import type { Processor } from "unified";
-import type { Parent, BlockContent, DefinitionContent } from "mdast";
+import { visit } from "unist-util-visit";
 
 declare module "micromark-util-types" {
   export interface TokenTypeMap {
     [fencedScope]: typeof fencedScope;
+    [fencedMetaScope]: typeof fencedMetaScope;
   }
 }
 
@@ -17,6 +19,7 @@ declare module "mdast" {
 
 interface Fenced extends Parent {
   type: typeof fencedScope;
+  meta: string;
   children: Array<BlockContent | DefinitionContent>;
   data?: any;
 }
@@ -24,25 +27,49 @@ interface Fenced extends Parent {
 const fencedSequenceMinLength = 3;
 const fencedFence = codes.colon;
 const fencedScope = "fenced" as const;
+const fencedMetaScope = "fencedMeta" as const;
 
 export function remarkFenced(this: Processor) {
   const data = this.data();
 
-  const micromarkExtensions = data.micromarkExtensions || (data.micromarkExtensions = []);
-  const fromMarkdownExtensions = data.fromMarkdownExtensions || (data.fromMarkdownExtensions = []);
+  data.micromarkExtensions ||= [];
+  data.fromMarkdownExtensions ||= [];
 
-  micromarkExtensions.push(fenced());
-  fromMarkdownExtensions.push({
+  data.micromarkExtensions.push(fenced());
+  data.fromMarkdownExtensions.push({
     canContainEols: [fencedScope],
     enter: {
       [fencedScope]: function (token) {
-        // @ts-ignore
-        this.enter({ type: fencedScope, name: "", attributes: {}, children: [] }, token);
+        this.enter({ type: fencedScope, meta: "", children: [] }, token);
       },
     },
     exit: {
-      [fencedScope]: function exit(token) {
+      [fencedScope]: function (token) {
         this.exit(token);
+      },
+      [fencedMetaScope]: function (token) {
+        const node = this.stack[this.stack.length - 1] as Fenced;
+        const meta = this.sliceSerialize(token);
+        const attributePattern = /(?<=[\s]|^)(?:[^\s"']+|"[^"]*"|'[^']*')+(?=[\s]|$)/g;
+        const attributeTokens = [...meta.matchAll(attributePattern)].map((m) => m[0]);
+
+        const name = attributeTokens[0];
+        const attributes = Object.fromEntries(
+          attributeTokens.slice(1).map((m) => {
+            const [key, ...valueParts] = m.split("=");
+            const quotableValue = valueParts.join("=");
+            const isQuoted =
+              (quotableValue.startsWith('"') && quotableValue.endsWith('"')) ||
+              (quotableValue.startsWith("'") && quotableValue.endsWith("'"));
+            const value = isQuoted ? quotableValue.slice(1, -1) : quotableValue;
+            return [key, value === "true" ? true : value];
+          }),
+        );
+
+        node.meta = meta;
+        node.data ||= {};
+        node.data.hName = name;
+        node.data.hProperties = attributes;
       },
     },
   });
@@ -60,9 +87,8 @@ const fenced = () => ({
 });
 
 function tokenizeFenced(this: TokenizeContext, effects: Effects, ok: State, nok: State): State {
-  let isCounting = true;
   let openSize = 0;
-  let previous: Token | undefined = undefined;
+  let previous: Token | undefined;
 
   return start;
 
@@ -72,18 +98,22 @@ function tokenizeFenced(this: TokenizeContext, effects: Effects, ok: State, nok:
   }
 
   function openFence(code: Code): State {
-    if (isCounting && code === fencedFence) {
+    if (code === fencedFence) {
       effects.consume(code);
       openSize++;
       return openFence;
     }
-    if (isCounting && openSize < fencedSequenceMinLength) {
+    if (openSize < fencedSequenceMinLength) {
       return nok(code)!;
     }
 
-    isCounting = false;
+    effects.enter(fencedMetaScope);
+    return fenceMeta(code);
+  }
 
+  function fenceMeta(code: Code) {
     if (isEol(code)) {
+      effects.exit(fencedMetaScope);
       effects.enter(types.lineEnding);
       effects.consume(code);
       effects.exit(types.lineEnding);
@@ -95,7 +125,7 @@ function tokenizeFenced(this: TokenizeContext, effects: Effects, ok: State, nok:
     }
 
     effects.consume(code);
-    return openFence;
+    return fenceMeta;
   }
 
   function lineStart(code: Code) {
@@ -140,13 +170,13 @@ function tokenizeFenced(this: TokenizeContext, effects: Effects, ok: State, nok:
 
   function closeFence(effects: Effects, ok: State, nok: State): State {
     let closeSize = 0;
-    return _closeSequence;
+    return _closeFence;
 
-    function _closeSequence(code: Code): State {
+    function _closeFence(code: Code): State {
       if (code === fencedFence) {
         effects.consume(code);
         closeSize++;
-        return _closeSequence;
+        return _closeFence;
       }
 
       if (closeSize === openSize && (isEol(code) || isEof(code))) {

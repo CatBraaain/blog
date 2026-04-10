@@ -2,7 +2,6 @@ import matter from "gray-matter";
 import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
-import remarkDirective from "remark-directive";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
@@ -26,7 +25,6 @@ export function md2svelte(): Plugin {
         .use(remarkEscapeMarkdownContent)
         .use(remarkExtendedTable)
         .use(remarkFenced)
-        .use(remarkFencedHandler)
         .use(remarkFlexibleMarkers)
         .use(remarkGfm)
         .use(remarkRehype, {
@@ -46,17 +44,6 @@ export function md2svelte(): Plugin {
         map: null,
       };
     },
-  };
-}
-
-function remarkFencedHandler() {
-  return (tree: Root) => {
-    visit(tree, (node) => {
-      if (node.type === "fenced") {
-        if (!node.data) node.data = {};
-        node.data.hName = "fenced";
-      }
-    });
   };
 }
 
