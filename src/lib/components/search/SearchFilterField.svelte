@@ -9,7 +9,7 @@
   import { linkVariants } from "$lib/style/variants";
 
   interface Props {
-    queryKey: "category" | "tag";
+    queryKey: "category" | "tags";
     label: "Categories" | "Tags";
     itemNames: string[];
     activeItemName: string | undefined;
@@ -17,6 +17,10 @@
   }
 
   let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
+
+  const posts = Object.values(
+    import.meta.glob("$content/**/index.md", { eager: true }),
+  );
 </script>
 
 <Field>
@@ -52,6 +56,16 @@
             <div class="icon-set">
               <Icon className="accent-icon-8" />
               {item}
+            </div>
+            <div>
+              {posts.filter((post) => {
+                const metaItem = post.meta[queryKey];
+                if (Array.isArray(metaItem)) {
+                  return metaItem.includes(item);
+                } else {
+                  return metaItem === item;
+                }
+              }).length}
             </div>
           </a>
         {/snippet}
