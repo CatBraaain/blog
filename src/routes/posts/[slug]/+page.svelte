@@ -1,14 +1,12 @@
 <script lang="ts">
+  import Post from "$/lib/components/post/Post.svelte";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
-  let { PostContent, meta } = $derived(data);
+  let { PostContent, postMeta } = $derived(data);
 </script>
 
 <BaseLayout title="Home" description="Svelte demo app">
-  <article>
-    {JSON.stringify(meta, null, 2)}
-    <PostContent></PostContent>
-  </article>
+  <Post {postMeta} {PostContent}></Post>
 </BaseLayout>

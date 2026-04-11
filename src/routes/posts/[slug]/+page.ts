@@ -6,6 +6,6 @@ export async function load({ params }) {
 
   return {
     PostContent: module.default as Component,
-    meta: module.meta as PostMeta,
+    postMeta: module.meta as PostMeta,
   };
 }
