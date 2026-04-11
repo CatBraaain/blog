@@ -7,7 +7,7 @@ import { CATEGORY_KINDS, COLLECTION_NAME, TAG_KINDS } from "$lib/config";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export const postSchema = z
+export const postMetaSchema = z
   .object({
     title: z.string(),
     description: z.string().optional(),
@@ -15,12 +15,8 @@ export const postSchema = z
     category: z.enum(CATEGORY_KINDS),
     tags: z.array(z.enum(TAG_KINDS)).default([]),
     image: z.string().optional(),
-    createdAt: z
-      .date()
-      .overwrite((d) => dayjs.utc(d).tz("Asia/Tokyo", true).toDate()),
-    updatedAt: z
-      .date()
-      .overwrite((d) => dayjs.utc(d).tz("Asia/Tokyo", true).toDate()),
+    createdAt: z.date().overwrite((d) => dayjs.utc(d).tz("Asia/Tokyo", true).toDate()),
+    updatedAt: z.date().overwrite((d) => dayjs.utc(d).tz("Asia/Tokyo", true).toDate()),
     noteLink: z.url().optional(),
     isDraft: z.boolean().default(false),
   })
@@ -34,4 +30,4 @@ export const postSchema = z
     path: ["updatedAt"],
   });
 
-export type Post = z.infer<typeof postSchema>;
+export type PostMeta = z.infer<typeof postMetaSchema>;
