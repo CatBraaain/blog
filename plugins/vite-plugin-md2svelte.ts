@@ -1,3 +1,4 @@
+import { uneval } from "devalue";
 import matter from "gray-matter";
 import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
@@ -10,6 +11,7 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
+import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
 import { remarkFenced } from "./remark-fenced.js";
 
 export function md2svelte(): Plugin {
@@ -32,7 +34,7 @@ export function md2svelte(): Plugin {
             ...extendedTableHandlers,
           },
         })
-        .use(addMetaScript, frontmatter)
+        .use(addMetaScript, postMetaSchema.parse(frontmatter))
         .use(rehypeStringify)
         .process(content);
       const html = String(file);
@@ -77,12 +79,12 @@ function remarkEscapeMarkdownContent() {
   };
 }
 
-function addMetaScript(meta: Record<string, any>) {
+function addMetaScript(frontmatter: PostMeta) {
   return (tree: any) => {
     const scriptNode = h(
       "script",
       { lang: "ts", context: "module" },
-      `export const meta = ${JSON.stringify(meta)};`,
+      `export const meta = ${uneval(frontmatter)};`,
     );
     tree.children.unshift(scriptNode);
   };

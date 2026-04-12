@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { z } from "zod";
-import { CATEGORY_KINDS, COLLECTION_NAME, TAG_KINDS } from "$lib/config";
+import { CATEGORY_KINDS, COLLECTION_NAME, TAG_KINDS } from "./config";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
