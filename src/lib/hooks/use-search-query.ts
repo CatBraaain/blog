@@ -1,3 +1,4 @@
+import { building } from "$app/environment";
 import { goto } from "$app/navigation";
 import { page } from "$app/state";
 
@@ -27,8 +28,8 @@ export class SearchQuery {
     });
   }
 
-  private static getSearchQuery(): SearchQueryStruct {
-    const tokens = page.url.searchParams.get("q")?.split(" ") ?? [];
+  public static getSearchQuery(): SearchQueryStruct {
+    const tokens = !building ? (page.url.searchParams.get("q")?.split(" ") ?? []) : [];
     const categoryTokens = tokens.filter((e) => e.startsWith("c:"));
     const tagTokens = tokens.filter((e) => e.startsWith("t:"));
     const word = tokens.filter((e) => ![...categoryTokens, ...tagTokens].includes(e)).join(" ");
