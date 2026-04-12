@@ -1,24 +1,53 @@
 <script lang="ts">
   import type { Component } from "svelte";
-  import type { PostMeta } from "$/lib/post-meta";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
+  import type { PostMeta } from "$lib/post-meta";
+  import MetaBelt from "./MetaBelt.svelte";
 
   let {
     postMeta,
     PostContent,
-  }: { postMeta: PostMeta; PostContent: Component } = $props();
+    titleLink,
+    showDescription,
+    showImage,
+  }: {
+    postMeta: PostMeta;
+    PostContent?: Component;
+    titleLink?: string | false;
+    showDescription: boolean;
+    showImage: boolean;
+  } = $props();
+  const description = postMeta.description || postMeta.excerpt || "";
 </script>
 
 <CardBase>
   <article class="flex flex-col">
     <div class="flex flex-col gap-4">
       <h1>
-        {postMeta.title}
+        {#if titleLink}
+          <a
+            href={titleLink}
+            // class={linkVariants({ variant: "link", size: "auto" })}
+          >
+            {postMeta.title}
+          </a>
+        {:else}
+          {postMeta.title}
+        {/if}
       </h1>
-      <!-- <MetaBelt {post} showUpdatedAt={false} /> -->
+      <MetaBelt {postMeta} showUpdatedAt={false} />
     </div>
-    <div class="m-0"></div>
+    {#if showDescription && description}
+      <div class="m-0">
+        {@html description}
+      </div>
+    {/if}
+    {#if showImage && postMeta.image}
+      <div class="not-prose">
+        <img class="w-full rounded-lg shadow-sm" src={postMeta.image} alt="" />
+      </div>
+    {/if}
     <PostContent />
   </article>
 </CardBase>

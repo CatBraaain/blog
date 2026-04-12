@@ -8,5 +8,11 @@
 </script>
 
 <BaseLayout title="Home" description="Svelte demo app">
-  <Post {postMeta} {PostContent}></Post>
+  <Post
+    {postMeta}
+    {PostContent}
+    titleLink={false}
+    showDescription={false}
+    showImage={true}
+  ></Post>
 </BaseLayout>
