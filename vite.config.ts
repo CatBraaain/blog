@@ -19,4 +19,10 @@ export default defineConfig({
       allow: ["./content"],
     },
   },
+  assetsInclude: ["**/pagefind.js"],
+  build: {
+    rollupOptions: {
+      external: ["/pagefind/pagefind.js"],
+    },
+  },
 });
