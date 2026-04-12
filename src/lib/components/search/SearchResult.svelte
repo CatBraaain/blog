@@ -1,8 +1,16 @@
 <script lang="ts">
   import { SearchQuery } from "$/lib/hooks/use-search-query";
   import Post from "$lib/components/post/Post.svelte";
+  import {
+    Empty,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle,
+  } from "$lib/components/ui/empty/index.js";
   import type { PostMeta } from "$lib/post-meta";
   import { cn } from "$lib/utils";
+  import IonSearchSharp from "~icons/ion/search-sharp";
 
   let {
     postMetas,
@@ -36,15 +44,16 @@
       {/each}
     </ul>
   {:else}
-    <div
-      class="flex flex-col items-center justify-center gap-4 py-12 text-center"
-    >
-      <div class="icon-set">
-        <span class="text-muted-foreground">No articles found</span>
-      </div>
-      <p class="text-muted-foreground">
-        Oops! No articles found. Try another search.
-      </p>
-    </div>
+    <Empty class="border border-muted border-dashed bg-muted/30">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <IonSearchSharp />
+        </EmptyMedia>
+        <EmptyTitle>No articles found</EmptyTitle>
+        <EmptyDescription>
+          Oops! No articles found. Try another search.
+        </EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   {/if}
 </div>
