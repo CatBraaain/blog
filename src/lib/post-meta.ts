@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { z } from "zod";
-import { CATEGORY_KINDS, COLLECTION_NAME, TAG_KINDS } from "./config";
+import { CATEGORY_KINDS, TAG_KINDS } from "./config";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -23,7 +23,7 @@ export const postMetaSchema = z
   .strict()
   .transform((data) => ({
     ...data,
-    pagePath: `/${COLLECTION_NAME.posts}/${dayjs(data.createdAt).tz("Asia/Tokyo").format("YYYYMMDDHHmmss")}/`,
+    slug: dayjs(data.createdAt).tz("Asia/Tokyo").format("YYYYMMDDHHmmss"),
   }))
   .refine((e) => e.updatedAt >= e.createdAt, {
     error: "updatedAt must be greater than or equal to createdAt",

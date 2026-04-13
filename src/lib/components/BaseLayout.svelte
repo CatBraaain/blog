@@ -70,7 +70,7 @@
     <meta
       data-pagefind-meta={`createdAt:${postMeta.createdAt.toISOString()}`}
     />
-    <meta data-pagefind-meta={`pagePath:${postMeta.pagePath}`} />
+    <meta data-pagefind-meta={`slug:${postMeta.slug}`} />
   {/if}
 </svelte:head>
 
