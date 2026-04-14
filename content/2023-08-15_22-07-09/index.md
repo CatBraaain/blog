@@ -26,5 +26,3 @@ $local:var
 ## 参考
 
 [https://stackoverflow.com/questions/63745490/powershell-cannot-have-local-variables-scoped-inside-a-class-method](https://stackoverflow.com/questions/63745490/powershell-cannot-have-local-variables-scoped-inside-a-class-method)
-
-##

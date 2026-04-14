@@ -20,11 +20,13 @@
     className?: string;
   } = $props();
 
-  const filteredPosts = postMetas.filter(
-    (post) =>
-      (SearchQuery.category === undefined ||
-        post.category === SearchQuery.category) &&
-      (SearchQuery.tag === undefined || post.tags.includes(SearchQuery.tag)),
+  const filteredPosts = $derived(() =>
+    postMetas.filter(
+      (post) =>
+        (SearchQuery.category === undefined ||
+          post.category === SearchQuery.category) &&
+        (SearchQuery.tag === undefined || post.tags.includes(SearchQuery.tag)),
+    ),
   );
 </script>
 

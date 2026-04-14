@@ -23,7 +23,7 @@
     showTags?: boolean;
   } = $props();
 
-  const isModified = postMeta.updatedAt > postMeta.createdAt;
+  const isModified = $derived(() => postMeta.updatedAt > postMeta.createdAt);
 </script>
 
 <div
