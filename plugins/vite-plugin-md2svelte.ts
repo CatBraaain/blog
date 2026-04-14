@@ -35,7 +35,10 @@ export function md2svelte(): Plugin {
           },
         })
         .use(addMetaScript, postMetaSchema.parse(frontmatter))
-        .use(rehypeStringify)
+        .use(importReferencedImage)
+        .use(rehypeStringify, {
+          allowDangerousHtml: true,
+        })
         .process(content);
       const html = String(file);
 
@@ -84,8 +87,43 @@ function addMetaScript(frontmatter: PostMeta) {
     const scriptNode = h(
       "script",
       { lang: "ts", context: "module" },
-      `export const meta = ${uneval(frontmatter)};`,
+      `\nexport const meta = ${uneval(frontmatter)};\n`,
     );
     tree.children.unshift(scriptNode);
   };
 }
+
+function importReferencedImage() {
+  return (tree: any) => {
+    let scriptNode: any = null;
+    visit(
+      tree,
+      {
+        type: "element",
+        tagName: "script",
+      },
+      (node) => {
+        scriptNode = node;
+      },
+    );
+
+    const imagePaths: string[] = [];
+    visit(
+      tree,
+      {
+        type: "element",
+        tagName: "img",
+      },
+      (node) => {
+        imagePaths.push(node.properties.src);
+        node.type = "raw";
+        node.value = `<img src={image${imagePaths.length}} alt="${node.properties.alt}">`;
+      },
+    );
+
+    scriptNode.children[0].value =
+      scriptNode.children[0].value +
+      imagePaths.map((filePath, i) => `import image${i + 1} from "${filePath}";\n`).join("");
+  };
+}
+

@@ -36,7 +36,7 @@
         <li>
           <Post
             postMeta={post}
-            titleLink={post.pagePath}
+            titleLink={`/posts/${post.slug}`}
             showDescription={true}
             showImage={false}
           />
