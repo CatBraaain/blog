@@ -3,7 +3,7 @@
   import { page } from "$app/state";
   import Header from "$lib/components/Header.svelte";
   import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "$lib/config";
-  import type { PostMeta } from "$lib/post-meta";
+  import type { PostMeta } from "$lib/post";
 
   import "$lib/style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";

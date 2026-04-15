@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PostMeta } from "$lib/post-meta";
+  import type { PostMeta } from "$lib/post";
   import { cn } from "$lib/utils";
   import HeroiconsHashtag16Solid from "~icons/heroicons/hashtag-16-solid";
   import LucideCalendar from "~icons/lucide/calendar";

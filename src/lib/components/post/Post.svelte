@@ -2,7 +2,7 @@
   import type { Component } from "svelte";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
-  import type { PostMeta } from "$lib/post-meta";
+  import type { PostMeta } from "$lib/post";
   import MetaBelt from "./MetaBelt.svelte";
 
   let {
