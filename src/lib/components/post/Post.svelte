@@ -18,9 +18,7 @@
     showDescription: boolean;
     showImage: boolean;
   } = $props();
-  const description = $derived(
-    () => postMeta.description || postMeta.excerpt || "",
-  );
+  const description = $derived(postMeta.description || postMeta.excerpt || "");
 </script>
 
 <CardBase>
