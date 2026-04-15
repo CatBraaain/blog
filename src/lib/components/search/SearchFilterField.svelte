@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
+  import { searchResult } from "$/lib/hooks/use-search-result.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
     ToggleGroup,
     ToggleGroupItem,
   } from "$lib/components/ui/toggle-group";
-  import { postMetas } from "$lib/post";
   import { linkVariants } from "$lib/style/variants";
 
   interface Props {
@@ -55,7 +55,7 @@
               {item}
             </div>
             <div>
-              {postMetas.filter((postMeta) => {
+              {$searchResult.filter((postMeta) => {
                 const metaItem = postMeta[queryKey];
                 if (Array.isArray(metaItem)) {
                   return metaItem.includes(item);

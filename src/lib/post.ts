@@ -8,6 +8,8 @@ export const postModules = Object.values(
   meta: PostMeta;
 }[];
 
-export const postMetas = Object.values(
-  import.meta.glob("$content/**/index.md", { eager: true, import: "meta" }),
-) as PostMeta[];
+export const postMetas = (
+  Object.values(
+    import.meta.glob("$content/**/index.md", { eager: true, import: "meta" }),
+  ) as PostMeta[]
+).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());

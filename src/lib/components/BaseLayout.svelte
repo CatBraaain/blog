@@ -68,7 +68,7 @@
 
   {#if postMeta}
     <meta
-      data-pagefind-meta={`createdAt:${postMeta.createdAt.toISOString()}`}
+      data-pagefind-sort={`createdAt:${postMeta.createdAt.toISOString()}`}
     />
     <meta data-pagefind-meta={`slug:${postMeta.slug}`} />
   {/if}
