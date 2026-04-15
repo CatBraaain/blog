@@ -81,16 +81,12 @@ export function md2svelte(): Plugin {
 function rehypeEscapeForSvelte() {
   return (tree: Root) => {
     const escapeSign = (str: string) =>
-      str.replace(/[{}<>]/g, (c) => {
+      str.replace(/[{}]/g, (c) => {
         switch (c) {
           case "{":
             return '{"{"}';
           case "}":
             return '{"}"}';
-          case "<":
-            return '{"<"}';
-          case ">":
-            return '{">"}';
           default:
             return c;
         }
