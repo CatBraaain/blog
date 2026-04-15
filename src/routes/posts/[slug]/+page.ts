@@ -1,10 +1,9 @@
 import type { Component } from "svelte";
 import type { PostMeta } from "$/lib/post-meta";
+import { postModules } from "$lib/post";
 
 export function load({ params }) {
-  const module = Object.values(import.meta.glob("$content/**/index.md", { eager: true })).find(
-    (m) => m.meta.slug === params.slug,
-  )!;
+  const module = postModules.find((m) => m.meta.slug === params.slug)!;
 
   return {
     PostContent: module.default as Component,

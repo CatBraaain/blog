@@ -2,10 +2,7 @@
   import SearchResult from "$/lib/components/search/SearchResult.svelte";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import Search from "$lib/components/search/Search.svelte";
-
-  const postMetas = Object.values(
-    import.meta.glob("$content/**/index.md", { eager: true }),
-  ).map((post) => post.meta);
+  import { postMetas } from "$lib/post";
 </script>
 
 <BaseLayout title="Home" description="Svelte demo app">

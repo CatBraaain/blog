@@ -6,6 +6,7 @@
     ToggleGroup,
     ToggleGroupItem,
   } from "$lib/components/ui/toggle-group";
+  import { postMetas } from "$lib/post";
   import { linkVariants } from "$lib/style/variants";
 
   interface Props {
@@ -17,10 +18,6 @@
   }
 
   let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
-
-  const postMetas = Object.values(
-    import.meta.glob("$content/**/index.md", { eager: true, import: "meta" }),
-  );
 </script>
 
 <Field>
