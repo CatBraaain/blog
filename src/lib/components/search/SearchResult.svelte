@@ -8,14 +8,27 @@
     EmptyMedia,
     EmptyTitle,
   } from "$lib/components/ui/empty/index.js";
+  import { Pagination } from "$lib/components/ui/pagination";
+  import { useCurrentPage } from "$lib/hooks/use-pagination";
   import { cn } from "$lib/utils";
   import IonSearchSharp from "~icons/ion/search-sharp";
+
+  const currentPage = $derived(useCurrentPage());
+  const postPerPage = 10;
+  const totalPage = $derived(Math.ceil($searchResult.length / postPerPage));
+  const pagedResult = $derived(
+    $searchResult.slice(
+      (currentPage - 1) * postPerPage,
+      currentPage * postPerPage,
+    ),
+  );
 </script>
 
 <div class={cn("flex flex-col gap-5")}>
   {#if $searchResult.length > 0}
+    <Pagination {totalPage} {currentPage}></Pagination>
     <ul class="flex flex-col gap-5">
-      {#each $searchResult as postMeta (postMeta.slug)}
+      {#each pagedResult as postMeta (postMeta.slug)}
         <li>
           <Post
             {postMeta}
@@ -26,6 +39,7 @@
         </li>
       {/each}
     </ul>
+    <Pagination {totalPage} {currentPage}></Pagination>
   {:else}
     <Empty class="border border-muted border-dashed bg-muted/30">
       <EmptyHeader>
