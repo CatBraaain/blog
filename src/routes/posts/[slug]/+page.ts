@@ -1,10 +1,8 @@
 import type { Component } from "svelte";
 import type { PostMeta } from "$/lib/post-meta";
 
-const modules = Object.values(import.meta.glob("$content/**/index.md"));
-
-export async function load({ params }) {
-  const module = (await Promise.all(modules.map((m) => m()))).find(
+export function load({ params }) {
+  const module = Object.values(import.meta.glob("$content/**/index.md", { eager: true })).find(
     (m) => m.meta.slug === params.slug,
   )!;
 

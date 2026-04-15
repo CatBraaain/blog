@@ -18,8 +18,8 @@
 
   let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
 
-  const posts = Object.values(
-    import.meta.glob("$content/**/index.md", { eager: true }),
+  const postMetas = Object.values(
+    import.meta.glob("$content/**/index.md", { eager: true, import: "meta" }),
   );
 </script>
 
@@ -58,8 +58,8 @@
               {item}
             </div>
             <div>
-              {posts.filter((post) => {
-                const metaItem = post.meta[queryKey];
+              {postMetas.filter((postMeta) => {
+                const metaItem = postMeta[queryKey];
                 if (Array.isArray(metaItem)) {
                   return metaItem.includes(item);
                 } else {
