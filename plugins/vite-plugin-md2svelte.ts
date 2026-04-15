@@ -1,5 +1,9 @@
+import fs from "node:fs";
+import { join } from "node:path";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { uneval } from "devalue";
 import matter from "gray-matter";
+import type { Element } from "hast";
 import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
@@ -8,11 +12,22 @@ import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import { bundledLanguages, bundledThemes, createHighlighter } from "shiki";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
 import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
 import { remarkFenced } from "./remark-fenced.js";
+
+const highlighter = await createHighlighter({
+  themes: Object.keys(bundledThemes),
+  langs: [
+    ...Object.keys(bundledLanguages),
+    ...["./shiki/shellsession.tm.json", "./shiki/ahk.tm.json", "./shiki/ahk2.tm.json"].map(
+      (grammer) => JSON.parse(fs.readFileSync(join(import.meta.dirname, grammer), "utf8")),
+    ),
+  ],
+});
 
 export function md2svelte(): Plugin {
   return {
@@ -24,7 +39,6 @@ export function md2svelte(): Plugin {
 
       const file = await unified()
         .use(remarkParse)
-        .use(remarkEscapeMarkdownContent)
         .use(remarkExtendedTable)
         .use(remarkFenced)
         .use(remarkFlexibleMarkers)
@@ -34,6 +48,18 @@ export function md2svelte(): Plugin {
             ...extendedTableHandlers,
           },
         })
+        .use(rehypeShikiFromHighlighter, highlighter, {
+          theme: "github-dark-default",
+          transformers: [
+            {
+              name: "custom-html-postprocessor",
+              root(node) {
+                delete (node.children[0] as Element).properties.tabindex;
+              },
+            },
+          ],
+        })
+        .use(rehypeEscapeForSvelte)
         .use(addMetaScript, postMetaSchema.parse(frontmatter))
         .use(importReferencedImage)
         .use(rehypeStringify, {
@@ -52,7 +78,7 @@ export function md2svelte(): Plugin {
   };
 }
 
-function remarkEscapeMarkdownContent() {
+function rehypeEscapeForSvelte() {
   return (tree: Root) => {
     const escapeSign = (str: string) =>
       str.replace(/[{}<>]/g, (c) => {

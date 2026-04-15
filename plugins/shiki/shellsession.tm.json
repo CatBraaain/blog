@@ -1,0 +1,24 @@
+{
+  "name": "shellsession",
+  "aliases": ["console"],
+  "scopeName": "text.shell-session",
+  "patterns": [
+    {
+      "match": "^[>$#%] (.*)$",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.prompt.shell-session"
+        },
+        "2": {
+          "name": "source.shell",
+          "patterns": [
+            {
+              "include": "source.shell"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fileTypes": ["sh-session"]
+}
