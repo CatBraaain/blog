@@ -29,13 +29,6 @@
     --os-handle-perpendicular-size-hover: 150% !important;
     --os-handle-perpendicular-size-active: 150% !important;
   }
-
-  .expressive-code .frame {
-    @apply shadow-none!;
-  }
-  .expressive-code .frame.has-title:not(.is-terminal) .title::after {
-    @apply border-[#30363d]! border-b-0!;
-  }
 }
 
 @layer components {
