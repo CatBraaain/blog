@@ -17,17 +17,6 @@
     h1 {
       @apply heading;
     }
-
-    .expressive-code,
-    [data-slot="alert"] {
-      @apply my-5!;
-    }
-    .expressive-code .header {
-      @apply rounded-t-lg!;
-    }
-    .expressive-code pre {
-      @apply rounded-b-lg!;
-    }
   }
 
   a,
