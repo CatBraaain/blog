@@ -7,6 +7,7 @@ import type { Element } from "hast";
 import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
+import remarkBreaks from "remark-breaks";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
@@ -39,6 +40,7 @@ export function md2svelte(): Plugin {
 
       const file = await unified()
         .use(remarkParse)
+        .use(remarkBreaks)
         .use(remarkExtendedTable)
         .use(remarkFenced)
         .use(remarkFlexibleMarkers)
