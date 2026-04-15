@@ -60,8 +60,8 @@ export function md2svelte(): Plugin {
           ],
         })
         .use(rehypeEscapeForSvelte)
-        .use(addMetaScript, postMetaSchema.parse(frontmatter))
-        .use(importReferencedImage)
+        .use(exportMeta, postMetaSchema.parse(frontmatter))
+        .use(importImage)
         .use(rehypeStringify, {
           allowDangerousHtml: true,
         })
@@ -108,7 +108,7 @@ function rehypeEscapeForSvelte() {
   };
 }
 
-function addMetaScript(frontmatter: PostMeta) {
+function exportMeta(frontmatter: PostMeta) {
   return (tree: any) => {
     const scriptNode = h(
       "script",
@@ -119,7 +119,7 @@ function addMetaScript(frontmatter: PostMeta) {
   };
 }
 
-function importReferencedImage() {
+function importImage() {
   return (tree: any) => {
     let scriptNode: any = null;
     visit(
