@@ -2,11 +2,13 @@
   import type { Component } from "svelte";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
   import { searchResult } from "$/lib/hooks/use-search-result.svelte";
+  import IconSet from "$lib/components/IconSet.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
     ToggleGroup,
     ToggleGroupItem,
   } from "$lib/components/ui/toggle-group";
+  import { iconVariants } from "$lib/style/variants";
   import { cn } from "$lib/utils";
   import { clickableVariants } from "$style/variants";
 
@@ -50,11 +52,11 @@
                 "flex w-full items-center justify-between text-foreground/90",
             })}
           >
-            <div class="icon-set">
-              <Icon className="accent-icon-8" />
+            <IconSet>
+              <Icon className={iconVariants({ variant: "accent" })} />
               {item}
-            </div>
-            <div>
+            </IconSet>
+            <div class={iconVariants({ variant: "normal" })}>
               {$searchResult.filter((postMeta) => {
                 const metaItem = postMeta[queryKey];
                 if (Array.isArray(metaItem)) {

@@ -60,22 +60,6 @@
   @apply absolute -left-5 top-px w-1 h-full rounded-md bg-primary;
 }
 
-@utility icon-set {
-  @apply flex items-center gap-2;
-}
-@utility accent-icon-* {
-  @apply flex items-center justify-center rounded-sm bg-accent p-2 text-accent-foreground;
-  /* size-[--value(number)] */
-  width: calc(var(--spacing) * --value(number));
-  height: calc(var(--spacing) * --value(number));
-}
-@utility normal-icon-* {
-  @apply flex items-center justify-center rounded-sm bg-transparent p-2 text-foreground;
-  /* size-[--value(number)] */
-  width: calc(var(--spacing) * --value(number));
-  height: calc(var(--spacing) * --value(number));
-}
-
 @custom-variant data-open {
   &:where([data-state="open"]),
   &:where([data-open]:not([data-open="false"])) {

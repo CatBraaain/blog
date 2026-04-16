@@ -1,5 +1,7 @@
 <script lang="ts">
+  import IconSet from "$lib/components/IconSet.svelte";
   import type { PostMeta } from "$lib/post-meta";
+  import { iconVariants } from "$lib/style/variants";
   import { cn } from "$lib/utils";
   import HeroiconsHashtag16Solid from "~icons/heroicons/hashtag-16-solid";
   import LucideCalendar from "~icons/lucide/calendar";
@@ -31,27 +33,27 @@
   class={cn("flex flex-wrap items-center gap-4", className)}
 >
   {#if showCreatedAt}
-    <div class="icon-set">
-      <LucideCalendar class="accent-icon-8" />
+    <IconSet>
+      <LucideCalendar class={iconVariants({ variant: "accent" })} />
       <LocalTime dt={postMeta.createdAt} />
-    </div>
+    </IconSet>
   {/if}
   {#if showUpdatedAt && isModified}
-    <div class="icon-set">
-      <LucideRefreshCw class="accent-icon-8" />
+    <IconSet>
+      <LucideRefreshCw class={iconVariants({ variant: "accent" })} />
       <LocalTime dt={postMeta.updatedAt} />
-    </div>
+    </IconSet>
   {/if}
   {#if showCategory}
-    <div class="icon-set">
-      <MdiFolderOutline class="accent-icon-8" />
+    <IconSet>
+      <MdiFolderOutline class={iconVariants({ variant: "accent" })} />
       {postMeta.category}
-    </div>
+    </IconSet>
   {/if}
   {#if showTags && postMeta.tags && postMeta.tags.length > 0}
-    <div class="icon-set">
-      <HeroiconsHashtag16Solid class="accent-icon-8" />
+    <IconSet>
+      <HeroiconsHashtag16Solid class={iconVariants({ variant: "accent" })} />
       {postMeta.tags.join(" / ")}
-    </div>
+    </IconSet>
   {/if}
 </div>

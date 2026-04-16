@@ -1,6 +1,6 @@
 <script lang="ts">
   import { buildPageHref } from "$lib/hooks/use-pagination";
-  import { cn } from "$lib/utils.js";
+  import { clickableVariants } from "$style/variants";
   import LucideChevronLeft from "~icons/lucide/chevron-left";
   import LucideChevronRight from "~icons/lucide/chevron-right";
   import LucideMoreHorizontal from "~icons/lucide/more-horizontal";
@@ -35,6 +35,7 @@
 {#snippet PageItem({ targetPage }: { targetPage: number })}
   <li>
     <a
+      class={clickableVariants({ variant: "icon" })}
       data-active={targetPage === currentPage}
       href={buildPageHref(targetPage)}
     >
@@ -46,7 +47,10 @@
 {#snippet PagePrevious()}
   <li>
     <a
-      class="gap-1 px-2.5 sm:pl-2.5"
+      class={clickableVariants({
+        variant: "icon",
+        class: "gap-1 px-2.5 sm:pl-2.5",
+      })}
       aria-label="Go to previous page"
       aria-disabled={currentPage <= firstPage}
       href={buildPageHref(currentPage - 1)}
@@ -59,7 +63,10 @@
 {#snippet PageNext()}
   <li>
     <a
-      class="gap-1 px-2.5 sm:pr-2.5"
+      class={clickableVariants({
+        variant: "icon",
+        class: "gap-1 px-2.5 sm:pr-2.5",
+      })}
       aria-label="Go to next page"
       aria-disabled={currentPage >= totalPage}
       href={buildPageHref(currentPage + 1)}
@@ -72,15 +79,16 @@
 {#snippet Ellipsis()}
   <li>
     <span
+      // TODO: use staticStyleVariants
+      class={"flex size-9 items-center justify-center"}
       aria-label="More pages"
-      class="flex size-9 items-center justify-center"
     >
       <LucideMoreHorizontal class="size-4" />
     </span>
   </li>
 {/snippet}
 
-<nav aria-label="pagination" class={cn("mx-auto flex w-full justify-center")}>
+<nav aria-label="pagination" class="mx-auto flex w-full justify-center">
   <ul class="flex flex-row items-center gap-1 w-full justify-between">
     {@render PagePrevious()}
     <div class="flex flex-row gap-1">

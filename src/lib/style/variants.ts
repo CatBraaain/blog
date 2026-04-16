@@ -86,23 +86,11 @@ export const headingVariants = tv({
 });
 
 export const iconVariants = tv({
-  base: "flex items-center justify-center rounded-sm p-2",
+  base: "flex items-center justify-center rounded-sm p-2 size-8",
   variants: {
-    type: {
+    variant: {
       accent: "bg-accent text-accent-foreground",
       normal: "bg-transparent text-foreground",
     },
-    size: {
-      default: "",
-      8: "w-8 h-8",
-      10: "w-10 h-10",
-      12: "w-12 h-12",
-      14: "w-14 h-14",
-      16: "w-16 h-16",
-    },
   },
-});
-
-export const iconSetVariants = tv({
-  base: "flex items-center gap-2",
 });
