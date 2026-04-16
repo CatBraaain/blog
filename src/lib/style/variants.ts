@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 export const interactiveVariants = tv({
   variants: {
     onFocusVisible: {
-      true: ["focus-visible:ring", "focus-visible:ring-accent-foreground"],
+      true: ["focus-visible:border-ring", "focus-visible:ring-ring/50", "focus-visible:ring-[3px]"],
     },
   },
   defaultVariants: {
