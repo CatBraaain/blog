@@ -1,37 +1,6 @@
 import { tv } from "tailwind-variants";
 
-export const interactiveVariants = tv({
-  variants: {
-    onFocusVisible: {
-      true: ["focus-visible:border-ring", "focus-visible:ring-ring/50", "focus-visible:ring-[3px]"],
-    },
-  },
-  defaultVariants: {
-    onFocusVisible: true,
-  },
-});
-
-export const inputVariants = tv({
-  variants: {
-    onDisabled: {
-      true: ["disabled:cursor-not-allowed"],
-    },
-    onInvalid: {
-      true: [
-        "aria-invalid:ring-destructive/20",
-        "aria-invalid:dark:ring-destructive/40",
-        "aria-invalid:border-destructive",
-      ],
-    },
-  },
-  defaultVariants: {
-    onDisabled: true,
-    onInvalid: true,
-  },
-});
-
-export const clickableBaseVariants = tv({
-  extend: interactiveVariants,
+export const baseStyleVariants = tv({
   variants: {
     onHoverColor: {
       icon: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
@@ -47,12 +16,23 @@ export const clickableBaseVariants = tv({
         "data-active:dark:bg-accent/50",
       ],
     },
+    onFocusVisible: {
+      true: ["focus-visible:border-ring", "focus-visible:ring-ring/50", "focus-visible:ring-[3px]"],
+    },
     onDisabled: {
-      true: [
+      clickable: [
         "aria-disabled:pointer-events-none",
         "aria-disabled:opacity-50",
         "disabled:pointer-events-none",
         "disabled:opacity-50",
+      ],
+      input: ["disabled:cursor-not-allowed"],
+    },
+    onInvalid: {
+      true: [
+        "aria-invalid:ring-destructive/20",
+        "aria-invalid:dark:ring-destructive/40",
+        "aria-invalid:border-destructive",
       ],
     },
   },
@@ -64,36 +44,28 @@ export const clickableVariants = tv({
   ],
   variants: {
     variant: {
-      icon: ["bg-card font-medium size-9"],
-      link: [
-        "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
-        "[&_svg]:pointer-events-none",
-        "[&_svg]:shrink-0",
-      ],
-    },
-  },
-  compoundVariants: [
-    {
-      variant: "link",
-      className: clickableBaseVariants({
-        onHoverColor: "link",
-        onHoverRing: false,
-        onActive: false,
-        onDisabled: true,
-        onFocusVisible: true,
-      }),
-    },
-    {
-      variant: "icon",
-      className: clickableBaseVariants({
+      icon: baseStyleVariants({
         onHoverColor: "icon",
         onHoverRing: true,
         onActive: true,
-        onDisabled: true,
+        onDisabled: "clickable",
         onFocusVisible: true,
+        class: ["bg-card font-medium size-9"],
+      }),
+      link: baseStyleVariants({
+        onHoverColor: "link",
+        onHoverRing: false,
+        onActive: false,
+        onDisabled: "clickable",
+        onFocusVisible: true,
+        class: [
+          "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
+          "[&_svg]:pointer-events-none",
+          "[&_svg]:shrink-0",
+        ],
       }),
     },
-  ],
+  },
 });
 
 export const headingVariants = tv({
