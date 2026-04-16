@@ -6,11 +6,14 @@
     InputGroupAddon,
     InputGroupInput,
   } from "$lib/components/ui/input-group";
+  import { headingVariants } from "$style/variants";
   import IonSearchSharp from "~icons/ion/search-sharp";
 </script>
 
-<Field>
-  <FieldLabel for="search">Search</FieldLabel>
+<Field class="gap-4">
+  <FieldLabel class={headingVariants({ variant: "label" })} for="search"
+    >Search</FieldLabel
+  >
   <InputGroup>
     <InputGroupInput bind:value={SearchQuery.word} placeholder="Search..." />
     <InputGroupAddon>

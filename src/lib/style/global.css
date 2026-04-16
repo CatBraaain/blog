@@ -13,10 +13,6 @@
 
   article {
     @apply prose dark:prose-invert max-w-full break-all;
-
-    h1 {
-      @apply heading;
-    }
   }
 
   a,
@@ -51,13 +47,6 @@
       @apply bg-transparent! text-transparent!;
     }
   }
-}
-
-@utility heading {
-  @apply relative m-0 ml-5 before:before-heading;
-}
-@utility before-heading {
-  @apply absolute -left-5 top-px w-1 h-full rounded-md bg-primary;
 }
 
 @custom-variant data-open {

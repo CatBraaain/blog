@@ -47,15 +47,12 @@
 {#snippet PagePrevious()}
   <li>
     <a
-      class={clickableVariants({
-        variant: "icon",
-        class: "gap-1 px-2.5 sm:pl-2.5",
-      })}
+      class={clickableVariants({ variant: "icon" })}
       aria-label="Go to previous page"
       aria-disabled={currentPage <= firstPage}
       href={buildPageHref(currentPage - 1)}
     >
-      <LucideChevronLeft class="size-4" />
+      <LucideChevronLeft class="size-6" />
     </a>
   </li>
 {/snippet}
@@ -63,15 +60,12 @@
 {#snippet PageNext()}
   <li>
     <a
-      class={clickableVariants({
-        variant: "icon",
-        class: "gap-1 px-2.5 sm:pr-2.5",
-      })}
+      class={clickableVariants({ variant: "icon" })}
       aria-label="Go to next page"
       aria-disabled={currentPage >= totalPage}
       href={buildPageHref(currentPage + 1)}
     >
-      <LucideChevronRight class="size-4" />
+      <LucideChevronRight class="size-6" />
     </a>
   </li>
 {/snippet}

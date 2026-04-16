@@ -69,18 +69,20 @@ export const clickableVariants = tv({
 });
 
 export const headingVariants = tv({
+  base: [
+    "relative m-0 ml-5",
+    "before:absolute",
+    "before:-left-5",
+    "before:top-px",
+    "before:w-1",
+    "before:h-full",
+    "before:rounded-md",
+    "before:bg-primary",
+  ],
   variants: {
     variant: {
-      h1: [
-        "relative m-0 ml-5",
-        "before:absolute",
-        "before:-left-5",
-        "before:top-px",
-        "before:w-1",
-        "before:h-full",
-        "before:rounded-md",
-        "before:bg-primary",
-      ],
+      h1: "text-4xl leading-[1.4]",
+      label: "font-extrabold text-2xl!",
     },
   },
 });

@@ -10,7 +10,7 @@
   } from "$lib/components/ui/toggle-group";
   import { iconVariants } from "$lib/style/variants";
   import { cn } from "$lib/utils";
-  import { clickableVariants } from "$style/variants";
+  import { clickableVariants, headingVariants } from "$style/variants";
 
   interface Props {
     queryKey: "category" | "tags";
@@ -23,8 +23,11 @@
   let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
 </script>
 
-<Field>
-  <FieldLabel for={label.toLowerCase()}>{label}</FieldLabel>
+<Field class="gap-4">
+  <FieldLabel
+    class={headingVariants({ variant: "label" })}
+    for={label.toLowerCase()}>{label}</FieldLabel
+  >
   <ToggleGroup
     type="single"
     value={activeItemName}

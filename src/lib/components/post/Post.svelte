@@ -3,7 +3,7 @@
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
   import type { PostMeta } from "$lib/post-meta";
-  import { clickableVariants } from "$style/variants";
+  import { clickableVariants, headingVariants } from "$style/variants";
   import MetaBelt from "./MetaBelt.svelte";
 
   let {
@@ -25,7 +25,7 @@
 <CardBase>
   <article class="flex flex-col">
     <div class="flex flex-col gap-4">
-      <h1>
+      <h1 class={headingVariants({ variant: "h1" })}>
         {#if titleLink}
           <a href={titleLink} class={clickableVariants({ variant: "link" })}>
             {postMeta.title}
