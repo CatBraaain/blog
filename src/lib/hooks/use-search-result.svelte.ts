@@ -5,6 +5,7 @@ import type { PostMeta } from "$/lib/post-meta";
 import { postMetas } from "$/lib/post-module";
 import { SearchQuery } from "./use-search-query";
 
+export const pagefindResult = writable<PostMeta[]>(postMetas);
 export const searchResult = writable<PostMeta[]>(postMetas);
 
 export function setupReactiveSearchResult() {
@@ -21,7 +22,7 @@ export function setupReactiveSearchResult() {
   $effect(() => {
     (async () => {
       const query = SearchQuery.getSearchQuery();
-      const pagefindResult = await (async () => {
+      const _pagefindResult = await (async () => {
         if (!pagefind) return postMetas;
         const pagefindResultPromise = await pagefind.search(query?.word || null, {
           sort: {
@@ -39,10 +40,11 @@ export function setupReactiveSearchResult() {
           } satisfies PostMeta;
         });
       })();
-      const filteredResult = pagefindResult
+      const _searchResult = _pagefindResult
         .filter((post) => query.category === undefined || post.category === query.category)
         .filter((post) => query.tags === undefined || post.tags.includes(query.tags));
-      searchResult.set(filteredResult);
+      pagefindResult.set(_pagefindResult);
+      searchResult.set(_searchResult);
     })();
   });
 }

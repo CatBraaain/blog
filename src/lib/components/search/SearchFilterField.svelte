@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
-  import { searchResult } from "$/lib/hooks/use-search-result.svelte";
+  import { pagefindResult } from "$/lib/hooks/use-search-result.svelte";
   import IconSet from "$lib/components/IconSet.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
@@ -60,7 +60,7 @@
               {item}
             </IconSet>
             <div class={iconVariants({ variant: "normal" })}>
-              {$searchResult.filter((postMeta) => {
+              {$pagefindResult.filter((postMeta) => {
                 const metaItem = postMeta[queryKey];
                 if (Array.isArray(metaItem)) {
                   return metaItem.includes(item);
