@@ -17,7 +17,7 @@
     label: "Categories" | "Tags";
     itemNames: string[];
     activeItemName: string | undefined;
-    icon: Component<{ className?: string }>;
+    icon: Component;
   }
 
   let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
@@ -53,7 +53,7 @@
             })}
           >
             <IconSet>
-              <Icon className={iconVariants({ variant: "accent" })} />
+              <Icon class={iconVariants({ variant: "accent" })} />
               {item}
             </IconSet>
             <div class={iconVariants({ variant: "normal" })}>
