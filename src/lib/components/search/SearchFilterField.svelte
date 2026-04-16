@@ -13,14 +13,24 @@
   import { clickableVariants, headingVariants } from "$style/variants";
 
   interface Props {
-    queryKey: "category" | "tag";
     label: "Categories" | "Tags";
     itemNames: string[];
     activeItemName: string | undefined;
     icon: Component;
   }
 
-  let { queryKey, label, itemNames, activeItemName, icon }: Props = $props();
+  let { label, itemNames, activeItemName, icon }: Props = $props();
+  const [queryKey, metaKey]: ["category" | "tag", "category" | "tags"] =
+    (() => {
+      switch (label) {
+        case "Categories":
+          return ["category", "category"];
+        case "Tags":
+          return ["tag", "tags"];
+        default:
+          throw new Error(`Unknown label: ${label}`);
+      }
+    })();
 </script>
 
 <Field class="gap-4">
@@ -61,7 +71,7 @@
             </IconSet>
             <div class={iconVariants({ variant: "normal" })}>
               {$pagefindResult.filter((postMeta) => {
-                const metaItem = postMeta[queryKey];
+                const metaItem = postMeta[metaKey];
                 if (Array.isArray(metaItem)) {
                   return metaItem.includes(item);
                 } else {

@@ -19,7 +19,6 @@
       <SearchInputField />
       <FieldSeparator />
       <SearchFilterField
-        queryKey="category"
         label="Categories"
         itemNames={CATEGORY_KINDS}
         activeItemName={SearchQuery.category}
@@ -27,7 +26,6 @@
       />
       <FieldSeparator />
       <SearchFilterField
-        queryKey="tag"
         label="Tags"
         itemNames={TAG_KINDS}
         activeItemName={SearchQuery.tag}
