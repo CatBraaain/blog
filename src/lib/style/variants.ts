@@ -1,31 +1,5 @@
 import { tv } from "tailwind-variants";
 
-export const linkVariants = tv({
-  base: [
-    "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
-    "disabled:click-disabled aria-invalid:invalid",
-    "focus-visible:focus-ring",
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0",
-  ],
-  variants: {
-    variant: {
-      default: "",
-      link: "hover:active-button font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
-      button:
-        "aria-disabled:click-disabled hover:active-button data-active:active-button hover:hover-ring bg-card font-medium",
-    },
-    size: {
-      default: "h-9 px-4 py-2 has-[>svg]:px-3",
-      icon: "size-9",
-      auto: "",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-});
-
 export const interactiveVariants = tv({
   variants: {
     onFocusVisible: {
@@ -57,10 +31,22 @@ export const inputVariants = tv({
 });
 
 export const clickableVariants = tv({
-  base: [],
+  extend: interactiveVariants,
+  base: [
+    "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
+  ],
   variants: {
+    variant: {
+      icon: ["bg-card font-medium size-9"],
+      link: [
+        "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
+        "[&_svg]:pointer-events-none",
+        "[&_svg]:shrink-0",
+      ],
+    },
     onHoverColor: {
-      true: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
+      icon: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
+      link: ["hover:bg-transparent", "hover:text-accent-foreground", "hover:dark:bg-none"],
     },
     onHoverRing: {
       true: ["hover:ring", "hover:ring-accent-foreground"],
@@ -81,12 +67,24 @@ export const clickableVariants = tv({
       ],
     },
   },
-  defaultVariants: {
-    onHoverColor: true,
-    onHoverRing: true,
-    onActive: true,
-    onDisabled: true,
-  },
+});
+
+export const linkStyle = clickableVariants({
+  variant: "link",
+  onHoverColor: "link",
+  onHoverRing: false,
+  onActive: false,
+  onDisabled: true,
+  onFocusVisible: true,
+});
+
+export const iconStyle = clickableVariants({
+  variant: "icon",
+  onHoverColor: "icon",
+  onHoverRing: true,
+  onActive: true,
+  onDisabled: true,
+  onFocusVisible: true,
 });
 
 export const headingVariants = tv({
