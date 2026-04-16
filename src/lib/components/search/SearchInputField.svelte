@@ -6,7 +6,7 @@
     InputGroupAddon,
     InputGroupInput,
   } from "$lib/components/ui/input-group";
-  import { headingVariants } from "$style/variants";
+  import { clickableVariants, headingVariants } from "$style/variants";
   import IonSearchSharp from "~icons/ion/search-sharp";
 </script>
 
@@ -14,7 +14,9 @@
   <FieldLabel class={headingVariants({ variant: "label" })} for="search"
     >Search</FieldLabel
   >
-  <InputGroup>
+  <InputGroup
+    class={clickableVariants({ variant: "input", class: "px-1 gap-0" })}
+  >
     <InputGroupInput bind:value={SearchQuery.word} placeholder="Search..." />
     <InputGroupAddon>
       <IonSearchSharp />

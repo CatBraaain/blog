@@ -5,6 +5,7 @@ export const baseStyleVariants = tv({
     onHoverColor: {
       icon: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
       link: ["hover:bg-transparent", "hover:text-accent-foreground", "hover:dark:bg-none"],
+      muted: ["hover:bg-muted-hover"],
     },
     onHoverRing: {
       true: ["hover:ring", "hover:ring-accent-foreground"],
@@ -41,6 +42,8 @@ export const baseStyleVariants = tv({
 export const clickableVariants = tv({
   base: [
     "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
+    "border-0 ring-0 shadow-none",
+    "hover:border-0 hover:ring-0 hover:shadow-none",
   ],
   variants: {
     variant: {
@@ -62,6 +65,13 @@ export const clickableVariants = tv({
           "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
           "[&_svg]:pointer-events-none",
           "[&_svg]:shrink-0",
+        ],
+      }),
+      input: baseStyleVariants({
+        class: [
+          "bg-muted dark:bg-input/30",
+          "hover:bg-muted-hover has-focus-visible:bg-muted-hover has-focus-visible:border-0",
+          "has-[[data-slot=input-group-control]:focus-visible]:ring-0",
         ],
       }),
     },
