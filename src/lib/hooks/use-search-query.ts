@@ -29,7 +29,8 @@ export class SearchQuery {
   }
 
   public static getSearchQuery(): SearchQueryStruct {
-    const tokens = !building ? (page.url.searchParams.get("q")?.split(" ") ?? []) : [];
+    const queryParam = !building ? (page.url.searchParams.get("q") ?? "") : "";
+    const tokens = (decodeURIComponent(queryParam) || undefined)?.split(" ") ?? [];
     const categoryTokens = tokens.filter((e) => e.startsWith("c:"));
     const tagTokens = tokens.filter((e) => e.startsWith("t:"));
     const word = tokens.filter((e) => ![...categoryTokens, ...tagTokens].includes(e)).join(" ");
