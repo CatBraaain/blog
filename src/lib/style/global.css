@@ -53,26 +53,6 @@
   }
 }
 
-@utility active-button {
-  @apply bg-accent text-accent-foreground dark:bg-accent/50;
-}
-@utility focus-ring {
-  @apply border-ring ring-ring/50 ring-[3px];
-}
-@utility hover-ring {
-  /* @apply ring ring-accent-hover; */
-  @apply ring ring-accent-foreground;
-}
-@utility click-disabled {
-  @apply pointer-events-none opacity-50;
-}
-@utility input-disabled {
-  @apply cursor-not-allowed;
-}
-@utility invalid {
-  @apply ring-destructive/20 dark:ring-destructive/40 border-destructive;
-}
-
 @utility heading {
   @apply relative m-0 ml-5 before:before-heading;
 }
