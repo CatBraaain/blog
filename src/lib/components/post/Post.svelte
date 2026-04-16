@@ -3,6 +3,7 @@
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
   import type { PostMeta } from "$lib/post-meta";
+  import { linkStyle } from "$style/variants";
   import MetaBelt from "./MetaBelt.svelte";
 
   let {
@@ -26,10 +27,7 @@
     <div class="flex flex-col gap-4">
       <h1>
         {#if titleLink}
-          <a
-            href={titleLink}
-            // class={linkVariants({ variant: "link", size: "auto" })}
-          >
+          <a href={titleLink} class={linkStyle}>
             {postMeta.title}
           </a>
         {:else}
