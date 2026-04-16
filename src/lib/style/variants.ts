@@ -30,20 +30,9 @@ export const inputVariants = tv({
   },
 });
 
-export const clickableVariants = tv({
+export const clickableBaseVariants = tv({
   extend: interactiveVariants,
-  base: [
-    "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
-  ],
   variants: {
-    variant: {
-      icon: ["bg-card font-medium size-9"],
-      link: [
-        "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
-        "[&_svg]:pointer-events-none",
-        "[&_svg]:shrink-0",
-      ],
-    },
     onHoverColor: {
       icon: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
       link: ["hover:bg-transparent", "hover:text-accent-foreground", "hover:dark:bg-none"],
@@ -69,22 +58,42 @@ export const clickableVariants = tv({
   },
 });
 
-export const linkStyle = clickableVariants({
-  variant: "link",
-  onHoverColor: "link",
-  onHoverRing: false,
-  onActive: false,
-  onDisabled: true,
-  onFocusVisible: true,
-});
-
-export const iconStyle = clickableVariants({
-  variant: "icon",
-  onHoverColor: "icon",
-  onHoverRing: true,
-  onActive: true,
-  onDisabled: true,
-  onFocusVisible: true,
+export const clickableVariants = tv({
+  base: [
+    "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
+  ],
+  variants: {
+    variant: {
+      icon: ["bg-card font-medium size-9"],
+      link: [
+        "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
+        "[&_svg]:pointer-events-none",
+        "[&_svg]:shrink-0",
+      ],
+    },
+  },
+  compoundVariants: [
+    {
+      variant: "link",
+      className: clickableBaseVariants({
+        onHoverColor: "link",
+        onHoverRing: false,
+        onActive: false,
+        onDisabled: true,
+        onFocusVisible: true,
+      }),
+    },
+    {
+      variant: "icon",
+      className: clickableBaseVariants({
+        onHoverColor: "icon",
+        onHoverRing: true,
+        onActive: true,
+        onDisabled: true,
+        onFocusVisible: true,
+      }),
+    },
+  ],
 });
 
 export const headingVariants = tv({

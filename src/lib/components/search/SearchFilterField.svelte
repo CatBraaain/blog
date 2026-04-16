@@ -8,7 +8,7 @@
     ToggleGroupItem,
   } from "$lib/components/ui/toggle-group";
   import { cn } from "$lib/utils";
-  import { iconStyle } from "$style/variants";
+  import { clickableVariants } from "$style/variants";
 
   interface Props {
     queryKey: "category" | "tags";
@@ -44,10 +44,11 @@
             })}
             data-active={activeItemName === item}
             {...props}
-            class={cn(
-              iconStyle,
-              "flex w-full items-center justify-between text-foreground/90",
-            )}
+            class={clickableVariants({
+              variant: "icon",
+              class:
+                "flex w-full items-center justify-between text-foreground/90",
+            })}
           >
             <div class="icon-set">
               <Icon className="accent-icon-8" />
