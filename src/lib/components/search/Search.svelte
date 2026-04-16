@@ -27,7 +27,7 @@
       />
       <FieldSeparator />
       <SearchFilterField
-        queryKey="tags"
+        queryKey="tag"
         label="Tags"
         itemNames={TAG_KINDS}
         activeItemName={SearchQuery.tag}

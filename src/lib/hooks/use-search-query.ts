@@ -5,7 +5,7 @@ import { page } from "$app/state";
 export type SearchQueryStruct = {
   word?: string;
   category?: string;
-  tags?: string;
+  tag?: string;
 };
 
 export class SearchQuery {
@@ -16,7 +16,7 @@ export class SearchQuery {
     return SearchQuery.getSearchQuery().category;
   }
   static get tag() {
-    return SearchQuery.getSearchQuery().tags;
+    return SearchQuery.getSearchQuery().tag;
   }
 
   static set word(value) {
@@ -36,7 +36,7 @@ export class SearchQuery {
     return {
       word,
       category: categoryTokens.at(0)?.slice(2),
-      tags: tagTokens.at(0)?.slice(2),
+      tag: tagTokens.at(0)?.slice(2),
     };
   }
 
@@ -58,7 +58,7 @@ export class SearchQuery {
     const parts = [
       query.word,
       query.category ? `c:${encodeURIComponent(query.category)}` : "",
-      query.tags ? `t:${encodeURIComponent(query.tags)}` : "",
+      query.tag ? `t:${encodeURIComponent(query.tag)}` : "",
     ].filter(Boolean);
     return parts.length > 0 ? parts.join(" ") : null;
   }

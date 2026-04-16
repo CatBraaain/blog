@@ -13,7 +13,7 @@
   import { clickableVariants, headingVariants } from "$style/variants";
 
   interface Props {
-    queryKey: "category" | "tags";
+    queryKey: "category" | "tag";
     label: "Categories" | "Tags";
     itemNames: string[];
     activeItemName: string | undefined;

@@ -42,7 +42,7 @@ export function setupReactiveSearchResult() {
       })();
       const _searchResult = _pagefindResult
         .filter((post) => query.category === undefined || post.category === query.category)
-        .filter((post) => query.tags === undefined || post.tags.includes(query.tags));
+        .filter((post) => query.tag === undefined || post.tags.includes(query.tag));
       pagefindResult.set(_pagefindResult);
       searchResult.set(_searchResult);
     })();
