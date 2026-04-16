@@ -1,4 +1,4 @@
-import { postMetas } from "$lib/post";
+import { postMetas } from "$lib/post-module";
 import type { EntryGenerator } from "./$types";
 
 export const entries: EntryGenerator = () => {

@@ -1,8 +1,8 @@
 import { onMount } from "svelte";
 import { writable } from "svelte/store";
 import type { Pagefind } from "vite-plugin-pagefind/types";
-import type { PostMeta } from "$/lib/post";
-import { postMetas } from "$lib/post";
+import type { PostMeta } from "$/lib/post-meta";
+import { postMetas } from "$/lib/post-module";
 import { SearchQuery } from "./use-search-query";
 
 export const searchResult = writable<PostMeta[]>(postMetas);

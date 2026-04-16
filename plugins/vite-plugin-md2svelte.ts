@@ -17,7 +17,7 @@ import { bundledLanguages, bundledThemes, createHighlighter } from "shiki";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
-import { type PostMeta, postMetaSchema } from "../src/lib/post.js";
+import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
 import { remarkFenced } from "./remark-fenced.js";
 
 const highlighter = await createHighlighter({
