@@ -13,13 +13,16 @@ import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { bundledLanguages, bundledThemes, createHighlighter } from "shiki";
+import { bundledLanguages, bundledLanguagesInfo, bundledThemes, createHighlighter } from "shiki";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
 import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
 import { remarkFenced } from "./remark-fenced.js";
 
+const languageAliasMap = Object.fromEntries(
+  bundledLanguagesInfo.flatMap(({ id, aliases }) => (aliases ?? []).map((alias) => [alias, id])),
+);
 const highlighter = await createHighlighter({
   themes: Object.keys(bundledThemes),
   langs: [
@@ -56,7 +59,12 @@ export function md2svelte(): Plugin {
             {
               name: "custom-html-postprocessor",
               root(node) {
-                delete (node.children[0] as Element).properties.tabindex;
+                delete this.pre.properties.tabindex;
+
+                const langId = this.options.lang;
+                const resolvedLangId = languageAliasMap[langId] ?? langId;
+                const meta = this.options.meta?.__raw ?? "";
+                this.root.children[0] = h("div", { lang: resolvedLangId, meta: meta }, this.pre);
               },
             },
           ],
