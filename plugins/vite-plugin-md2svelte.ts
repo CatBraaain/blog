@@ -65,15 +65,18 @@ export function md2svelte(): Plugin {
                 const langId = this.options.lang;
                 const resolvedLangId = languageAliasMap[langId] ?? langId;
                 const meta = this.options.meta?.__raw ?? "";
-                this.root.children[0] = h(
-                  "div",
+                this.root.children = [
                   {
-                    class: "code-block",
-                    lang: resolvedLangId,
-                    ...Object.fromEntries(parseMeta(meta)),
+                    type: "element",
+                    tagName: "CodeBlock",
+                    properties: {
+                      lang: resolvedLangId,
+                      style: this.pre.properties.style,
+                      ...Object.fromEntries(parseMeta(meta)),
+                    },
+                    children: [this.pre],
                   },
-                  this.pre,
-                );
+                ];
               },
             },
           ],
@@ -81,6 +84,7 @@ export function md2svelte(): Plugin {
         .use(rehypeEscapeForSvelte)
         .use(exportMeta, postMetaSchema.parse(frontmatter))
         .use(importImage)
+        .use(importCustomComponent)
         .use(rehypeStringify, {
           allowDangerousHtml: true,
         })
@@ -168,3 +172,39 @@ function importImage() {
   };
 }
 
+function importCustomComponent() {
+  return (tree: any) => {
+    let scriptNode: any = null;
+    visit(
+      tree,
+      {
+        type: "element",
+        tagName: "script",
+      },
+      (node) => {
+        scriptNode = node;
+      },
+    );
+
+    const customComponents: Set<string> = new Set();
+    visit(
+      tree,
+      {
+        type: "element",
+        tagName: "CodeBlock",
+      },
+      (node) => {
+        customComponents.add("CodeBlock");
+      },
+    );
+
+    // scriptNode.children[0].value =
+    //   scriptNode.children[0].value +
+    //   costomComponents.map((filePath, i) => `import image${i + 1} from "${filePath}";\n`).join("");
+    if (customComponents.size > 0) {
+      scriptNode.children[0].value =
+        scriptNode.children[0].value +
+        `import CodeBlock from "$lib/components/CodeBlock.svelte";\n`;
+    }
+  };
+}
