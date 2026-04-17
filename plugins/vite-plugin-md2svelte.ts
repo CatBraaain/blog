@@ -18,6 +18,7 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
 import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
+import { parseMeta } from "./parse-meta.js";
 import { remarkFenced } from "./remark-fenced.js";
 
 const languageAliasMap = Object.fromEntries(
@@ -64,7 +65,15 @@ export function md2svelte(): Plugin {
                 const langId = this.options.lang;
                 const resolvedLangId = languageAliasMap[langId] ?? langId;
                 const meta = this.options.meta?.__raw ?? "";
-                this.root.children[0] = h("div", { lang: resolvedLangId, meta: meta }, this.pre);
+                this.root.children[0] = h(
+                  "div",
+                  {
+                    class: "code-block",
+                    lang: resolvedLangId,
+                    ...Object.fromEntries(parseMeta(meta)),
+                  },
+                  this.pre,
+                );
               },
             },
           ],
