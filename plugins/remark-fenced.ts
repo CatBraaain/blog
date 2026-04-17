@@ -3,6 +3,7 @@ import { codes, constants, types } from "micromark-util-symbol";
 import type { Code, Effects, State, Token, TokenizeContext } from "micromark-util-types";
 import type { Processor } from "unified";
 import { visit } from "unist-util-visit";
+import { parseMeta } from "./parse-meta";
 
 declare module "micromark-util-types" {
   export interface TokenTypeMap {
@@ -50,26 +51,12 @@ export function remarkFenced(this: Processor) {
       [fencedMetaScope]: function (token) {
         const node = this.stack[this.stack.length - 1] as Fenced;
         const meta = this.sliceSerialize(token);
-        const attributePattern = /(?<=[\s]|^)(?:[^\s"']+|"[^"]*"|'[^']*')+(?=[\s]|$)/g;
-        const attributeTokens = [...meta.matchAll(attributePattern)].map((m) => m[0]);
-
-        const name = attributeTokens[0];
-        const attributes = Object.fromEntries(
-          attributeTokens.slice(1).map((m) => {
-            const [key, ...valueParts] = m.split("=");
-            const quotableValue = valueParts.join("=");
-            const isQuoted =
-              (quotableValue.startsWith('"') && quotableValue.endsWith('"')) ||
-              (quotableValue.startsWith("'") && quotableValue.endsWith("'"));
-            const value = isQuoted ? quotableValue.slice(1, -1) : quotableValue;
-            return [key, value === "true" ? true : value];
-          }),
-        );
+        const [[name, _], ...attributes] = parseMeta(meta);
 
         node.meta = meta;
         node.data ||= {};
         node.data.hName = name;
-        node.data.hProperties = attributes;
+        node.data.hProperties = Object.fromEntries(attributes);
       },
     },
   });
