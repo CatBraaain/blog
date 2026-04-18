@@ -3,7 +3,9 @@ import type { Config } from "@sveltejs/kit";
 
 const config: Config = {
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      pages: "dist",
+    }),
     alias: {
       "$/*": "src/*",
       "$style/*": "src/lib/style/*",
