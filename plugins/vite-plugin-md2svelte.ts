@@ -17,9 +17,9 @@ import { bundledLanguages, bundledLanguagesInfo, bundledThemes, createHighlighte
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
-import { type PostMeta, postMetaSchema } from "../src/lib/post-meta.js";
-import { parseMeta } from "./parse-meta.js";
-import { remarkFenced } from "./remark-fenced.js";
+import { type PostMeta, postMetaSchema } from "../src/lib/post-meta";
+import { parseMeta } from "./parse-meta";
+import { remarkFenced } from "./remark-fenced";
 
 const languageAliasMap = Object.fromEntries(
   bundledLanguagesInfo.flatMap(({ id, aliases }) => (aliases ?? []).map((alias) => [alias, id])),
