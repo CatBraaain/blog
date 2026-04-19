@@ -6,20 +6,18 @@
     class: className,
     title,
     style,
-    langId,
+    lang,
+    icon,
     children,
     ...restProps
   }: {
     class?: string;
     title?: string;
     style?: string;
-    langId?: string;
+    lang?: string;
+    icon?: string;
     children?: Snippet;
   } = $props();
-
-  // const iconPath = $derived(
-  //   langId && languageIcons[langId] ? `~icons/${languageIcons[langId]}` : null,
-  // );
 </script>
 
 <div
@@ -33,10 +31,9 @@
 >
   {#if title}
     <div class="flex items-center gap-2 px-4 py-2">
-      <!-- {#if iconPath}
-        {@const IconComponent = iconPath}
-        <svelte:component this={IconComponent} class="size-4" />
-      {/if} -->
+      {#if icon}
+        {@html icon}
+      {/if}
       <span class="text-sm text-white">{title}</span>
     </div>
   {/if}
