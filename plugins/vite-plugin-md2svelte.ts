@@ -1,9 +1,5 @@
-import fs from "node:fs";
-import { join } from "node:path";
-import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { uneval } from "devalue";
 import matter from "gray-matter";
-import type { Element } from "hast";
 import { h } from "hastscript";
 import type { Code, InlineCode, Root, Text } from "mdast";
 import rehypeStringify from "rehype-stringify";
@@ -13,26 +9,12 @@ import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { bundledLanguages, bundledLanguagesInfo, bundledThemes, createHighlighter } from "shiki";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
 import { type PostMeta, postMetaSchema } from "../src/lib/post-meta";
-import { parseMeta } from "./parse-meta";
+import { rehypeCodeBlock } from "./rehype-code-block";
 import { remarkFenced } from "./remark-fenced";
-
-const languageAliasMap = Object.fromEntries(
-  bundledLanguagesInfo.flatMap(({ id, aliases }) => (aliases ?? []).map((alias) => [alias, id])),
-);
-const highlighter = await createHighlighter({
-  themes: Object.keys(bundledThemes),
-  langs: [
-    ...Object.keys(bundledLanguages),
-    ...["./shiki/shellsession.tm.json", "./shiki/ahk.tm.json", "./shiki/ahk2.tm.json"].map(
-      (grammer) => JSON.parse(fs.readFileSync(join(import.meta.dirname, grammer), "utf8")),
-    ),
-  ],
-});
 
 export function md2svelte(): Plugin {
   return {
@@ -54,33 +36,7 @@ export function md2svelte(): Plugin {
             ...extendedTableHandlers,
           },
         })
-        .use(rehypeShikiFromHighlighter, highlighter, {
-          theme: "github-dark-default",
-          transformers: [
-            {
-              name: "custom-html-postprocessor",
-              root(node) {
-                delete this.pre.properties.tabindex;
-
-                const langId = this.options.lang;
-                const resolvedLangId = languageAliasMap[langId] ?? langId;
-                const meta = this.options.meta?.__raw ?? "";
-                this.root.children = [
-                  {
-                    type: "element",
-                    tagName: "CodeBlock",
-                    properties: {
-                      lang: resolvedLangId,
-                      style: this.pre.properties.style,
-                      ...Object.fromEntries(parseMeta(meta)),
-                    },
-                    children: [this.pre],
-                  },
-                ];
-              },
-            },
-          ],
-        })
+        .use(rehypeCodeBlock)
         .use(rehypeEscapeForSvelte)
         .use(exportMeta, postMetaSchema.parse(frontmatter))
         .use(importImage)
