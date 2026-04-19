@@ -9,7 +9,7 @@ import type { Processor } from "unified";
 import { parseMeta } from "./parse-meta";
 
 const iconNameMap = await getIconNameMap();
-const languageAliasMap = Object.fromEntries(
+const langAliasMap = Object.fromEntries(
   bundledLanguagesInfo.flatMap(({ id, aliases }) => (aliases ?? []).map((alias) => [alias, id])),
 );
 const highlighter = await createHighlighter({
@@ -33,7 +33,7 @@ export function rehypeCodeBlock(this: Processor) {
 
           const langId = this.options.lang;
 
-          const resolvedLangId = languageAliasMap[langId] ?? langId;
+          const resolvedLangId = langAliasMap[langId] ?? langId;
           const meta = Object.fromEntries(parseMeta(this.options.meta?.__raw ?? ""));
           const iconName: string =
             meta.icon ??
