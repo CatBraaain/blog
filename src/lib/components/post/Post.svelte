@@ -22,7 +22,7 @@
   const description = $derived(postMeta.description || postMeta.excerpt || "");
 </script>
 
-<CardBase>
+<CardBase data-slot="post-card">
   <article class="flex flex-col">
     <div class={["flex flex-col gap-4", { "mb-5": !!PostContent }]}>
       <h1 class={headingVariants({ type: "h1" })}>

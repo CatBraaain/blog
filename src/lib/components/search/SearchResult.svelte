@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { searchResult } from "$/lib/hooks/use-search-result.svelte";
+  import { searchResult, pagefindHydrated } from "$/lib/hooks/use-search-result.svelte";
   import Post from "$lib/components/post/Post.svelte";
   import {
     Empty,
@@ -24,7 +24,7 @@
   );
 </script>
 
-<div class={cn("flex flex-col gap-5")}>
+<div class={cn("flex flex-col gap-5", !$pagefindHydrated && "skeleton-group")}>
   {#if $searchResult.length > 0}
     <Pagination {totalPage} {currentPage}></Pagination>
     <ul class="flex flex-col gap-5">

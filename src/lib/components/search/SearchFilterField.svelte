@@ -1,7 +1,10 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
-  import { pagefindResult } from "$/lib/hooks/use-search-result.svelte";
+  import {
+    pagefindHydrated,
+    pagefindResult,
+  } from "$/lib/hooks/use-search-result.svelte";
   import IconSet from "$lib/components/IconSet.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import {
@@ -61,8 +64,10 @@
             {...props}
             class={clickableVariants({
               type: "icon",
-              class:
+              class: [
                 "flex w-full items-center justify-between text-foreground/90 px-0.5",
+                !$pagefindHydrated && "skeleton",
+              ],
             })}
             data-sveltekit-noscroll
           >

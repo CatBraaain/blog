@@ -7,6 +7,7 @@ import { SearchQuery } from "./use-search-query";
 
 export const pagefindResult = writable<PostMeta[]>(postMetas);
 export const searchResult = writable<PostMeta[]>(postMetas);
+export const pagefindHydrated = writable<boolean>(false);
 
 export function setupReactiveSearchResult() {
   let pagefind = $state<Pagefind | null>(null);
@@ -45,6 +46,7 @@ export function setupReactiveSearchResult() {
         .filter((post) => query.tag === undefined || post.tags.includes(query.tag));
       pagefindResult.set(_pagefindResult);
       searchResult.set(_searchResult);
+      pagefindHydrated.set(true);
     })();
   });
 }

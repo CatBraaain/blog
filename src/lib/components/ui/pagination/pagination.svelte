@@ -82,7 +82,7 @@
   </li>
 {/snippet}
 
-<nav aria-label="pagination" class="mx-auto flex w-full justify-center">
+<nav aria-label="pagination" class="mx-auto flex w-full justify-center" data-slot="pagination">
   <ul class="flex flex-row items-center gap-1 w-full justify-between">
     {@render PagePrevious()}
     <div class="flex flex-row gap-1">
