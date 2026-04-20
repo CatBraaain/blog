@@ -11,11 +11,17 @@ export const baseStyleVariants = tv({
       true: ["hover:ring", "hover:ring-accent-foreground"],
     },
     onActive: {
-      true: [
+      icon: [
         "data-active:bg-accent",
         "data-active:text-accent-foreground",
         "data-active:dark:bg-accent/50",
       ],
+      cardIcon: [
+        "data-active:bg-primary",
+        "data-active:text-card",
+        "data-active:dark:bg-primary/50",
+      ],
+      false: "",
     },
     onFocusVisible: {
       true: ["focus-visible:border-ring", "focus-visible:ring-ring/50", "focus-visible:ring-[3px]"],
@@ -50,7 +56,15 @@ export const clickableVariants = tv({
       icon: baseStyleVariants({
         onHoverColor: "icon",
         onHoverRing: true,
-        onActive: true,
+        onActive: "icon",
+        onDisabled: "clickable",
+        onFocusVisible: true,
+        class: ["font-medium size-9"],
+      }),
+      cardIcon: baseStyleVariants({
+        onHoverColor: "icon",
+        onHoverRing: true,
+        onActive: "cardIcon",
         onDisabled: "clickable",
         onFocusVisible: true,
         class: ["bg-card font-medium size-9"],

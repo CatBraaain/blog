@@ -35,7 +35,7 @@
 {#snippet PageItem({ targetPage }: { targetPage: number })}
   <li>
     <a
-      class={clickableVariants({ type: "icon" })}
+      class={clickableVariants({ type: "cardIcon" })}
       data-active={targetPage === currentPage}
       href={buildPageHref(targetPage)}
     >
@@ -47,7 +47,7 @@
 {#snippet PagePrevious()}
   <li>
     <a
-      class={clickableVariants({ type: "icon" })}
+      class={clickableVariants({ type: "cardIcon" })}
       aria-label="Go to previous page"
       aria-disabled={currentPage <= firstPage}
       href={buildPageHref(currentPage - 1)}
@@ -60,7 +60,7 @@
 {#snippet PageNext()}
   <li>
     <a
-      class={clickableVariants({ type: "icon" })}
+      class={clickableVariants({ type: "cardIcon" })}
       aria-label="Go to next page"
       aria-disabled={currentPage >= totalPage}
       href={buildPageHref(currentPage + 1)}
