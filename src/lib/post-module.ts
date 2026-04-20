@@ -12,4 +12,6 @@ export const postMetas = (
   Object.values(
     import.meta.glob("$content/**/index.md", { eager: true, import: "meta" }),
   ) as PostMeta[]
-).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+)
+  .filter((m) => !m.isDraft)
+  .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
