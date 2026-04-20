@@ -52,6 +52,7 @@ export class SearchQuery {
     } else {
       newUrl.searchParams.delete("q");
     }
+    newUrl.searchParams.delete("page");
     return newUrl.toString().replaceAll("%3A", ":");
   }
 
