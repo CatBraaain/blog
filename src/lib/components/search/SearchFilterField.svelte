@@ -64,6 +64,7 @@
               class:
                 "flex w-full items-center justify-between text-foreground/90",
             })}
+            data-sveltekit-noscroll
           >
             <IconSet>
               <Icon class={iconVariants({ variant: "accent" })} />
