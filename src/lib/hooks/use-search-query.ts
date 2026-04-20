@@ -1,5 +1,4 @@
 import { building } from "$app/environment";
-import { goto } from "$app/navigation";
 import { page } from "$app/state";
 
 export type SearchQueryStruct = {
@@ -17,15 +16,6 @@ export class SearchQuery {
   }
   static get tag() {
     return SearchQuery.getSearchQuery().tag;
-  }
-
-  static set word(value) {
-    const href = SearchQuery.buildMergedHref({ word: value });
-    goto(href, {
-      replaceState: true,
-      keepFocus: true,
-      noScroll: true,
-    });
   }
 
   public static getSearchQuery(): SearchQueryStruct {
