@@ -61,7 +61,11 @@ function getIconSvg(iconName: string) {
   const iconData = getIconData(vscodeIcons, iconName);
   if (iconData) {
     const renderData = iconToSVG(iconData, { height: "auto" });
-    const iconSvg = iconToHTML(replaceIDs(renderData.body), renderData.attributes);
+    const iconSvg = iconToHTML(replaceIDs(renderData.body), {
+      ...renderData.attributes,
+      height: "1em",
+      width: "1em",
+    });
     return iconSvg;
   } else {
     return undefined;
