@@ -62,7 +62,7 @@
             class={clickableVariants({
               type: "icon",
               class:
-                "flex w-full items-center justify-between text-foreground/90",
+                "flex w-full items-center justify-between text-foreground/90 px-0.5",
             })}
             data-sveltekit-noscroll
           >
