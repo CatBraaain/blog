@@ -46,7 +46,7 @@ export const clickableVariants = tv({
     "hover:border-0 hover:ring-0 hover:shadow-none",
   ],
   variants: {
-    variant: {
+    type: {
       icon: baseStyleVariants({
         onHoverColor: "icon",
         onHoverRing: true,
@@ -90,7 +90,7 @@ export const headingVariants = tv({
     "before:bg-primary",
   ],
   variants: {
-    variant: {
+    type: {
       h1: "text-4xl leading-[1.4]",
       label: "font-extrabold text-2xl!",
     },
@@ -100,7 +100,7 @@ export const headingVariants = tv({
 export const iconVariants = tv({
   base: "flex items-center justify-center rounded-sm p-2 size-8",
   variants: {
-    variant: {
+    type: {
       accent: "bg-accent text-accent-foreground",
       normal: "bg-transparent text-foreground",
     },

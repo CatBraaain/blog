@@ -35,7 +35,7 @@
 
 <Field class="gap-4">
   <FieldLabel
-    class={headingVariants({ variant: "label" })}
+    class={headingVariants({ type: "label" })}
     for={label.toLowerCase()}>{label}</FieldLabel
   >
   <ToggleGroup
@@ -60,17 +60,17 @@
             data-active={activeItemName === item}
             {...props}
             class={clickableVariants({
-              variant: "icon",
+              type: "icon",
               class:
                 "flex w-full items-center justify-between text-foreground/90",
             })}
             data-sveltekit-noscroll
           >
             <IconSet>
-              <Icon class={iconVariants({ variant: "accent" })} />
+              <Icon class={iconVariants({ type: "accent" })} />
               {item}
             </IconSet>
-            <div class={iconVariants({ variant: "normal" })}>
+            <div class={iconVariants({ type: "normal" })}>
               {$pagefindResult.filter((postMeta) => {
                 const metaItem = postMeta[metaKey];
                 if (Array.isArray(metaItem)) {

@@ -25,9 +25,9 @@
 <CardBase>
   <article class="flex flex-col">
     <div class={["flex flex-col gap-4", { "mb-5": !!PostContent }]}>
-      <h1 class={headingVariants({ variant: "h1" })}>
+      <h1 class={headingVariants({ type: "h1" })}>
         {#if titleLink}
-          <a href={titleLink} class={clickableVariants({ variant: "link" })}>
+          <a href={titleLink} class={clickableVariants({ type: "link" })}>
             {postMeta.title}
           </a>
         {:else}

@@ -12,7 +12,7 @@
       <div class="justify-self-start">
         <a
           href="/"
-          class={clickableVariants({ variant: "icon" })}
+          class={clickableVariants({ type: "icon" })}
           aria-label="Home"
           aria-current={page.url.pathname === "/" ? "page" : undefined}
         >
@@ -25,7 +25,7 @@
       <div class="flex items-center gap-5 justify-self-end">
         <a
           href="https://github.com/withastro/astro"
-          class={clickableVariants({ variant: "icon" })}
+          class={clickableVariants({ type: "icon" })}
           aria-label="Go to Astro's GitHub repo"
           target="_blank"
           rel="noopener"

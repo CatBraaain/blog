@@ -34,25 +34,25 @@
 >
   {#if showCreatedAt}
     <IconSet>
-      <LucideCalendar class={iconVariants({ variant: "accent" })} />
+      <LucideCalendar class={iconVariants({ type: "accent" })} />
       <LocalTime dt={postMeta.createdAt} />
     </IconSet>
   {/if}
   {#if showUpdatedAt && isModified}
     <IconSet>
-      <LucideRefreshCw class={iconVariants({ variant: "accent" })} />
+      <LucideRefreshCw class={iconVariants({ type: "accent" })} />
       <LocalTime dt={postMeta.updatedAt} />
     </IconSet>
   {/if}
   {#if showCategory}
     <IconSet>
-      <MdiFolderOutline class={iconVariants({ variant: "accent" })} />
+      <MdiFolderOutline class={iconVariants({ type: "accent" })} />
       {postMeta.category}
     </IconSet>
   {/if}
   {#if showTags && postMeta.tags && postMeta.tags.length > 0}
     <IconSet>
-      <HeroiconsHashtag16Solid class={iconVariants({ variant: "accent" })} />
+      <HeroiconsHashtag16Solid class={iconVariants({ type: "accent" })} />
       {postMeta.tags.join(" / ")}
     </IconSet>
   {/if}

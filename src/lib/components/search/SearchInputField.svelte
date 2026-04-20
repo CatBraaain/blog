@@ -11,12 +11,10 @@
 </script>
 
 <Field class="gap-4">
-  <FieldLabel class={headingVariants({ variant: "label" })} for="search"
+  <FieldLabel class={headingVariants({ type: "label" })} for="search"
     >Search</FieldLabel
   >
-  <InputGroup
-    class={clickableVariants({ variant: "input", class: "px-1 gap-0" })}
-  >
+  <InputGroup class={clickableVariants({ type: "input", class: "px-1 gap-0" })}>
     <InputGroupInput bind:value={SearchQuery.word} placeholder="Search..." />
     <InputGroupAddon>
       <IonSearchSharp />
