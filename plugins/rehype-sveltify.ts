@@ -101,10 +101,11 @@ function serializeAttribute(key: string, value: ValidValue): string {
     return "";
   }
 
-  const safeKey = stringifyEntities(key, {
+  const _safeKey = stringifyEntities(key, {
     useNamedReferences: true,
     subset: attributeKeyEscapeSubset,
   });
+  const safeKey = _safeKey.toLowerCase() === "classname" ? "class" : _safeKey;
 
   if (value === true) {
     return safeKey;
