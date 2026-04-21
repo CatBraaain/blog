@@ -3,7 +3,6 @@ import matter from "gray-matter";
 import { h } from "hastscript";
 import remarkBreaks from "remark-breaks";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
-import remarkFlexibleMarkers from "remark-flexible-markers";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -28,7 +27,6 @@ export function md2svelte(): Plugin {
         .use(remarkBreaks)
         .use(remarkExtendedTable)
         .use(remarkFenced)
-        .use(remarkFlexibleMarkers)
         .use(remarkGfm)
         .use(remarkRehype, {
           handlers: {
