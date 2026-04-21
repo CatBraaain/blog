@@ -1,8 +1,6 @@
 import { uneval } from "devalue";
 import matter from "gray-matter";
 import { h } from "hastscript";
-import type { Code, InlineCode, Root, Text } from "mdast";
-import rehypeStringify from "rehype-stringify";
 import remarkBreaks from "remark-breaks";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import remarkFlexibleMarkers from "remark-flexible-markers";
@@ -14,6 +12,7 @@ import { visit } from "unist-util-visit";
 import type { Plugin } from "vite";
 import { type PostMeta, postMetaSchema } from "../src/lib/post-meta";
 import { rehypeCodeBlock } from "./rehype-code-block";
+import { rehypeSveltify } from "./rehype-sveltify";
 import { remarkFenced } from "./remark-fenced";
 
 export function md2svelte(): Plugin {
@@ -37,13 +36,10 @@ export function md2svelte(): Plugin {
           },
         })
         .use(rehypeCodeBlock)
-        .use(rehypeEscapeForSvelte)
         .use(exportMeta, postMetaSchema.parse(frontmatter))
         .use(importImage)
         .use(importCustomComponent)
-        .use(rehypeStringify, {
-          allowDangerousHtml: true,
-        })
+        .use(rehypeSveltify)
         .process(content);
       const html = String(file);
 
@@ -54,32 +50,6 @@ export function md2svelte(): Plugin {
         map: null,
       };
     },
-  };
-}
-
-function rehypeEscapeForSvelte() {
-  return (tree: Root) => {
-    const escapeSign = (str: string) =>
-      str.replace(/[{}]/g, (c) => {
-        switch (c) {
-          case "{":
-            return '{"{"}';
-          case "}":
-            return '{"}"}';
-          default:
-            return c;
-        }
-      });
-
-    visit(tree, "text", (node: Text) => {
-      node.value = escapeSign(node.value);
-    });
-    visit(tree, "code", (node: Code) => {
-      node.value = escapeSign(node.value);
-    });
-    visit(tree, "inlineCode", (node: InlineCode) => {
-      node.value = escapeSign(node.value);
-    });
   };
 }
 
