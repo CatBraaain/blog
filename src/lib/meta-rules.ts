@@ -28,13 +28,7 @@ export const metaRules: MetaRule[] = [
     tag: "DB",
     category: "Tech",
     langPattern: "sql",
-    titlePatterns: [
-      "sql",
-      "(postgres|postgresql|postgrest)",
-      "mongodb",
-      "hasura",
-      "supabase",
-    ],
+    titlePatterns: ["sql", "(postgres|postgresql|postgrest)", "mongodb", "hasura", "supabase"],
   },
   {
     tag: "Docker",
