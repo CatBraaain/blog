@@ -74,6 +74,26 @@
           }
         }
       }
+    },
+    {
+      "includes": ["src/lib/components/ui/*/index.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noShadowRestrictedNames": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/lib/components/ui/*/*.svelte"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useValidAriaRole": "off"
+          }
+        }
+      }
     }
   ]
 }

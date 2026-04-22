@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { searchResult, pagefindHydrated } from "$/lib/hooks/use-search-result.svelte";
+  import {
+    pagefindHydrated,
+    searchResult,
+  } from "$/lib/hooks/use-search-result.svelte";
   import Post from "$lib/components/post/Post.svelte";
   import {
     Empty,
