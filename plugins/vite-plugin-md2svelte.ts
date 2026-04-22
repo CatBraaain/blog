@@ -116,9 +116,6 @@ function importCustomComponent() {
       },
     );
 
-    // scriptNode.children[0].value =
-    //   scriptNode.children[0].value +
-    //   costomComponents.map((filePath, i) => `import image${i + 1} from "${filePath}";\n`).join("");
     if (customComponents.size > 0) {
       scriptNode.children[0].value =
         scriptNode.children[0].value +

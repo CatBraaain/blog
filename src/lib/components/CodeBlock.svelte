@@ -76,7 +76,6 @@
           requestAnimationFrame(() => {
             copyButtonState = "success";
           });
-          // throw new Error();
         } catch {
           copyButtonState = "idle";
           requestAnimationFrame(() => {

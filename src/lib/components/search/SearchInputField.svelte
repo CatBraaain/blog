@@ -12,7 +12,6 @@
 
   let composing: boolean = false;
   function searchInputHandler(e: Event): void {
-    console.log("searchInputHandler", e);
     if (composing) return;
 
     const target = e.target as HTMLInputElement;
