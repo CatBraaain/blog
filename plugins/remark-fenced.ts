@@ -1,8 +1,7 @@
-import type { BlockContent, DefinitionContent, Parent, Root } from "mdast";
+import type { BlockContent, DefinitionContent, Parent } from "mdast";
 import { codes, constants, types } from "micromark-util-symbol";
 import type { Code, Effects, State, Token, TokenizeContext } from "micromark-util-types";
 import type { Processor } from "unified";
-import { visit } from "unist-util-visit";
 import { parseMeta } from "./parse-meta";
 
 declare module "micromark-util-types" {
