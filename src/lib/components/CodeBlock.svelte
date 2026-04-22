@@ -37,7 +37,7 @@
   {style}
   {...restProps}
 >
-  {#if title}
+  {#if title || icon}
     <div class="flex text-sm">
       <div
         class={[
@@ -52,7 +52,9 @@
             {@html icon}
           </span>
         {/if}
-        <span class="text-white leading-none">{title}</span>
+        {#if title}
+          <span class="text-white leading-none">{title}</span>
+        {/if}
       </div>
       <div class="bg-black flex-1 border-l border-b border-white/15"></div>
     </div>
