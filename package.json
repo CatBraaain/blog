@@ -61,7 +61,6 @@
     "js-yaml": "^4.1.1",
     "playwright": "^1.58.2",
     "remark-breaks": "^4.0.0",
-    "remark-extended-table": "^2.0.3",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",

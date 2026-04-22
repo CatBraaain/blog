@@ -2,7 +2,6 @@ import { uneval } from "devalue";
 import matter from "gray-matter";
 import { h } from "hastscript";
 import remarkBreaks from "remark-breaks";
-import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -25,14 +24,9 @@ export function md2svelte(): Plugin {
       const file = await unified()
         .use(remarkParse)
         .use(remarkBreaks)
-        .use(remarkExtendedTable)
         .use(remarkFenced)
         .use(remarkGfm)
-        .use(remarkRehype, {
-          handlers: {
-            ...extendedTableHandlers,
-          },
-        })
+        .use(remarkRehype)
         .use(rehypeCodeBlock)
         .use(exportMeta, postMetaSchema.parse(frontmatter))
         .use(importImage)
