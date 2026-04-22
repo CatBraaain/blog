@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ClassValue } from "svelte/elements";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
   import CardBase from "$lib/components/CardBase.svelte";
   import {
@@ -11,9 +12,11 @@
   import MdiFolderOutline from "~icons/mdi/folder-outline";
   import SearchFilterField from "./SearchFilterField.svelte";
   import SearchInputField from "./SearchInputField.svelte";
+
+  let { class: className }: { class?: ClassValue } = $props();
 </script>
 
-<CardBase>
+<CardBase class={className}>
   <FieldSet>
     <FieldGroup>
       <SearchInputField />

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component } from "svelte";
+  import type { ClassValue } from "svelte/elements";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
   import type { PostMeta } from "$lib/post-meta";
@@ -12,17 +13,19 @@
     titleLink,
     showDescription,
     showImage,
+    class: className,
   }: {
     postMeta: PostMeta;
     PostContent?: Component;
     titleLink?: string | false;
     showDescription: boolean;
     showImage: boolean;
+    class?: ClassValue;
   } = $props();
   const description = $derived(postMeta.description || postMeta.excerpt || "");
 </script>
 
-<CardBase data-slot="post-card">
+<CardBase data-slot="post-card" class={className}>
   <article class="flex flex-col">
     <div class={["flex flex-col gap-4", { "mb-5": !!PostContent }]}>
       <h1 class={headingVariants({ type: "h1" })}>

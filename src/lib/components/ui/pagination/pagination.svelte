@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ClassValue } from "svelte/elements";
   import { buildPageHref } from "$lib/hooks/use-pagination";
   import { clickableVariants } from "$style/variants";
   import LucideChevronLeft from "~icons/lucide/chevron-left";
@@ -8,9 +9,10 @@
   type PaginationProps = {
     totalPage: number;
     currentPage: number;
+    class?: ClassValue;
   };
 
-  let { totalPage, currentPage }: PaginationProps = $props();
+  let { totalPage, currentPage, class: className }: PaginationProps = $props();
 
   const firstPage = 1;
   const siblingCount = 2;
@@ -82,7 +84,11 @@
   </li>
 {/snippet}
 
-<nav aria-label="pagination" class="mx-auto flex w-full justify-center" data-slot="pagination">
+<nav
+  aria-label="pagination"
+  class={["mx-auto flex w-full justify-center", className]}
+  data-slot="pagination"
+>
   <ul class="flex flex-row items-center gap-1 w-full justify-between">
     {@render PagePrevious()}
     <div class="flex flex-row gap-1">
