@@ -15,8 +15,7 @@ eslintrc => eslint.config に変更したい
 
 ## スクリプト
 
-```js
-// .eslintrc.js
+```js title=".eslintrc.js"
 module.exports = {
   extends: ["alloy", "alloy/typescript"],
 };

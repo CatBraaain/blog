@@ -18,8 +18,7 @@ Error: spawn dist\vendor\fastlist-0.3.0-x64.exe ENOENT
 
 ## 再現スクリプト
 
-```ts
-// test.ts
+```ts title="test.ts"
 import find from "find-process";
 import fkill from "fkill";
 
@@ -32,8 +31,7 @@ import fkill from "fkill";
 })();
 ```
 
-```ts
-// vite.config.mjs
+```ts title="vite.config.mjs"
 import nodeExternals from "rollup-plugin-node-externals";
 import { defineConfig } from "vite";
 import type { LibraryFormats } from "vite";
@@ -78,8 +76,7 @@ export default defineConfig(() => {
 vite-plugin-static-copy を使ってバイナリファイルをコピーする
 下記では、node_modules/ps-list/vendorをディレクトリごとコピーしている
 
-```ts
-// vite.config.mjs
+```ts title="vite.config.mjs"
 import nodeExternals from "rollup-plugin-node-externals";
 import { defineConfig } from "vite";
 import type { LibraryFormats } from "vite";

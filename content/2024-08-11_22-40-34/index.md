@@ -12,8 +12,7 @@ noteLink: https://note.com/optim/n/nf7607283ba23
 cmdをallowlistに加えて
 commandsでは、cmd /c から書く
 
-```ini
-; tox.ini
+```ini title="tox.ini"
 allowlist_externals = cmd
 commands =
     cmd /c if exist dist rmdir dist /q /s

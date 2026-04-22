@@ -60,8 +60,7 @@ IMEオフを送信
 
 ## ダメスクリプト
 
-```ahk
-;ダメスクリプト
+```ahk title="ダメスクリプト"
 #IfWinActive Google Chrome
 	~^t::
 	~^l::

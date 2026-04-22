@@ -22,9 +22,7 @@ uv add --editable . --dev
 
 pyproject.tomlに下記の自動生成が追加される
 
-```toml
-# pyproject.toml
-
+```toml title="pyproject.toml"
 [tool.uv.sources]
 my-project = { workspace = true }
 
@@ -51,9 +49,7 @@ warning: Package(s) not found for: my-project
 
 こんな風にも変えてみたけど、状況変わらず
 
-```toml
-# pyproject.toml
-
+```toml title="pyproject.toml"
 [tool.uv.sources]
 my-project = { path = ".", editable = true }
 
@@ -102,9 +98,7 @@ package = false
 できる
 しかも、下記2行を追加するだけなので簡単
 
-```toml
-# pyproject.toml
-
+```toml title="pyproject.toml"
 [tool.uv]
 package = true
 ```

@@ -34,8 +34,7 @@ vscodeのおせっかい機能なのかバグなのか不明
 
 ## 解決方法
 
-```json
-// settings.json
+```json title="settings.json"
   "python.experiments.optOutFrom": ["pythonTerminalEnvVarActivation"]
 ```
 
@@ -44,8 +43,7 @@ vscodeのおせっかい機能なのかバグなのか不明
 という解決策が先のリンク先に書かれていて確かに機能したけど
 まったくもって意味が分からないので
 
-```json
-// settings.json
+```json title="settings.json"
   "python.envFile": ""
 ```
 

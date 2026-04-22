@@ -9,8 +9,7 @@ noteLink: https://note.com/optim/n/n910e216a8720
 
 ## ローカルmp4
 
-```ts
-// electron-main.ts
+```ts title="electron-main.ts"
 // これをやらないとNot allowed to load local resource:のエラーになる
     webPreferences: {
       webSecurity: false,

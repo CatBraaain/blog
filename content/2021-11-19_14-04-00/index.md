@@ -16,8 +16,7 @@ noteLink: https://note.com/optim/n/n6e82b20879d7
 
 ## スクリプト
 
-```ahk
-;Explorer
+```ahk title="Explorer.ahk"
 #IfWinActive ahk_exe explorer.exe
 	^t::Send !{1}{Up}{Up}{Enter}
 	^+t::Send ^+{n}

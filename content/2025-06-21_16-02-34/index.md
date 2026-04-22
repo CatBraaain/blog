@@ -28,8 +28,7 @@ vscodeにおいてgitの未適用ファイルの表示を常に"View as Tree"に
 
 下記の通り設定できる
 
-```json
-// settings.json
+```json title="settings.json"
 {
   "scm.defaultViewMode": "tree"
 }

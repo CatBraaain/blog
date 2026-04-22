@@ -11,8 +11,7 @@ noteLink: https://note.com/optim/n/n8b9dd0ca0068
 
 ## ExcelでShift+スクロール=>水平スクロール
 
-```ahk
-;Excel
+```ahk title="Excel.ahk"
 #If WinActive("- Excel")
     +WheelUp::
         SetScrollLockState, On

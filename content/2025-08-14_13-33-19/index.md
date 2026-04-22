@@ -17,8 +17,7 @@ docker composeを使ってredisを立ち上げて
 適当な値をsetしてからコンテナの再起動をして確認すると
 値が残っている
 
-```yaml
-# compose.yaml
+```yaml title="compose.yaml"
 services:
   redis:
     image: redis

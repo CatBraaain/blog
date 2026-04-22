@@ -11,8 +11,7 @@ noteLink: https://note.com/optim/n/nccff5138e9b1
 
 docker composeを利用するプロジェクトをリモートからURL指定で利用できるもの
 
-```yaml
-# compose.yaml
+```yaml title="compose.yaml"
 include:
   - https://github.com/example/example.git
 ```

@@ -24,8 +24,8 @@ tensorflowをインストールしようとしたら
 python3.13に対応していなかった
 python3.12なら対応してるとのことだったので3.12.Xにしたい
 
-```toml
-# pyproject.toml 今こうなってる
+```toml title="pyproject.toml"
+# 今こうなってる
 
 [project]
 requires-python = ">=3.13.0"
@@ -45,14 +45,14 @@ pyproject.tomlだけで完結させたいので、この方法は不採用
 
 ### 下限を指定してみる
 
-```toml
-# pyproject.toml before
+```toml title="pyproject.toml"
+# before
 
 [project]
 requires-python = ">=3.13"
 
 
-# pyproject.toml after
+# after
 
 [project]
 requires-python = ">=3.12"
@@ -75,9 +75,7 @@ uvのpythonバージョン解決順序としては
 
 ### 上限も指定してみる
 
-```toml
-# pyproject.toml
-
+```toml title="pyproject.toml"
 [project]
 requires-python = ">=3.12, <3.13"
 ```
@@ -92,9 +90,7 @@ python --version
 
 ### 短く書く
 
-```toml
-# pyproject.toml
-
+```toml title="pyproject.toml"
 [project]
 requires-python = "==3.12.*"  # ~=3.12.0でもいいんだけど前者の方が直感的
 ```

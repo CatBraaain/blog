@@ -14,8 +14,7 @@ fallbacks機能: LLMの呼び出しが失敗したときに、次の予備のモ
 
 ## スクリプト
 
-```python
-# test.py
+```python title="test.py"
 await crawler.arun(
     url,
     config=CrawlerRunConfig(

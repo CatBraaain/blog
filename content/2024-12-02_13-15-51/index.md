@@ -24,9 +24,7 @@ Google Cloud Translationは毎月50万文字無料だが、完全無料で無制
 pip install googletrans==4.0.0rc1
 ```
 
-```python
-# test.py
-
+```python title="test.py"
 from googletrans import Translator
 
 str = "Hoy hace muy buen tiempo."

@@ -7,8 +7,7 @@ updatedAt: 2021-11-18 08:43:40
 noteLink: https://note.com/optim/n/nd853d5b21dbb
 ---
 
-```ahk
-;Google Apps Script
+```ahk title="GAS.ahk"
 #IfWinActive Apps Script - Google Chrome
     ^e::Send {End}+{Home}+{Home}+{Left}^c^v^v ;duplicate line
     ^d::Send {End}+{Home}+{Home}+{Left}{BS} ;delete line
@@ -24,8 +23,7 @@ Shift+Homeを2回打ってるのはインデント対策
 
 ## 他のエディタでも共通ショートカットにしてみた
 
-```ahk
-;共通エディターショートカット
+```ahk title="CommonEditor.ahk"
 #If not(WinActive("- Google Chrome")) or (WinActive("Apps Script - Google Chrome"))
 	^e::Send {End}+{Home}+{Left}^c^v{Enter}^v
 	^d::Send {End}+{Home}+{Left}{BackSpace}

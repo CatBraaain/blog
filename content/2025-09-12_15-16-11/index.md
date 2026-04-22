@@ -13,14 +13,12 @@ pre-commitでruffのリント、フォーマットをする
 
 ## pyproject.tomlの設定が無視される
 
-```toml
-# pyproject.toml
+```toml title="pyproject.toml"
 [tool.ruff]
 include = [ "pyproject.toml", "src/**/*.py", "tests/**/*.py" ]
 ```
 
-```yaml
-# .pre-commit-config.yaml
+```yaml title=".pre-commit-config.yaml"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.13.0
@@ -36,8 +34,7 @@ uvx pre-commit run --hook-stage pre-commit
 
 ## 解決方法
 
-```yaml
-# .pre-commit-config.yaml
+```yaml title=".pre-commit-config.yaml"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.13.0
@@ -51,8 +48,7 @@ repos:
 
 もしくは
 
-```yaml
-# .pre-commit-config.yaml
+```yaml title=".pre-commit-config.yaml"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.13.0

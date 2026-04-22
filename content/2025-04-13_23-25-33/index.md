@@ -20,8 +20,8 @@ WSLでzshをデフォルトコマンドラインとしている
 
 ## スクリプト
 
-```bash
-# .zshrc (.bashrcの場合は後述のgithub link先を参照)
+```bash title=".zshrc"
+# (.bashrcの場合は後述のgithub link先を参照)
 
 # コマンドが見つからなかった際のイベントハンドラーをオーバーライド
 command_not_found_handler() {

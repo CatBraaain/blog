@@ -19,8 +19,7 @@ ccr側の設定は終わっているものとする
 
 claudeの設定で通信をccrのプロキシサーバーに投げさせる
 
-```json
-// ~/.claude/settings.json
+```json title="~/.claude/settings.json"
 {
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "xxx",

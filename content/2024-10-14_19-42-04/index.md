@@ -23,8 +23,7 @@ vite build
 
 electronのmain.tsをバンドルする際に
 
-```ts
-// main.ts
+```ts title="main.ts"
 import { app, BrowserWindow, screen } from "electron";
 ```
 

@@ -94,15 +94,13 @@ SendJs(JsStr){
 
 自作関数SendJs完成
 
-```ahk
-;Note ショートカット
+```ahk title="Note ショートカット"
 #IfWinActive note - Google Chrome
 ```
 
 chromeでnoteを開いているウィンドウがアクティブなとき
 
 ```ahk
-
 	^1::SendJs("document.querySelector('button[aria-label=""見出し""]').click()")
 ```
 
