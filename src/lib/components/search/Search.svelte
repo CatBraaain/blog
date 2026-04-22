@@ -16,7 +16,7 @@
   let { class: className }: { class?: ClassValue } = $props();
 </script>
 
-<CardBase class={className}>
+<CardBase class={className} data-slot="search">
   <FieldSet>
     <FieldGroup>
       <SearchInputField />

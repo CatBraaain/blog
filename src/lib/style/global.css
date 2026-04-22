@@ -28,23 +28,20 @@
 }
 
 @layer components {
-  .skeleton-group {
+  .skeleton {
+    [data-slot="search"],
     [data-slot="pagination"],
     [data-slot="post-card"] {
       @apply animate-pulse! rounded-md! bg-muted!;
-    }
-    [data-slot="pagination"] *,
-    [data-slot="post-card"] *,
-    [data-slot="post-card"] *::before {
-      @apply bg-transparent! text-transparent!;
-    }
-  }
-  .skeleton {
-    @apply animate-pulse! rounded-md! bg-muted!;
-    *,
-    *::before,
-    *::placeholder {
-      @apply bg-transparent! text-transparent!;
+      & * {
+        @apply bg-transparent! text-transparent! pointer-events-none!;
+      }
+      & *::before {
+        @apply bg-transparent! text-transparent!;
+      }
+      & *::placeholder {
+        @apply bg-transparent! text-transparent!;
+      }
     }
   }
 }
