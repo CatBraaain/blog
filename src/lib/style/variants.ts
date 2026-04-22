@@ -59,7 +59,7 @@ export const clickableVariants = tv({
         onActive: "icon",
         onDisabled: "clickable",
         onFocusVisible: true,
-        class: ["size-9 font-medium"],
+        class: ["size-9 font-medium select-none"],
       }),
       cardIcon: baseStyleVariants({
         onHoverColor: "icon",
@@ -67,7 +67,7 @@ export const clickableVariants = tv({
         onActive: "cardIcon",
         onDisabled: "clickable",
         onFocusVisible: true,
-        class: ["size-9 bg-card font-medium"],
+        class: ["size-9 bg-card font-medium select-none"],
       }),
       link: baseStyleVariants({
         onHoverColor: "link",

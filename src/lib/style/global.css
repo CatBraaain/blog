@@ -15,11 +15,6 @@
     @apply prose dark:prose-invert max-w-full break-all;
   }
 
-  a,
-  button {
-    @apply select-none;
-  }
-
   .os-scrollbar {
     --os-handle-perpendicular-size: 150% !important;
     --os-handle-perpendicular-size-hover: 150% !important;
