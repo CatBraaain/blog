@@ -48,8 +48,8 @@ export const baseStyleVariants = tv({
 export const clickableVariants = tv({
   base: [
     "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm outline-none transition-all",
-    "border-0 ring-0 shadow-none",
-    "hover:border-0 hover:ring-0 hover:shadow-none",
+    "border-0 shadow-none ring-0",
+    "hover:border-0 hover:shadow-none hover:ring-0",
   ],
   variants: {
     type: {
@@ -59,7 +59,7 @@ export const clickableVariants = tv({
         onActive: "icon",
         onDisabled: "clickable",
         onFocusVisible: true,
-        class: ["font-medium size-9"],
+        class: ["size-9 font-medium"],
       }),
       cardIcon: baseStyleVariants({
         onHoverColor: "icon",
@@ -67,7 +67,7 @@ export const clickableVariants = tv({
         onActive: "cardIcon",
         onDisabled: "clickable",
         onFocusVisible: true,
-        class: ["bg-card font-medium size-9"],
+        class: ["size-9 bg-card font-medium"],
       }),
       link: baseStyleVariants({
         onHoverColor: "link",
@@ -84,7 +84,7 @@ export const clickableVariants = tv({
       input: baseStyleVariants({
         class: [
           "bg-muted dark:bg-input/30",
-          "hover:bg-muted-hover has-focus-visible:bg-muted-hover has-focus-visible:border-0",
+          "hover:bg-muted-hover has-focus-visible:border-0 has-focus-visible:bg-muted-hover",
           "has-[[data-slot=input-group-control]:focus-visible]:ring-0",
         ],
       }),
@@ -112,7 +112,7 @@ export const headingVariants = tv({
 });
 
 export const iconVariants = tv({
-  base: "flex items-center justify-center rounded-sm p-2 size-8",
+  base: "flex size-8 items-center justify-center rounded-sm p-2",
   variants: {
     type: {
       accent: "bg-accent text-accent-foreground",
