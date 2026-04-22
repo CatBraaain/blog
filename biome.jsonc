@@ -33,17 +33,18 @@
       },
       "suspicious": {
         "noExplicitAny": "off"
-      },
-      "nursery": {
-        "useSortedClasses": {
-          "level": "warn",
-          "fix": "safe",
-          "options": {
-            "attributes": ["classList"],
-            "functions": ["clsx", "cva", "tw", "tw.*", "cx", "cn", "tv", "cnMerge"]
-          }
-        }
       }
+      // not fixable in non-script tag in svelte
+      // "nursery": {
+      //   "useSortedClasses": {
+      //     "level": "warn",
+      //     "fix": "safe",
+      //     "options": {
+      //       "attributes": ["classList"],
+      //       "functions": ["clsx", "cva", "tw", "tw.*", "cx", "cn", "tv", "cnMerge"]
+      //     }
+      //   }
+      // }
     }
   },
   "javascript": {
