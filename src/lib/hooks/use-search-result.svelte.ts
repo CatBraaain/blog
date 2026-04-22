@@ -22,9 +22,9 @@ export function setupReactiveSearchResult() {
 
   $effect(() => {
     (async () => {
+      if (!pagefind) return;
       const query = SearchQuery.getSearchQuery();
       const _pagefindResult = await (async () => {
-        if (!pagefind) return postMetas;
         const pagefindResultPromise = await pagefind.search(query?.word || null, {
           sort: {
             ...(query?.word ? {} : { createdAt: "desc" }),
