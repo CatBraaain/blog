@@ -85,8 +85,8 @@ function importImage() {
       },
       (node) => {
         imagePaths.push(node.properties.src);
-        node.type = "raw";
-        node.value = `<img src={image${imagePaths.length}} alt="${node.properties.alt}">`;
+        delete node.properties.src;
+        node.properties["raw:src"] = `{image${imagePaths.length}}`;
       },
     );
 

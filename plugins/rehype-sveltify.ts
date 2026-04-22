@@ -92,6 +92,10 @@ function compileElement(node: Element, parent: Parents): string {
 }
 
 function serializeAttribute(key: string, value: ValidValue): string {
+  if (key.startsWith("raw:")) {
+    return `${key.slice("raw:".length)}=${value}`;
+  }
+
   if (
     value === null ||
     value === undefined ||
