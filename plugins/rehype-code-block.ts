@@ -46,6 +46,7 @@ export function rehypeCodeBlock(this: Processor) {
                 ...meta,
                 style: this.pre.properties.style,
                 lang: resolvedLangId,
+                source: this.source,
                 icon: getIconSvg(iconName),
               },
               children: [this.pre],

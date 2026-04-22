@@ -1,5 +1,41 @@
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --animate-shake: shake 0.5s ease-out;
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+      transform: translate3d(1px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-2px, 0, 0);
+    }
+    40%,
+    60% {
+      transform: translate3d(2px, 0, 0);
+    }
+  }
+
+  --animate-pop: pop 0.15s ease-out;
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
 @theme inline {
   --font-noto-sans: "Noto Sans JP", var(--font-sans);
   /* #region radius */
