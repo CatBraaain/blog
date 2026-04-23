@@ -37,8 +37,8 @@
   {style}
   {...restProps}
 >
-  {#if title || icon}
-    <div class="flex text-sm">
+  {#if title || (icon && lang !== "text")}
+    <div class="flex text-sm" {lang}>
       <div
         class={[
           "flex gap-1 px-4 py-2 h-8",
