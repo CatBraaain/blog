@@ -4,6 +4,7 @@
   import { clickableVariants } from "$style/variants";
   import LaHome from "~icons/la/home";
   import SimpleIconsGithub from "~icons/simple-icons/github";
+  import ThemeSwitch from "./ThemeSwitch.svelte";
 </script>
 
 <header data-pagefind-ignore="all">
@@ -23,6 +24,7 @@
       <div class="flex items-center gap-5 justify-self-center"></div>
 
       <div class="flex items-center gap-5 justify-self-end">
+        <ThemeSwitch />
         <a
           href="https://github.com/withastro/astro"
           class={clickableVariants({ type: "icon" })}

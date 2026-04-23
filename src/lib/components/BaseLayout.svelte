@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ModeWatcher } from "mode-watcher";
   import { onMount } from "svelte";
   import { page } from "$app/state";
   import Header from "$lib/components/Header.svelte";
@@ -74,6 +75,7 @@
   {/if}
 </svelte:head>
 
+<ModeWatcher defaultMode="dark" />
 <div class="max-w-5xl mx-auto flex flex-col gap-5 px-5 pb-5">
   <Header />
   <main>
