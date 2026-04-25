@@ -36,8 +36,10 @@
 <Field class="gap-4">
   <FieldLabel
     class={headingVariants({ type: "label" })}
-    for={label.toLowerCase()}>{label}</FieldLabel
+    for={label.toLowerCase()}
   >
+    {label}
+  </FieldLabel>
   <ToggleGroup
     type="single"
     value={activeItemName}

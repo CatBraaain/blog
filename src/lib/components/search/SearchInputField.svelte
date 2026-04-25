@@ -25,9 +25,9 @@
 </script>
 
 <Field class="gap-4">
-  <FieldLabel class={headingVariants({ type: "label" })} for="search"
-    >Search</FieldLabel
-  >
+  <FieldLabel class={headingVariants({ type: "label" })} for="search">
+    Search
+  </FieldLabel>
   <InputGroup class={clickableVariants({ type: "input", class: "px-1 gap-0" })}>
     <InputGroupInput
       placeholder="Search..."

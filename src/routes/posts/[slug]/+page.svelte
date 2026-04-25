@@ -14,5 +14,5 @@
     titleLink={false}
     showDescription={false}
     showImage={true}
-  ></Post>
+  />
 </BaseLayout>
