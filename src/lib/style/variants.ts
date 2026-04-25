@@ -3,24 +3,20 @@ import { tv } from "tailwind-variants";
 export const baseStyleVariants = tv({
   variants: {
     onHoverColor: {
-      icon: ["hover:bg-accent", "hover:text-accent-foreground", "hover:dark:bg-accent/50"],
-      link: ["hover:bg-transparent", "hover:text-accent-foreground", "hover:dark:bg-none"],
-      muted: ["hover:bg-muted-hover"],
+      icon: ["hover:bg-primary", "hover:text-primary-strong", "hover:dark:bg-primary/50"],
+      link: ["hover:bg-transparent", "hover:text-primary-strong", "hover:dark:bg-none"],
+      muted: ["hover:bg-muted-strong"],
     },
     onHoverRing: {
-      true: ["hover:ring", "hover:ring-accent-foreground"],
+      true: ["hover:ring", "hover:ring-primary-strong"],
     },
     onActive: {
       icon: [
-        "data-active:bg-accent",
-        "data-active:text-accent-foreground",
-        "data-active:dark:bg-accent/50",
-      ],
-      cardIcon: [
         "data-active:bg-primary",
-        "data-active:text-card",
+        "data-active:text-primary-strong",
         "data-active:dark:bg-primary/50",
       ],
+      cardIcon: ["data-active:bg-accent", "data-active:text-card", "data-active:dark:bg-accent/50"],
       false: "",
     },
     onFocusVisible: {
@@ -84,7 +80,7 @@ export const clickableVariants = tv({
       input: baseStyleVariants({
         class: [
           "bg-muted dark:bg-input/30",
-          "hover:bg-muted-hover has-focus-visible:border-0 has-focus-visible:bg-muted-hover",
+          "hover:bg-muted-strong has-focus-visible:border-0 has-focus-visible:bg-muted-strong",
           "has-[[data-slot=input-group-control]:focus-visible]:ring-0",
         ],
       }),
@@ -101,7 +97,7 @@ export const headingVariants = tv({
     "before:w-1",
     "before:h-full",
     "before:rounded-md",
-    "before:bg-primary",
+    "before:bg-accent",
   ],
   variants: {
     type: {
@@ -115,7 +111,7 @@ export const iconVariants = tv({
   base: "flex size-8 items-center justify-center rounded-sm p-2",
   variants: {
     type: {
-      accent: "bg-accent text-accent-foreground",
+      accent: "bg-primary text-primary-strong",
       normal: "bg-transparent text-foreground",
     },
   },
