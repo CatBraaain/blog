@@ -43,7 +43,7 @@
         class={[
           "flex gap-1 px-4 py-2 h-8",
           lang === "shellsession"
-            ? "w-full border-b justify-center border-white/15"
+            ? "w-full border-b justify-center border-white/15 bg-black"
             : "w-fit",
         ]}
       >
@@ -53,7 +53,7 @@
           </span>
         {/if}
         {#if title}
-          <span class="text-white leading-none">{title}</span>
+          <span class="leading-none">{title}</span>
         {/if}
       </div>
       <div class="bg-black flex-1 border-l border-b border-white/15"></div>

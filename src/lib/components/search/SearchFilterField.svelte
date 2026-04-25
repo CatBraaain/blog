@@ -46,7 +46,7 @@
     variant={"default"}
     size={"default"}
     spacing={1}
-    class="flex flex-col items-start gap-2"
+    class="flex flex-col items-start gap-1.5"
   >
     {#each itemNames as item}
       <ToggleGroupItem value={item}>
@@ -63,9 +63,7 @@
             {...props}
             class={clickableVariants({
               type: "icon",
-              class: [
-                "flex w-full items-center justify-between text-foreground/90 px-0.5",
-              ],
+              class: ["flex w-full items-center justify-between p-0.5 h-fit"],
             })}
             data-sveltekit-noscroll
           >

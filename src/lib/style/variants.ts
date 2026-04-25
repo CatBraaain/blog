@@ -116,7 +116,7 @@ export const iconVariants = tv({
   variants: {
     type: {
       accent: "bg-primary text-primary-strong",
-      normal: "bg-transparent text-foreground",
+      normal: "bg-transparent text-inherit",
     },
   },
 });
