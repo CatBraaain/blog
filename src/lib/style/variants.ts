@@ -3,20 +3,16 @@ import { tv } from "tailwind-variants";
 export const baseStyleVariants = tv({
   variants: {
     onHoverColor: {
-      icon: ["hover:bg-primary", "hover:text-primary-strong", "hover:dark:bg-primary/50"],
-      link: ["hover:bg-transparent", "hover:text-primary-strong", "hover:dark:bg-none"],
+      icon: ["hover:bg-primary", "hover:text-primary-strong"],
+      link: ["hover:bg-transparent", "hover:text-primary-strong"],
       muted: ["hover:bg-muted-strong"],
     },
     onHoverRing: {
       true: ["hover:ring", "hover:ring-primary-strong"],
     },
     onActive: {
-      icon: [
-        "data-active:bg-primary",
-        "data-active:text-primary-strong",
-        "data-active:dark:bg-primary/50",
-      ],
-      cardIcon: ["data-active:bg-accent", "data-active:text-card", "data-active:dark:bg-accent/50"],
+      icon: ["data-active:bg-primary", "data-active:text-primary-strong"],
+      cardIcon: ["data-active:bg-accent", "data-active:text-card"],
       false: "",
     },
     onFocusVisible: {
@@ -32,11 +28,7 @@ export const baseStyleVariants = tv({
       input: ["disabled:cursor-not-allowed"],
     },
     onInvalid: {
-      true: [
-        "aria-invalid:ring-destructive/20",
-        "aria-invalid:dark:ring-destructive/40",
-        "aria-invalid:border-destructive",
-      ],
+      true: ["aria-invalid:ring-destructive/20", "aria-invalid:border-destructive"],
     },
   },
 });
@@ -72,7 +64,7 @@ export const clickableVariants = tv({
         onFocusVisible: true,
         onDisabled: "clickable",
         class: [
-          "font-extrabold text-[length:inherit] no-underline hover:bg-transparent dark:hover:bg-none",
+          "font-extrabold text-[length:inherit] no-underline hover:bg-transparent",
           "[&_svg]:pointer-events-none",
           "[&_svg]:shrink-0",
         ],
@@ -83,7 +75,7 @@ export const clickableVariants = tv({
         onActive: false,
         onDisabled: "input",
         class: [
-          "bg-muted dark:bg-input/30",
+          "bg-muted",
           "has-focus-visible:border-0 has-focus-visible:bg-muted-strong",
           "has-[[data-slot=input-group-control]:focus-visible]:ring-0",
         ],
