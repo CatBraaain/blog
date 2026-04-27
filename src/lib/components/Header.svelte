@@ -26,9 +26,9 @@
       <div class="flex items-center gap-5 justify-self-end">
         <ThemeSwitch />
         <a
-          href="https://github.com/withastro/astro"
+          href="https://github.com/CatBraaain/blog"
           class={clickableVariants({ type: "icon" })}
-          aria-label="Go to Astro's GitHub repo"
+          aria-label="GitHub repo of this blog"
           target="_blank"
           rel="noopener"
         >
