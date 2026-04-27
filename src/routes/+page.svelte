@@ -4,6 +4,7 @@
     pagefindHydrated,
     setupReactiveSearchResult,
   } from "$/lib/hooks/use-search-result.svelte";
+  import { building } from "$app/environment";
   import { page } from "$app/state";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import Search from "$lib/components/search/Search.svelte";
@@ -15,7 +16,7 @@
   <div
     class={[
       "flex gap-5",
-      page.url.searchParams.get("q") && !$pagefindHydrated && "skeleton",
+      !building && $page.url.searchParams.get("q") && !$pagefindHydrated && "skeleton",
     ]}
     data-pagefind-ignore="all"
   >
