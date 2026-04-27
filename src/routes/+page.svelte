@@ -16,7 +16,7 @@
   <div
     class={[
       "flex gap-5",
-      !building && $page.url.searchParams.get("q") && !$pagefindHydrated && "skeleton",
+      !building && page.url.searchParams.get("q") && !$pagefindHydrated && "skeleton",
     ]}
     data-pagefind-ignore="all"
   >
