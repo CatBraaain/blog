@@ -15,7 +15,9 @@
     "test:e2e": "playwright test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "pf": "pagefind -s .svelte-kit && rm -f -r static/pagefind && cp -R .svelte-kit/pagefind static/pagefind"
+    "pf": "pagefind -s .svelte-kit && bun run pf:dev && bun run pf:prod",
+    "pf:dev": "rm -f -r static/pagefind && cp -R .svelte-kit/pagefind static/pagefind",
+    "pf:prod": "rm -f -r dist/pagefind && cp -R .svelte-kit/pagefind dist/pagefind"
   },
   "dependencies": {
     "@lucide/svelte": "^1.7.0",
