@@ -5,6 +5,7 @@
   import LucideChevronLeft from "~icons/lucide/chevron-left";
   import LucideChevronRight from "~icons/lucide/chevron-right";
   import LucideMoreHorizontal from "~icons/lucide/more-horizontal";
+  import { isMobile } from "$lib/hooks/is-mobile";
 
   type PaginationProps = {
     totalPage: number;
@@ -15,7 +16,7 @@
   let { totalPage, currentPage, class: className }: PaginationProps = $props();
 
   const firstPage = 1;
-  const siblingCount = 2;
+  const siblingCount = $derived(isMobile.current ? 0 : 2);
 
   const pageRange = $derived(
     Array.from({ length: totalPage }, (_, i) => i + 1),

@@ -15,15 +15,15 @@
 <BaseLayout title="Home" description="CatBraaain's personal blog site">
   <div
     class={[
-      "flex gap-5",
+      "flex flex-col md:flex-row gap-5",
       !building && page.url.searchParams.get("q") && !$pagefindHydrated && "skeleton",
     ]}
     data-pagefind-ignore="all"
   >
-    <section class={"w-1/3"}>
+    <section class={"w-full md:w-1/3"}>
       <Search />
     </section>
-    <section class={"w-2/3"}>
+    <section class={"w-full md:w-2/3"}>
       <SearchResult />
     </section>
   </div>
