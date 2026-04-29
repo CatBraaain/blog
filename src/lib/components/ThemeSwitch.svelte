@@ -12,10 +12,10 @@
   class={clickableVariants({ type: "icon" })}
   onclick={toggleMode}
 >
-  <MaterialSymbolsLightModeOutlineRounded
+  <MaterialSymbolsDarkModeOutlineRounded
     class={["size-8", { hidden: isDarkMode }]}
   />
-  <MaterialSymbolsDarkModeOutlineRounded
+  <MaterialSymbolsLightModeOutlineRounded
     class={["size-8", { hidden: !isDarkMode }]}
   />
 </button>
