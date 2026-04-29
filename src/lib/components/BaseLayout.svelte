@@ -3,19 +3,19 @@
   import { onMount } from "svelte";
   import { page } from "$app/state";
   import Header from "$lib/components/Header.svelte";
-  import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "$lib/config";
+  import { SITE_TITLE, SITE_URL} from "$lib/config";
   import type { PostMeta } from "$lib/post-meta";
 
   import "$lib/style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";
 
   let {
-    title = SITE_TITLE,
-    description = SITE_DESCRIPTION,
+    title,
+    description,
     postMeta,
     children,
   }: {
-    title?: string;
+    title: string;
     description?: string;
     postMeta?: PostMeta;
     children?: any;
@@ -24,9 +24,7 @@
   const canonicalUrl = $derived(new URL(page.url.pathname, SITE_URL).href);
   const url = $derived(new URL(page.url.href, SITE_URL).href);
 
-  const pageTitle = $derived(
-    title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}` : SITE_TITLE,
-  );
+  const pageTitle = $derived(`${title} | ${SITE_TITLE}`);
 
   onMount(async () => {
     const { OverlayScrollbars, ClickScrollPlugin } =

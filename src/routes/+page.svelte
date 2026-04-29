@@ -12,7 +12,7 @@
   setupReactiveSearchResult();
 </script>
 
-<BaseLayout title="Home" description="Svelte demo app">
+<BaseLayout title="Home" description="CatBraaain's personal blog site">
   <div
     class={[
       "flex gap-5",

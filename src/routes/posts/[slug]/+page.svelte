@@ -7,7 +7,7 @@
   let { PostContent, postMeta } = $derived(data);
 </script>
 
-<BaseLayout title="Home" description="Svelte demo app" {postMeta}>
+<BaseLayout title={postMeta.title} description={postMeta.description} {postMeta}>
   <Post
     {postMeta}
     {PostContent}
