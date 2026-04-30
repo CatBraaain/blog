@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "svelte-kit sync && vite build && bun run pf",
+    "build": "svelte-kit sync && vite build && bun run build:pagefind",
+    "build:pagefind": "pagefind -s .svelte-kit && bun run build:pagefind:dev && bun run build:pagefind:prod",
+    "build:pagefind:dev": "rm -f -r static/pagefind && cp -R .svelte-kit/pagefind static/pagefind",
+    "build:pagefind:prod": "rm -f -r dist/pagefind && cp -R .svelte-kit/pagefind dist/pagefind",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -13,10 +16,7 @@
     "test": "npm run test:unit -- --run && npm run test:e2e",
     "test:e2e": "playwright test",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "pf": "pagefind -s .svelte-kit && bun run pf:dev && bun run pf:prod",
-    "pf:dev": "rm -f -r static/pagefind && cp -R .svelte-kit/pagefind static/pagefind",
-    "pf:prod": "rm -f -r dist/pagefind && cp -R .svelte-kit/pagefind dist/pagefind"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "mode-watcher": "^1.1.0",
