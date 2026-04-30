@@ -1,5 +1,8 @@
 {
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "explorer.fileNesting.patterns": {
+    "*.md": "${capture}*"
   }
 }
