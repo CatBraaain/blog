@@ -1,6 +1,6 @@
 {
   "extends": "./.svelte-kit/tsconfig.json",
-  "include": ["src", "plugins"],
+  "include": ["src", "plugins","scripts"],
   "compilerOptions": {
     "rewriteRelativeImportExtensions": true,
     "allowJs": true,
