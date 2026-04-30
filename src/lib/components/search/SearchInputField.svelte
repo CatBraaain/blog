@@ -17,7 +17,7 @@
     const target = e.target as HTMLInputElement;
     const href = SearchQuery.buildMergedHref({ word: target.value });
     goto(href, {
-      replaceState: true,
+      replaceState: SearchQuery.word !== "",
       keepFocus: true,
       noScroll: true,
     });
