@@ -17,7 +17,7 @@ export default defineConfig({
       frontmatterSchema: postMetaSchema,
       remarkPlugins: [remarkBreaks, remarkFenced, remarkGfm],
       rehypePlugins: [rehypeCodeBlock],
-      components: { CodeBlock: "$lib/components/CodeBlock.svelte" },
+      customComponents: { CodeBlock: "$lib/components/CodeBlock.svelte" },
     }),
     sveltekit(),
     Icons({
