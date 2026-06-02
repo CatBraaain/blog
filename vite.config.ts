@@ -14,10 +14,10 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     md2svelte({
-      components: { CodeBlock: "$lib/components/CodeBlock.svelte" },
+      frontmatterSchema: postMetaSchema,
       remarkPlugins: [remarkBreaks, remarkFenced, remarkGfm],
       rehypePlugins: [rehypeCodeBlock],
-      frontmatterSchema: postMetaSchema,
+      components: { CodeBlock: "$lib/components/CodeBlock.svelte" },
     }),
     sveltekit(),
     Icons({
