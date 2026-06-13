@@ -2,6 +2,7 @@ import type { BlockContent, DefinitionContent, Parent } from "mdast";
 import { codes, constants, types } from "micromark-util-symbol";
 import type { Code, Effects, State, Token, TokenizeContext } from "micromark-util-types";
 import type { Processor } from "unified";
+
 import { parseMeta } from "./parse-meta";
 
 declare module "micromark-util-types" {

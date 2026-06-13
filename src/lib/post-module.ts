@@ -1,4 +1,5 @@
 import type { Component } from "svelte";
+
 import type { PostMeta } from "./post-meta";
 
 export const postModules = Object.values<{

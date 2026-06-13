@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { ClassValue } from "svelte/elements";
+  import { isMobile } from "$lib/hooks/is-mobile";
   import { buildPageHref } from "$lib/hooks/use-pagination";
   import { clickableVariants } from "$style/variants";
+  import type { ClassValue } from "svelte/elements";
   import LucideChevronLeft from "~icons/lucide/chevron-left";
   import LucideChevronRight from "~icons/lucide/chevron-right";
   import LucideMoreHorizontal from "~icons/lucide/more-horizontal";
-  import { isMobile } from "$lib/hooks/is-mobile";
 
   type PaginationProps = {
     totalPage: number;
@@ -18,19 +18,11 @@
   const firstPage = 1;
   const siblingCount = $derived(isMobile.current ? 0 : 2);
 
-  const pageRange = $derived(
-    Array.from({ length: totalPage }, (_, i) => i + 1),
-  );
-  const buttonRangeStart = $derived(
-    Math.max(currentPage - siblingCount, firstPage) - 1,
-  );
-  const buttonRangeEnd = $derived(
-    Math.min(currentPage + siblingCount, totalPage),
-  );
+  const pageRange = $derived(Array.from({ length: totalPage }, (_, i) => i + 1));
+  const buttonRangeStart = $derived(Math.max(currentPage - siblingCount, firstPage) - 1);
+  const buttonRangeEnd = $derived(Math.min(currentPage + siblingCount, totalPage));
 
-  const buttonRange = $derived(
-    pageRange.slice(buttonRangeStart, buttonRangeEnd),
-  );
+  const buttonRange = $derived(pageRange.slice(buttonRangeStart, buttonRangeEnd));
   const firstRestRange = $derived(pageRange.slice(0, buttonRangeStart));
   const lastRestRange = $derived(pageRange.slice(buttonRangeEnd, totalPage));
 </script>

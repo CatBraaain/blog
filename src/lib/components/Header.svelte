@@ -4,6 +4,7 @@
   import { clickableVariants } from "$style/variants";
   import LaHome from "~icons/la/home";
   import SimpleIconsGithub from "~icons/simple-icons/github";
+
   import ThemeSwitch from "./ThemeSwitch.svelte";
 </script>
 

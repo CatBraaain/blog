@@ -1,8 +1,9 @@
+import type { PostMeta } from "$/lib/post-meta";
+import { postMetas } from "$/lib/post-module";
 import { onMount } from "svelte";
 import { writable } from "svelte/store";
 import type { Pagefind } from "vite-plugin-pagefind/types";
-import type { PostMeta } from "$/lib/post-meta";
-import { postMetas } from "$/lib/post-module";
+
 import { SearchQuery } from "./use-search-query";
 
 export const pagefindResult = writable<PostMeta[]>(postMetas);
@@ -26,9 +27,7 @@ export function setupReactiveSearchResult() {
       const query = SearchQuery.getSearchQuery();
       const _pagefindResult = await (async () => {
         const pagefindResultPromise = await pagefind.search(query?.word || null, {
-          sort: {
-            ...(query?.word ? {} : { createdAt: "desc" }),
-          },
+          sort: query?.word ? {} : { createdAt: "desc" },
         });
         const pagefindResult = await Promise.all(
           pagefindResultPromise.results.map((r) => r.data()),

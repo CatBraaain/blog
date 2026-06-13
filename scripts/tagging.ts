@@ -1,4 +1,5 @@
 import { Glob } from "bun";
+
 import { metaPatterns } from "../src/lib/meta-rules.ts";
 
 const glob = new Glob("content/**/*.md");

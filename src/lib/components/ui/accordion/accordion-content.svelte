@@ -1,27 +1,22 @@
 <script lang="ts">
-	import { Accordion as AccordionPrimitive } from "bits-ui";
-	import { cn, type WithoutChild } from "$lib/utils.js";
+  import { cn, type WithoutChild } from "$lib/utils.js";
+  import { Accordion as AccordionPrimitive } from "bits-ui";
 
-	let {
-		ref = $bindable(null),
-		class: className,
-		children,
-		...restProps
-	}: WithoutChild<AccordionPrimitive.ContentProps> = $props();
+  let {
+    ref = $bindable(null),
+    class: className,
+    children,
+    ...restProps
+  }: WithoutChild<AccordionPrimitive.ContentProps> = $props();
 </script>
 
 <AccordionPrimitive.Content
-	bind:ref
-	data-slot="accordion-content"
-	class="data-open:animate-accordion-down data-closed:animate-accordion-up text-sm"
-	{...restProps}
+  bind:ref
+  data-slot="accordion-content"
+  class="data-open:animate-accordion-down data-closed:animate-accordion-up text-sm"
+  {...restProps}
 >
-	<div
-		class={cn(
-			"",
-			className
-		)}
-	>
-		{@render children?.()}
-	</div>
+  <div class={cn("", className)}>
+    {@render children?.()}
+  </div>
 </AccordionPrimitive.Content>

@@ -1,16 +1,13 @@
 <script lang="ts">
-  import type { Component } from "svelte";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
   import { pagefindResult } from "$/lib/hooks/use-search-result.svelte";
   import IconSet from "$lib/components/IconSet.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
-  import {
-    ToggleGroup,
-    ToggleGroupItem,
-  } from "$lib/components/ui/toggle-group";
+  import { ToggleGroup, ToggleGroupItem } from "$lib/components/ui/toggle-group";
   import { iconVariants } from "$lib/style/variants";
   import { cn } from "$lib/utils";
   import { clickableVariants, headingVariants } from "$style/variants";
+  import type { Component } from "svelte";
 
   interface Props {
     label: "Categories" | "Tags";
@@ -20,24 +17,20 @@
   }
 
   let { label, itemNames, activeItemName, icon }: Props = $props();
-  const [queryKey, metaKey]: ["category" | "tag", "category" | "tags"] =
-    (() => {
-      switch (label) {
-        case "Categories":
-          return ["category", "category"];
-        case "Tags":
-          return ["tag", "tags"];
-        default:
-          throw new Error(`Unknown label: ${label}`);
-      }
-    })();
+  const [queryKey, metaKey]: ["category" | "tag", "category" | "tags"] = (() => {
+    switch (label) {
+      case "Categories":
+        return ["category", "category"];
+      case "Tags":
+        return ["tag", "tags"];
+      default:
+        throw new Error(`Unknown label: ${label}`);
+    }
+  })();
 </script>
 
 <Field class="gap-4">
-  <FieldLabel
-    class={headingVariants({ type: "label" })}
-    for={label.toLowerCase()}
-  >
+  <FieldLabel class={headingVariants({ type: "label" })} for={label.toLowerCase()}>
     {label}
   </FieldLabel>
   <ToggleGroup

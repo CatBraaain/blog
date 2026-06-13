@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { ModeWatcher } from "mode-watcher";
-  import { onMount } from "svelte";
   import { page } from "$app/state";
   import Header from "$lib/components/Header.svelte";
-  import { SITE_TITLE, SITE_URL} from "$lib/config";
+  import { SITE_TITLE, SITE_URL } from "$lib/config";
   import type { PostMeta } from "$lib/post-meta";
+  import { ModeWatcher } from "mode-watcher";
+  import { onMount } from "svelte";
 
   import "$lib/style/global.css";
   import "overlayscrollbars/overlayscrollbars.css";
@@ -27,8 +27,7 @@
   const pageTitle = $derived(`${title} | ${SITE_TITLE}`);
 
   onMount(async () => {
-    const { OverlayScrollbars, ClickScrollPlugin } =
-      await import("overlayscrollbars");
+    const { OverlayScrollbars, ClickScrollPlugin } = await import("overlayscrollbars");
     OverlayScrollbars.plugin(ClickScrollPlugin);
     OverlayScrollbars(document.body, {
       scrollbars: {
@@ -66,9 +65,7 @@
   <!-- TODO: add image -->
 
   {#if postMeta}
-    <meta
-      data-pagefind-sort={`createdAt:${postMeta.createdAt.toISOString()}`}
-    />
+    <meta data-pagefind-sort={`createdAt:${postMeta.createdAt.toISOString()}`} />
     <meta data-pagefind-meta={`slug:${postMeta.slug}`} />
   {/if}
 </svelte:head>

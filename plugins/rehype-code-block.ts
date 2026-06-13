@@ -1,11 +1,13 @@
 import fs from "node:fs";
 import { join } from "node:path";
-import { getIconData, iconToHTML, iconToSVG, replaceIDs } from "@iconify/utils";
+
 import { icons as vscodeIcons } from "@iconify-json/vscode-icons";
+import { getIconData, iconToHTML, iconToSVG, replaceIDs } from "@iconify/utils";
 import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
 import { load } from "js-yaml";
 import { bundledLanguages, bundledLanguagesInfo, bundledThemes, createHighlighter } from "shiki";
 import type { Processor } from "unified";
+
 import { parseMeta } from "./parse-meta";
 
 const iconNameMap = await getIconNameMap();
@@ -28,7 +30,7 @@ export function rehypeCodeBlock(this: Processor) {
     transformers: [
       {
         name: "custom-html-postprocessor",
-        root(node) {
+        root(_node) {
           delete this.pre.properties.tabindex;
 
           const langId = this.options.lang;

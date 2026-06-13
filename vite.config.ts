@@ -4,7 +4,8 @@ import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import Icons from "unplugin-icons/vite";
 import { md2svelte } from "vite-plugin-md2svelte";
-import { defineConfig } from "vitest/config";
+import { defineConfig } from "vite-plus";
+
 import { rehypeCodeBlock } from "./plugins/rehype-code-block";
 import { remarkFenced } from "./plugins/remark-fenced";
 import { postMetaSchema } from "./src/lib/post-meta";
@@ -33,6 +34,30 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ["/pagefind/pagefind.js"],
+    },
+  },
+  fmt: {
+    sortImports: true,
+    sortPackageJson: {
+      sortScripts: true,
+    },
+    svelte: true,
+  },
+  lint: {
+    plugins: ["unicorn", "typescript", "oxc"],
+    rules: {
+      "unicorn/prefer-node-protocol": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          fix: {
+            imports: "off",
+            variables: "off",
+          },
+        },
+      ],
     },
   },
 });

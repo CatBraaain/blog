@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import { clickableVariants } from "$lib/style/variants";
   import { cn } from "$lib/utils";
+  import type { Snippet } from "svelte";
   import LucideCopy from "~icons/lucide/copy";
   import LucideCopyCheck from "~icons/lucide/copy-check";
   import LucideCopyX from "~icons/lucide/copy-x";
@@ -29,11 +29,7 @@
 </script>
 
 <div
-  class={cn(
-    "overflow-hidden rounded-lg my-2",
-    "[&_pre]:m-0! [&_pre]:rounded-none!",
-    className,
-  )}
+  class={cn("overflow-hidden rounded-lg my-2", "[&_pre]:m-0! [&_pre]:rounded-none!", className)}
   {style}
   {...restProps}
 >

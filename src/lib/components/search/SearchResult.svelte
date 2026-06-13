@@ -17,10 +17,7 @@
   const postPerPage = 10;
   const totalPage = $derived(Math.ceil($searchResult.length / postPerPage));
   const pagedResult = $derived(
-    $searchResult.slice(
-      (currentPage - 1) * postPerPage,
-      currentPage * postPerPage,
-    ),
+    $searchResult.slice((currentPage - 1) * postPerPage, currentPage * postPerPage),
   );
 </script>
 
@@ -47,9 +44,7 @@
           <IonSearchSharp />
         </EmptyMedia>
         <EmptyTitle>No articles found</EmptyTitle>
-        <EmptyDescription>
-          Oops! No articles found. Try another search.
-        </EmptyDescription>
+        <EmptyDescription>Oops! No articles found. Try another search.</EmptyDescription>
       </EmptyHeader>
     </Empty>
   {/if}

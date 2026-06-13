@@ -7,6 +7,7 @@
   import LucideCalendar from "~icons/lucide/calendar";
   import LucideRefreshCw from "~icons/lucide/refresh-cw";
   import MdiFolderOutline from "~icons/mdi/folder-outline";
+
   import LocalTime from "./LocalTime.svelte";
 
   let {
@@ -28,10 +29,7 @@
   const isModified = $derived(postMeta.updatedAt > postMeta.createdAt);
 </script>
 
-<div
-  data-pagefind-ignore="all"
-  class={cn("flex flex-wrap items-center gap-4", className)}
->
+<div data-pagefind-ignore="all" class={cn("flex flex-wrap items-center gap-4", className)}>
   {#if showCreatedAt}
     <IconSet>
       <LucideCalendar class={iconVariants({ type: "accent" })} />

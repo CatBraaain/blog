@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { cn, type WithoutChild } from "$lib/utils.js";
+  import { Accordion as AccordionPrimitive } from "bits-ui";
   import LucideChevronDown from "~icons/lucide/chevron-down";
   import LucideChevronUp from "~icons/lucide/chevron-up";
-  import { Accordion as AccordionPrimitive } from "bits-ui";
-  import { cn, type WithoutChild } from "$lib/utils.js";
 
   let {
     ref = $bindable(null),

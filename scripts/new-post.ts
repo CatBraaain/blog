@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+
 import dayjs from "dayjs";
 
 const folderPath = "content";

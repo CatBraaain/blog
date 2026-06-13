@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { ClassValue } from "svelte/elements";
   import { SearchQuery } from "$/lib/hooks/use-search-query";
   import CardBase from "$lib/components/CardBase.svelte";
   import {
@@ -8,17 +7,15 @@
     AccordionItem,
     AccordionTrigger,
   } from "$lib/components/ui/accordion";
-  import {
-    FieldGroup,
-    FieldSeparator,
-    FieldSet,
-  } from "$lib/components/ui/field";
+  import { FieldGroup, FieldSeparator, FieldSet } from "$lib/components/ui/field";
   import { CATEGORY_KINDS, TAG_KINDS } from "$lib/config";
+  import { isMobile } from "$lib/hooks/is-mobile";
+  import type { ClassValue } from "svelte/elements";
   import HeroiconsHashtag16Solid from "~icons/heroicons/hashtag-16-solid";
   import MdiFolderOutline from "~icons/mdi/folder-outline";
+
   import SearchFilterField from "./SearchFilterField.svelte";
   import SearchInputField from "./SearchInputField.svelte";
-  import { isMobile } from "$lib/hooks/is-mobile";
 
   let { class: className }: { class?: ClassValue } = $props();
   let openFilter = $state<string | undefined>(undefined);
@@ -52,9 +49,7 @@
       {:else}
         <Accordion class="md:hidden" type="single" value={openFilter}>
           <AccordionItem>
-            <AccordionTrigger class="text-muted-foreground">
-              Advanced Search
-            </AccordionTrigger>
+            <AccordionTrigger class="text-muted-foreground">Advanced Search</AccordionTrigger>
             <AccordionContent>
               <div class="flex flex-col gap-5 pt-5">
                 {@render AdvancedSearch()}

@@ -1,10 +1,11 @@
 <script lang="ts">
-  import type { Component } from "svelte";
-  import type { ClassValue } from "svelte/elements";
   import BaseLayout from "$lib/components/BaseLayout.svelte";
   import CardBase from "$lib/components/CardBase.svelte";
   import type { PostMeta } from "$lib/post-meta";
   import { clickableVariants, headingVariants } from "$style/variants";
+  import type { Component } from "svelte";
+  import type { ClassValue } from "svelte/elements";
+
   import MetaBelt from "./MetaBelt.svelte";
 
   let {
@@ -45,11 +46,7 @@
       {/if}
       {#if showImage && postMeta.image}
         <div class="not-prose">
-          <img
-            class="w-full rounded-lg shadow-sm"
-            src={postMeta.image}
-            alt=""
-          />
+          <img class="w-full rounded-lg shadow-sm" src={postMeta.image} alt="" />
         </div>
       {/if}
     </div>
