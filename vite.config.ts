@@ -27,13 +27,7 @@ export default defineConfig({
   ],
   server: {
     fs: {
-      allow: ["./content"],
-    },
-  },
-  assetsInclude: ["**/pagefind.js"],
-  build: {
-    rollupOptions: {
-      external: ["/pagefind/pagefind.js"],
+      allow: ["./content", "./.pagefind-client"],
     },
   },
   fmt: {

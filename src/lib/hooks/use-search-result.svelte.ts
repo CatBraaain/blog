@@ -2,21 +2,28 @@ import type { PostMeta } from "$/lib/post-meta";
 import { postMetas } from "$/lib/post-module";
 import { onMount } from "svelte";
 import { writable } from "svelte/store";
-import type { Pagefind } from "vite-plugin-pagefind/types";
+import type { Pagefind, PagefindIndexOptions } from "vite-plugin-pagefind/types";
 
 import { SearchQuery } from "./use-search-query";
+
+// vite-plugin-pagefind types predate the pagefind v1.5 options (noWorker)
+type PagefindInstance = Pagefind & {
+  options: (options: PagefindIndexOptions & { noWorker?: boolean }) => Promise<void>;
+};
 
 export const pagefindResult = writable<PostMeta[]>(postMetas);
 export const searchResult = writable<PostMeta[]>(postMetas);
 export const pagefindHydrated = writable<boolean>(false);
 
 export function setupReactiveSearchResult() {
-  let pagefind = $state<Pagefind | null>(null);
+  let pagefind = $state<PagefindInstance | null>(null);
   onMount(async () => {
     const mod = (await import(
-      // @ts-expect-error
-      "/pagefind/pagefind.js"
-    )) as Pagefind;
+      "../../../.pagefind-client/pagefind.js"
+    )) as PagefindInstance;
+    // The bundled client cannot locate its bundle dir on its own,
+    // so point it at the statically placed index data instead.
+    await mod.options({ basePath: "/pagefind/", noWorker: true });
     await mod.init();
     pagefind = mod;
   });

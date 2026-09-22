@@ -27,3 +27,6 @@ test-results
 *storybook.log
 storybook-static
 pagefind
+
+# pagefind client fetched at build time (bundled into site JS)
+.pagefind-client
