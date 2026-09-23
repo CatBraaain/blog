@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import Icons from "unplugin-icons/vite";
 import { md2svelte } from "vite-plugin-md2svelte";
 import { defineConfig } from "vite-plus";
+import { configDefaults } from "vitest/config";
 
 import { rehypeCodeBlock } from "./plugins/rehype-code-block";
 import { remarkFenced } from "./plugins/remark-fenced";
@@ -29,6 +30,10 @@ export default defineConfig({
     fs: {
       allow: ["./content", "./.pagefind-client"],
     },
+  },
+  test: {
+    // E2E specs in tests/ are run by Playwright, not vitest.
+    exclude: [...configDefaults.exclude, "tests/**"],
   },
   fmt: {
     sortImports: true,

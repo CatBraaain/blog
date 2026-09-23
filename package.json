@@ -28,6 +28,7 @@
   "devDependencies": {
     "@iconify-json/vscode-icons": "^1.2.45",
     "@iconify/json": "^2.2.456",
+    "@playwright/test": "^1.63.0",
     "@shikijs/rehype": "^4.0.2",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.50.2",
