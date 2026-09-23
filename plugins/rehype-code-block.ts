@@ -18,8 +18,10 @@ const highlighter = await createHighlighter({
   themes: Object.keys(bundledThemes),
   langs: [
     ...Object.keys(bundledLanguages),
-    ...["./shiki/shellsession.tm.json", "./shiki/ahk.tm.json", "./shiki/ahk2.tm.json"].map(
-      (grammer) => JSON.parse(fs.readFileSync(join(import.meta.dirname, grammer), "utf8")),
+    // "shellsession" is bundled with shiki, but the bundled grammar paints
+    // non-prompt output lines blue. This custom grammar keeps them plain.
+    ...["./shiki/shellsession.tm.json"].map((grammer) =>
+      JSON.parse(fs.readFileSync(join(import.meta.dirname, grammer), "utf8")),
     ),
   ],
 });

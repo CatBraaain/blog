@@ -31,7 +31,7 @@
     "@iconify-json/vscode-icons": "^1.2.45",
     "@iconify/json": "^2.2.456",
     "@playwright/test": "^1.63.0",
-    "@shikijs/rehype": "^4.0.2",
+    "@shikijs/rehype": "^4.4.3",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/addon-svelte-csf": "latest",
