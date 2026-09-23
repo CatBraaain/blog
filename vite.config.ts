@@ -73,7 +73,8 @@ export default defineConfig({
         extends: true,
         test: {
           // E2E specs in tests/ are run by Playwright, not vitest.
-          exclude: [...configDefaults.exclude, "tests/**"],
+          // Storybook specs in storybook-tests/ are run by playwright.storybook.config.ts.
+          exclude: [...configDefaults.exclude, "tests/**", "storybook-tests/**"],
         },
       },
       {
