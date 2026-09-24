@@ -9,7 +9,7 @@
 </script>
 
 <header data-pagefind-ignore="all">
-  <CardBase class="rounded-t-none px-5 py-4">
+  <CardBase class="rounded-t-none px-6 py-4">
     <nav class="grid grid-cols-3 items-center text-xl">
       <div class="justify-self-start">
         <a
@@ -22,9 +22,7 @@
         </a>
       </div>
 
-      <div class="flex items-center gap-5 justify-self-center"></div>
-
-      <div class="flex items-center gap-5 justify-self-end">
+      <div class="col-start-3 flex items-center gap-5 justify-self-end">
         <ThemeSwitch />
         <a
           href="https://github.com/CatBraaain/blog"

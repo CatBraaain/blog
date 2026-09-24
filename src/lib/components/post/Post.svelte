@@ -3,6 +3,7 @@
   import CardBase from "$lib/components/CardBase.svelte";
   import type { PostMeta } from "$lib/post-meta";
   import { headingTitle } from "$lib/style/styles";
+  import { cn } from "$lib/utils";
   import type { Component } from "svelte";
   import type { ClassValue } from "svelte/elements";
 
@@ -28,8 +29,8 @@
 
 <CardBase data-slot="post-card" class={className}>
   <article class="flex flex-col">
-    <div class="border-b border-border pb-3">
-      <h1 class={headingTitle}>
+    <div class="border-b border-border pb-4">
+      <h1 class={cn(headingTitle, titleLink && "text-2xl")}>
         {#if titleLink}
           <a
             href={titleLink}
@@ -41,11 +42,11 @@
           {postMeta.title}
         {/if}
       </h1>
-      <div class="mt-2">
+      <div class="mt-3">
         <MetaBelt {postMeta} showUpdatedAt={false} />
       </div>
     </div>
-    <div class="mt-3 flex flex-col gap-3">
+    <div class="mt-4 flex flex-col gap-3">
       {#if showDescription && description}
         <div class="not-prose m-0 text-sm text-content-foreground">
           {@html description}

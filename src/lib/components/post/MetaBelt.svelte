@@ -29,7 +29,11 @@
   const isModified = $derived(postMeta.updatedAt > postMeta.createdAt);
 </script>
 
-<div data-pagefind-ignore="all" class={cn("flex flex-wrap items-center gap-4", className)}>
+<div
+  data-slot="meta-belt"
+  data-pagefind-ignore="all"
+  class={cn("flex flex-wrap items-center gap-4 text-sm", className)}
+>
   {#if showCreatedAt}
     <IconSet>
       <LucideCalendar class={iconAccent} />

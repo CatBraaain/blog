@@ -17,7 +17,7 @@ const headingBar =
 
 export const headingTitle = `${headingBar} text-4xl leading-[1.4]`;
 
-export const headingLabel = `${headingBar} font-extrabold text-2xl!`;
+export const headingLabel = `${headingBar} font-extrabold text-xl!`;
 
 // Shared sizing for inline icons.
 const iconShell = "flex size-8 items-center justify-center rounded-sm p-2";

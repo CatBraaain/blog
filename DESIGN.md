@@ -8,23 +8,23 @@
 
 色の値の正本は `src/lib/style/color-theme.css`。この表はトークンの役割を定める。コードと ui コンポーネントが参照しないトークン（sidebar 系・chart 系・popover 系など）は持たない。必要になったときは color-theme.css とこの表へ同時に足す。
 
-| トークン | 役割 |
-| --- | --- |
-| `--background` | ページ背景 |
-| `--card` | カードの面（背景との色差だけで面を区切る） |
-| `--foreground` | 標準の文字色 |
-| `--content-foreground` | カード内の補助テキスト（概要・メタ行） |
-| `--primary` | ホバー時の面（アイコンボタン）・選択中のアイコンボタンの面・メタアイコンの枠 |
-| `--primary-strong` | リンクの hover 文字色・アイコンの色・ホバー時のリング |
-| `--primary-foreground` | shadcn ui コンポーネント内部の対比文字色（button 等） |
-| `--secondary` / `--secondary-foreground` | shadcn ui コンポーネント内部（button の variant 等） |
-| `--muted` / `--muted-strong` | 入力欄の面とそのホバー |
-| `--muted-foreground` | 補助的な文字色（placeholder 等） |
-| `--accent` | タイトル左バー・選択中の pagination の面 |
-| `--destructive` | エラー・無効入力の表示 |
-| `--border` | 区切り線・入力部品の枠 |
-| `--ring` | キーボードフォーカスのリング |
-| `--input` | shadcn 入力部品の枠（ダークテーマの入力面） |
+| トークン                                 | 役割                                                                         |
+| ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `--background`                           | ページ背景                                                                   |
+| `--card`                                 | カードの面（背景との色差だけで面を区切る）                                   |
+| `--foreground`                           | 標準の文字色                                                                 |
+| `--content-foreground`                   | カード内の補助テキスト（概要・メタ行）                                       |
+| `--primary`                              | ホバー時の面（アイコンボタン）・選択中のアイコンボタンの面・メタアイコンの枠 |
+| `--primary-strong`                       | リンクの hover 文字色・アイコンの色・ホバー時のリング                        |
+| `--primary-foreground`                   | shadcn ui コンポーネント内部の対比文字色（button 等）                        |
+| `--secondary` / `--secondary-foreground` | shadcn ui コンポーネント内部（button の variant 等）                         |
+| `--muted` / `--muted-strong`             | 入力欄の面とそのホバー                                                       |
+| `--muted-foreground`                     | 補助的な文字色（placeholder 等）                                             |
+| `--accent`                               | タイトル左バー・選択中の pagination の面                                     |
+| `--destructive`                          | エラー・無効入力の表示                                                       |
+| `--border`                               | 区切り線・入力部品の枠                                                       |
+| `--ring`                                 | キーボードフォーカスのリング                                                 |
+| `--input`                                | shadcn 入力部品の枠（ダークテーマの入力面）                                  |
 
 アクセント色（`--accent`・`--primary`・`--primary-strong`）を使うのは、タイトル左バー、メタアイコン背景、リンク文字の hover 色、クリック可能要素の hover・選択中の面だけである。タイトルの静止時の文字色、カードの縁、カードの面・縁・影のホバー反応には使わない。
 
@@ -32,33 +32,33 @@
 
 ボタン・リンク・入力欄など操作できる要素の状態は、`src/lib/style/styles.ts` の完成品定数（`clickableIcon`・`clickableCardIcon`）と、1箇所でしか使わない要素へのインライン指定（Post のタイトルリンク・SearchInputField の入力欄）が正本である。新しく操作できる要素を足すときは、同種の既存要素の定数を使うか、ここに合う状態の見た目を引き継ぐ。
 
-| 状態 | 見た目 |
-| --- | --- |
-| ホバー | アイコン型は面が `--primary`・文字とリングが `--primary-strong`。リンクは文字だけが `--primary-strong` に変化する。入力欄は面が `--muted-strong` になる |
-| キーボードフォーカス | `--ring` の 3px リング。面は変化しない |
-| 無効（disabled / aria-disabled） | 不透明度 50% で操作できない |
-| 選択中（data-active） | アイコンボタンは面 `--primary`・文字 `--primary-strong`。pagination のページ番号は面 `--accent`・文字 `--card` |
-| 無効な入力（aria-invalid） | 枠とリングが `--destructive`（shadcn ui 入力部品の既定） |
+| 状態                             | 見た目                                                                                                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ホバー                           | アイコン型は面が `--primary`・文字とリングが `--primary-strong`。リンクは文字だけが `--primary-strong` に変化する。入力欄は面が `--muted-strong` になる |
+| キーボードフォーカス             | `--ring` の 3px リング。面は変化しない                                                                                                                  |
+| 無効（disabled / aria-disabled） | 不透明度 50% で操作できない                                                                                                                             |
+| 選択中（data-active）            | アイコンボタンは面 `--primary`・文字 `--primary-strong`。pagination のページ番号は面 `--accent`・文字 `--card`                                          |
+| 無効な入力（aria-invalid）       | 枠とリングが `--destructive`（shadcn ui 入力部品の既定）                                                                                                |
 
 要素の静止時の面・縁・影は持たない（border-0・shadow-none・ring-0）。角丸は `--radius-md`。
 
 ## 3. タイポグラフィ
 
-- 見出し（`headingTitle`）: text-4xl（36px）・行高 1.4。記事タイトルに使う
-- ラベル（`headingLabel`）: text-2xl（24px）・extrabold。検索カードのフィールドラベルに使う
+- 見出し（`headingTitle`）: text-4xl（36px）・行高 1.4。記事タイトルに使う。一覧ページでは Post カードのタイトル帯で text-2xl（24px）に差し替える
+- ラベル（`headingLabel`）: text-xl（20px）・extrabold。検索カードのフィールドラベルに使う
 - 見出しとラベルは左にアクセントバー（幅 spacing-1・色 `--accent`・角丸 `--radius-md`）を持ち、文字はバーから spacing-5 右に始まる。実装は `src/lib/style/styles.ts` が正本
 
 ## 4. カードシェル（共通）
 
-| 属性       | 値                                                                                               |
-| ---------- | ------------------------------------------------------------------------------------------------ |
-| 面         | `--card`（ライト oklch(1 0 0) / ダーク oklch(0.26 0.01 250)）。背景との色差だけで面を区切る      |
-| 縁         | なし                                                                                             |
-| 影         | なし                                                                                             |
-| 角丸       | `--radius`（0.625rem）。Header のみ上辺 0                                                        |
-| 内側余白   | Post・Search は四方 spacing-5（1.25rem）。Header は横 spacing-5（1.25rem）・縦 spacing-4（1rem） |
-| ホバー     | 面・縁・影とも変化しない（静止）                                                                 |
-| 読み込み中 | 検索の読み込み中は面のみを点滅表示し、内部を非表示にする                                         |
+| 属性       | 値                                                                                             |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| 面         | `--card`（ライト oklch(1 0 0) / ダーク oklch(0.26 0.01 250)）。背景との色差だけで面を区切る    |
+| 縁         | なし                                                                                           |
+| 影         | なし                                                                                           |
+| 角丸       | `--radius`（0.625rem）。Header のみ上辺 0                                                      |
+| 内側余白   | Post・Search は四方 spacing-6（1.5rem）。Header は横 spacing-6（1.5rem）・縦 spacing-4（1rem） |
+| ホバー     | 面・縁・影とも変化しない（静止）                                                               |
+| 読み込み中 | 検索の読み込み中は面のみを点滅表示し、内部を非表示にする                                       |
 
 ページ背景は `--background`（ライト oklch(0.95 0.01 250) / ダーク oklch(0.22 0.01 250)）で、カード面との色差だけで面を認識させる。
 
@@ -68,21 +68,21 @@
 
 ### タイトル帯
 
-- タイトルとメタ行を含み、下辺を 1px の罫線（`--border`）で区切る。罫線までの余白は spacing-3（0.75rem）
-- 本文領域は罫線から spacing-3（0.75rem）離れて始まる
+- タイトルとメタ行を含み、下辺を 1px の罫線（`--border`）で区切る。罫線までの余白は spacing-4（1rem）
+- 本文領域は罫線から spacing-4（1rem）離れて始まる
 
 ### タイトル
 
-- text-4xl（36px）・extrabold・行高 1.4。文字色は prose の見出し色（ダークでは白）
+- 記事ページ: text-4xl（36px）・一覧ページ: text-2xl（24px）。extrabold・行高 1.4。文字色は prose の見出し色（ダークでは白）
 - 一覧ページではタイトル全体が記事ページへのリンクで、hover 時に文字色が `--primary-strong` へ変化する
 
 ### メタ行
 
-- タイトルの spacing-2（0.5rem）下に置く
+- タイトルの spacing-3（0.75rem）下に置く
 - アイコン+テキストの組（組内の間隔 spacing-2）を横に並べる。行の間隔は spacing-4（1rem）で、幅が足りなければ折り返す
 - 項目の順序: 作成日 → 更新日（作成日より後の日付があるときだけ） → カテゴリ → タグ（`/` 区切りで 1 項目にまとめる）
 - アイコン枠: size-8（2rem）四方、角丸 `--radius-sm`、背景 `--primary`、内側 spacing-2（0.5rem）。アイコンの色は `--primary-strong`
-- テキスト: text-base（16px）。文字色は prose の本文色
+- テキスト: text-sm（14px）。文字色は prose の本文色
 
 ### 本文領域
 
