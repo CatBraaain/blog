@@ -8,7 +8,6 @@ const config: Config = {
     }),
     alias: {
       "$/*": "src/*",
-      "$style/*": "src/lib/style/*",
       "$content/*": "content/*",
     },
   },

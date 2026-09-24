@@ -1,7 +1,7 @@
 <script lang="ts">
   import { isMobile } from "$lib/hooks/is-mobile";
   import { buildPageHref } from "$lib/hooks/use-pagination";
-  import { clickableVariants } from "$style/variants";
+  import { clickableCardIcon } from "$lib/style/styles";
   import type { ClassValue } from "svelte/elements";
   import LucideChevronLeft from "~icons/lucide/chevron-left";
   import LucideChevronRight from "~icons/lucide/chevron-right";
@@ -30,7 +30,7 @@
 {#snippet PageItem({ targetPage }: { targetPage: number })}
   <li>
     <a
-      class={clickableVariants({ type: "cardIcon" })}
+      class={clickableCardIcon}
       data-active={targetPage === currentPage}
       href={buildPageHref(targetPage)}
     >
@@ -42,7 +42,7 @@
 {#snippet PagePrevious()}
   <li>
     <a
-      class={clickableVariants({ type: "cardIcon" })}
+      class={clickableCardIcon}
       aria-label="Go to previous page"
       aria-disabled={currentPage <= firstPage}
       href={buildPageHref(currentPage - 1)}
@@ -55,7 +55,7 @@
 {#snippet PageNext()}
   <li>
     <a
-      class={clickableVariants({ type: "cardIcon" })}
+      class={clickableCardIcon}
       aria-label="Go to next page"
       aria-disabled={currentPage >= totalPage}
       href={buildPageHref(currentPage + 1)}
@@ -67,11 +67,7 @@
 
 {#snippet Ellipsis()}
   <li>
-    <span
-      // TODO: use staticStyleVariants
-      class={"flex size-9 items-center justify-center"}
-      aria-label="More pages"
-    >
+    <span class={"flex size-9 items-center justify-center"} aria-label="More pages">
       <LucideMoreHorizontal class="size-4" />
     </span>
   </li>

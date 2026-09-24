@@ -1,67 +1,70 @@
+/* The single source of color tokens for this blog.
+ * Values are the effective ones previously split across
+ * default-color-theme.css (shadcn defaults) and custom-color-theme.css (overrides).
+ * Only tokens referenced by app code or shadcn ui components live here
+ * (checked by grep: sidebar-*, chart-*, popover*, card-foreground,
+ * accent-foreground, primary-subtle are unused and intentionally absent).
+ * `@theme inline` + `:root`/`.dark` two-step is required for mode-watcher
+ * to swap `.dark` at runtime. Keep in sync with DESIGN.md.
+ */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-content-foreground: var(--content-foreground);
-
   --color-card: var(--card);
-
   --color-primary: var(--primary);
   --color-primary-strong: var(--primary-strong);
-  --color-primary-subtle: var(--primary-subtle);
-
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-strong: var(--muted-strong);
   --color-muted-foreground: var(--muted-foreground);
-
   --color-accent: var(--accent);
-
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-input: var(--input);
 }
 
 :root {
   --background: oklch(0.95 0.01 250);
   --foreground: oklch(0.25 0.02 250);
   --content-foreground: oklch(0.373 0.034 259.733);
-
   --card: oklch(1 0 0);
-
   --primary: oklch(0.95 0.025 250);
   --primary-strong: oklch(0.55 0.12 250);
-  --primary-subtle: oklch(0.55 0.1 250);
-
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0 0 250 / 0.04);
   --muted-strong: oklch(0 0 250 / 0.06);
   --muted-foreground: oklch(0 0 250 / 0.6);
-
   --accent: oklch(0.7 0.14 250);
-
   --destructive: oklch(0.6 0.2 25);
   --border: rgba(0 0 0 / 0.1);
   --ring: oklch(0.95 0.025 250);
+  --input: oklch(0.922 0 0);
 }
 
 .dark {
   --background: oklch(0.22 0.01 250);
   --foreground: oklch(0.92 0.01 250);
   --content-foreground: oklch(0.78 0.015 250);
-
   --card: oklch(0.26 0.01 250);
-
   --primary: oklch(0.3 0.035 250);
   --primary-strong: oklch(0.73 0.16 250);
-  --primary-subtle: oklch(0.75 0.2 250);
-
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.35 0.01 250 / 0.06);
   --muted-strong: oklch(0.35 0.01 250 / 0.1);
   --muted-foreground: oklch(0.65 0.01 250);
-
   --accent: oklch(0.7 0.14 250);
-
   --destructive: oklch(0.7 0.18 25);
   --border: oklch(1 0 0 / 0.12);
   --ring: oklch(0.55 0.08 250);
+  --input: oklch(1 0 0 / 15%);
 }

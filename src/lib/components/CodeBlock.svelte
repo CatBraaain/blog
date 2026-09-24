@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clickableVariants } from "$lib/style/variants";
+  import { clickableIcon } from "$lib/style/styles";
   import { cn } from "$lib/utils";
   import type { Snippet } from "svelte";
   import LucideCopy from "~icons/lucide/copy";
@@ -58,14 +58,12 @@
   <div class="relative">
     <button
       type="button"
-      class={clickableVariants({
-        type: "icon",
-        class: [
-          "absolute top-2 right-2",
-          copyButtonState === "success" && "animate-pop",
-          copyButtonState === "error" && "animate-shake",
-        ],
-      })}
+      class={cn(
+        clickableIcon,
+        "absolute top-2 right-2",
+        copyButtonState === "success" && "animate-pop",
+        copyButtonState === "error" && "animate-shake",
+      )}
       aria-label="Copy code"
       onclick={async () => {
         try {

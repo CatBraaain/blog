@@ -3,7 +3,7 @@
   import { goto } from "$app/navigation";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import { InputGroup, InputGroupAddon, InputGroupInput } from "$lib/components/ui/input-group";
-  import { clickableVariants, headingVariants } from "$style/variants";
+  import { headingLabel } from "$lib/style/styles";
   import IonSearchSharp from "~icons/ion/search-sharp";
 
   let composing: boolean = false;
@@ -21,8 +21,10 @@
 </script>
 
 <Field class="gap-4">
-  <FieldLabel class={headingVariants({ type: "label" })} for="search">Search</FieldLabel>
-  <InputGroup class={clickableVariants({ type: "input", class: "px-1 gap-0" })}>
+  <FieldLabel class={headingLabel} for="search">Search</FieldLabel>
+  <InputGroup
+    class="inline-flex shrink-0 items-center justify-center rounded-md text-sm outline-none transition-all border-0 shadow-none ring-0 hover:border-0 hover:shadow-none hover:ring-0 hover:bg-muted-strong disabled:cursor-not-allowed bg-muted has-focus-visible:border-0 has-focus-visible:bg-muted-strong has-[[data-slot=input-group-control]:focus-visible]:ring-0 px-1 gap-0"
+  >
     <InputGroupInput
       placeholder="Search..."
       value={SearchQuery.word}

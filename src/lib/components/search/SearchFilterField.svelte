@@ -4,9 +4,8 @@
   import IconSet from "$lib/components/IconSet.svelte";
   import { Field, FieldLabel } from "$lib/components/ui/field";
   import { ToggleGroup, ToggleGroupItem } from "$lib/components/ui/toggle-group";
-  import { iconVariants } from "$lib/style/variants";
+  import { clickableIcon, headingLabel, iconAccent, iconNormal } from "$lib/style/styles";
   import { cn } from "$lib/utils";
-  import { clickableVariants, headingVariants } from "$style/variants";
   import type { Component } from "svelte";
 
   interface Props {
@@ -30,7 +29,7 @@
 </script>
 
 <Field class="gap-4">
-  <FieldLabel class={headingVariants({ type: "label" })} for={label.toLowerCase()}>
+  <FieldLabel class={headingLabel} for={label.toLowerCase()}>
     {label}
   </FieldLabel>
   <ToggleGroup
@@ -54,17 +53,14 @@
             })}
             data-active={activeItemName === item}
             {...props}
-            class={clickableVariants({
-              type: "icon",
-              class: ["flex w-full items-center justify-between p-0.5 h-fit"],
-            })}
+            class={cn(clickableIcon, "flex w-full items-center justify-between p-0.5 h-fit")}
             data-sveltekit-noscroll
           >
             <IconSet>
-              <Icon class={iconVariants({ type: "accent" })} />
+              <Icon class={iconAccent} />
               {item}
             </IconSet>
-            <div class={iconVariants({ type: "normal" })}>
+            <div class={iconNormal}>
               {$pagefindResult.filter((postMeta) => {
                 const metaItem = postMeta[metaKey];
                 if (Array.isArray(metaItem)) {

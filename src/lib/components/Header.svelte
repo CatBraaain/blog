@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import CardBase from "$lib/components/CardBase.svelte";
-  import { clickableVariants } from "$style/variants";
+  import { clickableIcon } from "$lib/style/styles";
   import LaHome from "~icons/la/home";
   import SimpleIconsGithub from "~icons/simple-icons/github";
 
@@ -14,9 +14,9 @@
       <div class="justify-self-start">
         <a
           href="/"
-          class={clickableVariants({ type: "icon" })}
           aria-label="Home"
           aria-current={page.url.pathname === "/" ? "page" : undefined}
+          class={clickableIcon}
         >
           <LaHome class="size-8" />
         </a>
@@ -28,10 +28,10 @@
         <ThemeSwitch />
         <a
           href="https://github.com/CatBraaain/blog"
-          class={clickableVariants({ type: "icon" })}
           aria-label="GitHub repo of this blog"
           target="_blank"
           rel="noopener"
+          class={clickableIcon}
         >
           <SimpleIconsGithub class="size-8" />
         </a>
