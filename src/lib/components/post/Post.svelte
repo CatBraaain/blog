@@ -28,7 +28,7 @@
 
 <CardBase data-slot="post-card" class={className}>
   <article class="flex flex-col">
-    <div class={["flex flex-col gap-4", { "mb-5": !!PostContent }]}>
+    <div class="border-b border-border pb-3">
       <h1 class={headingVariants({ type: "h1" })}>
         {#if titleLink}
           <a href={titleLink} class={clickableVariants({ type: "link" })}>
@@ -38,9 +38,13 @@
           {postMeta.title}
         {/if}
       </h1>
-      <MetaBelt {postMeta} showUpdatedAt={false} />
+      <div class="mt-2">
+        <MetaBelt {postMeta} showUpdatedAt={false} />
+      </div>
+    </div>
+    <div class="mt-3 flex flex-col gap-3">
       {#if showDescription && description}
-        <div class="m-0">
+        <div class="not-prose m-0 text-sm text-content-foreground">
           {@html description}
         </div>
       {/if}
@@ -49,7 +53,7 @@
           <img class="w-full rounded-lg shadow-sm" src={postMeta.image} alt="" />
         </div>
       {/if}
+      <PostContent />
     </div>
-    <PostContent class="mt-5" />
   </article>
 </CardBase>
