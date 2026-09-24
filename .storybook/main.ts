@@ -10,6 +10,10 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
   ],
   framework: "@storybook/sveltekit",
+  core: {
+    disableTelemetry: true,
+    disableWhatsNewNotifications: true,
+  },
   viteFinal: async (config) => {
     // post-module.ts reads content/*.md via import.meta.glob,
     // so the Storybook dev server must be allowed to serve them.
