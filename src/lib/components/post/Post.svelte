@@ -25,11 +25,13 @@
     class?: ClassValue;
   } = $props();
   const description = $derived(postMeta.description || postMeta.excerpt || "");
+  const hasDescription = $derived(showDescription && !!description);
+  const hasBody = $derived(hasDescription || (showImage && !!postMeta.image) || !!PostContent);
 </script>
 
 <CardBase data-slot="post-card" class={className}>
   <article class="flex flex-col">
-    <div class="border-b border-border pb-4">
+    <div class={cn((!titleLink || hasDescription) && "border-b border-border pb-4")}>
       <h1 class={cn(headingTitle, titleLink && "text-2xl")}>
         {#if titleLink}
           <a
@@ -46,18 +48,22 @@
         <MetaBelt {postMeta} showUpdatedAt={false} />
       </div>
     </div>
-    <div class="mt-4 flex flex-col gap-3">
-      {#if showDescription && description}
-        <div class="not-prose m-0 text-sm text-content-foreground">
-          {@html description}
-        </div>
-      {/if}
-      {#if showImage && postMeta.image}
-        <div class="not-prose">
-          <img class="w-full rounded-lg shadow-sm" src={postMeta.image} alt="" />
-        </div>
-      {/if}
-      <PostContent />
-    </div>
+    {#if hasBody}
+      <div class="mt-4 flex flex-col gap-3">
+        {#if hasDescription}
+          <div class="not-prose m-0 text-sm text-content-foreground">
+            {@html description}
+          </div>
+        {/if}
+        {#if showImage && postMeta.image}
+          <div class="not-prose">
+            <img class="w-full rounded-lg shadow-sm" src={postMeta.image} alt="" />
+          </div>
+        {/if}
+        {#if PostContent}
+          <PostContent />
+        {/if}
+      </div>
+    {/if}
   </article>
 </CardBase>

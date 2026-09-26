@@ -37,6 +37,26 @@
 />
 
 <Story
+  name="List item without description"
+  args={{
+    postMeta: { ...postMeta, description: undefined },
+    titleLink: "/posts/getting-started-with-sveltekit",
+    showDescription: true,
+    showImage: false,
+  }}
+/>
+
+<Story
+  name="List item with excerpt"
+  args={{
+    postMeta: { ...postMeta, description: undefined, excerpt: "A search result excerpt." },
+    titleLink: "/posts/getting-started-with-sveltekit",
+    showDescription: true,
+    showImage: false,
+  }}
+/>
+
+<Story
   name="List item with image"
   args={{
     postMeta: { ...postMeta, image: SAMPLE_IMAGE },
