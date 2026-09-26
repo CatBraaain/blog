@@ -1,11 +1,17 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+
+import { clickWithMotion, test } from "./support/recording-fixture";
 
 const POST_TITLE = "タスクスケジューラからPycharmのPythonファイルを実行する";
 
 test("filters posts by a search word", async ({ page }) => {
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  await page.getByPlaceholder("Search...").fill("Pycharm");
+
+  // Type instead of fill() so the recording shows the text appearing on screen.
+  const searchInput = page.getByPlaceholder("Search...");
+  await clickWithMotion(page, searchInput);
+  await searchInput.pressSequentially("Pycharm", { delay: 120 });
 
   await expect(page).toHaveURL(/\/\?q=Pycharm$/);
 
@@ -26,7 +32,7 @@ test("shows the empty state when filters match nothing", async ({ page }) => {
 test("filters posts by category", async ({ page }) => {
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  await page.getByRole("radio", { name: /^Tech / }).click();
+  await clickWithMotion(page, page.getByRole("radio", { name: /^Tech / }));
 
   await expect(page).toHaveURL(/\/\?q=c:Tech$/);
 
@@ -40,7 +46,7 @@ test("filters posts by category", async ({ page }) => {
 test("filters posts by tag", async ({ page }) => {
   await page.goto("/");
   await page.waitForLoadState("networkidle");
-  await page.getByRole("radio", { name: /^Python / }).click();
+  await clickWithMotion(page, page.getByRole("radio", { name: /^Python / }));
 
   await expect(page).toHaveURL(/\/\?q=t:Python$/);
 

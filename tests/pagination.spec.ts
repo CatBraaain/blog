@@ -1,4 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+
+import { clickWithMotion, test } from "./support/recording-fixture";
 
 test("paginates posts with the next and previous buttons", async ({ page }) => {
   await page.goto("/");
@@ -12,13 +14,13 @@ test("paginates posts with the next and previous buttons", async ({ page }) => {
   const next = pagination.getByRole("link", { name: "Go to next page" });
 
   await expect(previous).toHaveAttribute("aria-disabled", "true");
-  await next.click();
+  await clickWithMotion(page, next);
 
   await expect(page).toHaveURL(/\/\?page=2$/);
   await expect(posts).toHaveCount(10);
   await expect(previous).toHaveAttribute("aria-disabled", "false");
 
-  await previous.click();
+  await clickWithMotion(page, previous);
   await expect(page).toHaveURL(/\/$/);
 });
 

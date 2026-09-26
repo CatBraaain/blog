@@ -1,4 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { expect } from "@playwright/test";
+
+import { test } from "./support/recording-fixture";
 
 const POST_SLUG = "20201002113048";
 const POST_TITLE = "タスクスケジューラからPycharmのPythonファイルを実行する";
