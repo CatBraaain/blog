@@ -43,6 +43,12 @@ export default defineConfig({
       allow: ["./content", "./.pagefind-client"],
     },
   },
+  preview: {
+    // Fail fast when the Playwright webServer port (4173) is occupied by a
+    // stale preview process; otherwise Playwright polls the stale server for
+    // the full 180 s timeout before failing.
+    strictPort: true,
+  },
   fmt: {
     sortImports: true,
     sortPackageJson: {
