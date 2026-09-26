@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
-import { mkdtemp, rm, unlink, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, rm, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { extname, join } from "node:path";
 
@@ -8,7 +9,7 @@ import type { Reporter, TestCase, TestResult } from "@playwright/test/reporter";
 // Copy this reporter into the test project and add it alongside the existing reporter.
 // It converts only the WebM files that Playwright attached to the selected run.
 export default class RecordingReporter implements Reporter {
-  private recordings = new Map<string, { title: string; input: string; output: string }>();
+  private recordings = new Map<string, { title: string; input: string }>();
 
   onTestEnd(test: TestCase, result: TestResult): void {
     // Keep one recording per test: the first page of the last recorded attempt.
@@ -22,13 +23,16 @@ export default class RecordingReporter implements Reporter {
     this.recordings.set(test.id, {
       title: test.titlePath().slice(3).join(" › ") || test.title,
       input: attachment.path,
-      output: attachment.path.slice(0, -5) + ".mp4",
     });
   }
 
   async onEnd(): Promise<void> {
-    for (const { title, input, output } of this.recordings.values()) {
+    const outputDir = join(process.cwd(), "recordings");
+    for (const [id, { title, input }] of this.recordings) {
+      const suffix = createHash("sha256").update(id).digest("hex").slice(0, 12);
+      const output = join(outputDir, `${sanitizeFilename(title)}-${suffix}.mp4`);
       try {
+        await mkdir(outputDir, { recursive: true });
         await convertVideo(input, output, title);
         console.log(`[playwright-recording] ${title}: ${output}`);
       } catch (error) {
@@ -38,6 +42,10 @@ export default class RecordingReporter implements Reporter {
       }
     }
   }
+}
+
+function sanitizeFilename(title: string): string {
+  return title.replace(/[/\\:*?"<>|\s]+/g, "-").replace(/^-+|-+$/g, "") || "recording";
 }
 
 async function convertVideo(input: string, output: string, title: string): Promise<void> {
