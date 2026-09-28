@@ -21,7 +21,8 @@ export default class RecordingReporter implements Reporter {
       return;
     }
     this.recordings.set(test.id, {
-      title: test.titlePath().slice(3).join(" › ") || test.title,
+      // titlePath starts with the empty root suite and the project; drop both and keep file, describes and test.
+      title: test.titlePath().filter(Boolean).slice(1).join(" › ") || test.title,
       input: attachment.path,
     });
   }
@@ -45,7 +46,7 @@ export default class RecordingReporter implements Reporter {
 }
 
 function sanitizeFilename(title: string): string {
-  return title.replace(/[/\\:*?"<>|\s]+/g, "-").replace(/^-+|-+$/g, "") || "recording";
+  return title.replace(/[/\\:*?"<>|›,\s]+/g, "-").replace(/^-+|-+$/g, "") || "recording";
 }
 
 async function convertVideo(input: string, output: string, title: string): Promise<void> {

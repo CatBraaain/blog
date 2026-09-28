@@ -8,8 +8,6 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4174",
     trace: "on-first-retry",
-    // Record e2e runs locally; CI keeps only traces to avoid artifact bloat.
-    video: process.env.CI ? "off" : "on",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {

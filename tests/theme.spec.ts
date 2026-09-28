@@ -1,6 +1,4 @@
-import { expect } from "@playwright/test";
-
-import { clickWithMotion, test } from "./support/recording-fixture";
+import { expect, test } from "@playwright/test";
 
 test("toggles between dark and light and persists the choice", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
@@ -13,12 +11,10 @@ test("toggles between dark and light and persists the choice", async ({ page }) 
 
   await expect.poll(isDark).toBe(true);
 
-  await clickWithMotion(page, themeButton);
+  await themeButton.click();
   await expect.poll(isDark).toBe(false);
-  // Hold the light theme briefly so the recording can capture it.
-  await page.waitForTimeout(600);
 
-  await clickWithMotion(page, themeButton);
+  await themeButton.click();
   await expect.poll(isDark).toBe(true);
 
   await page.reload();

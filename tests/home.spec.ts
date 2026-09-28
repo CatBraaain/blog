@@ -1,6 +1,4 @@
-import { expect } from "@playwright/test";
-
-import { test } from "./support/recording-fixture";
+import { expect, test } from "@playwright/test";
 
 test("shows search input, filters and the first page of posts", async ({ page }) => {
   await page.goto("/");
