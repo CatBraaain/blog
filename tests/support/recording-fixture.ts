@@ -37,6 +37,46 @@ export async function clickWithMotion(page: Page, locator: Locator): Promise<voi
   await locator.click();
 }
 
+// Scroll by small, frequent wheel ticks so the motion reads as smooth scrolling
+// rather than discrete jumps.
+export async function smoothScroll(page: Page, totalY: number): Promise<void> {
+  const stepPx = 20;
+  for (let y = 0; y < totalY; y += stepPx) {
+    await page.mouse.wheel(0, stepPx);
+    await page.waitForTimeout(10);
+  }
+}
+
+// Show what the current step expects on the video: a "step N: action -> outcome" label
+// under the top bar. Call it before the step's action; the label survives navigations
+// via sessionStorage, so it stays visible until the next step replaces it, and it also
+// clears the previous step's highlight outlines.
+export async function showStep(page: Page, label: string): Promise<void> {
+  await page.evaluate((text) => {
+    sessionStorage.setItem("playwright-recording-step", text);
+    window.dispatchEvent(new CustomEvent("playwright-recording-step", { detail: text }));
+    for (const element of document.querySelectorAll<HTMLElement>("[data-playwright-highlight]")) {
+      element.removeAttribute("data-playwright-highlight");
+      element.style.outline = "";
+      element.style.outlineOffset = "";
+    }
+  }, label);
+}
+
+// Outline the elements a reviewer should watch. Call it after the step's assertions,
+// once the outcome is settled; outlines follow their element through scrolls.
+export async function highlight(page: Page, locators: Locator[]): Promise<void> {
+  for (const locator of locators) {
+    await locator
+      .evaluate((element) => {
+        element.setAttribute("data-playwright-highlight", "");
+        element.style.outline = "3px solid #ffdb65";
+        element.style.outlineOffset = "3px";
+      })
+      .catch(() => {});
+  }
+}
+
 function installOverlay(): void {
   // page.addInitScript also runs in child frames; only the recorded top-level page needs an overlay.
   if (window !== window.top) return;
@@ -66,6 +106,13 @@ function installOverlay(): void {
         font: 600 30px/1.2 system-ui, sans-serif; text-align: center;
         white-space: pre; overflow: hidden; text-overflow: ellipsis;
         opacity: 0; transition: opacity 300ms ease-out; }
+      .step-label {
+        position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+        max-width: calc(100vw - 48px); padding: 10px 24px; border-radius: 999px;
+        background: rgba(15, 17, 20, .82); color: #f4f1e9;
+        font: 600 22px/1.3 system-ui, sans-serif; text-align: center;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        opacity: 0; transition: opacity 300ms ease-out; }
     `;
     shadow.append(style);
 
@@ -76,7 +123,9 @@ function installOverlay(): void {
     const ripples = document.createElement("div");
     const inputBand = document.createElement("div");
     inputBand.className = "input-band";
-    shadow.append(ripples, cursor, inputBand);
+    const stepLabel = document.createElement("div");
+    stepLabel.className = "step-label";
+    shadow.append(ripples, cursor, inputBand, stepLabel);
     document.documentElement.append(host);
 
     window.addEventListener(
@@ -144,8 +193,12 @@ function installOverlay(): void {
       (event) => {
         lastKeydownMs = Date.now();
         window.clearTimeout(pendingTextTimer);
-        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "a") {
-          text = `${event.metaKey ? "Meta" : "Ctrl"} + A`;
+        if ((event.ctrlKey || event.metaKey) && ["a", "r"].includes(event.key.toLowerCase())) {
+          text = `${event.metaKey ? "Meta" : "Ctrl"} + ${event.key.toUpperCase()}`;
+          showingShortcut = true;
+          deletionVisibleUntilMs = 0;
+        } else if (event.altKey && event.key === "ArrowLeft") {
+          text = "Alt + ←";
           showingShortcut = true;
           deletionVisibleUntilMs = 0;
         } else if (event.key === "Backspace" && !event.ctrlKey && !event.metaKey) {
@@ -194,6 +247,24 @@ function installOverlay(): void {
       },
       { passive: true, capture: true },
     );
+    window.addEventListener(
+      "playwright-recording-step",
+      (event) => {
+        stepLabel.textContent = (event as CustomEvent<string>).detail;
+        stepLabel.style.opacity = "1";
+      },
+      { passive: true, capture: true },
+    );
+    // Restore the current step label after a navigation rebuilt the page.
+    try {
+      const savedStep = sessionStorage.getItem("playwright-recording-step");
+      if (savedStep) {
+        stepLabel.textContent = savedStep;
+        stepLabel.style.opacity = "1";
+      }
+    } catch {
+      // sessionStorage is unavailable on opaque origins (about:blank); nothing to restore.
+    }
   };
 
   if (document.documentElement) mount();
