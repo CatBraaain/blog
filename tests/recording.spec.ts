@@ -5,7 +5,8 @@ import { clickWithMotion, test } from "./support/recording-fixture";
 // Recording scenarios defined by SPEC.md, the canonical source. One test per
 // recorded video, walking through the spec steps in order at a pace a human
 // can follow on video.
-test.use({ video: "on" });
+// Record at the full viewport size instead of Playwright's default 800px-wide scale.
+test.use({ video: { mode: "on", size: { width: 1280, height: 720 } } });
 
 const POST_SLUG = "20201002113048";
 const POST_TITLE = "タスクスケジューラからPycharmのPythonファイルを実行する";

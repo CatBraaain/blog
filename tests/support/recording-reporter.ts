@@ -52,7 +52,7 @@ function sanitizeFilename(title: string): string {
 async function convertVideo(input: string, output: string, title: string): Promise<void> {
   const directory = await mkdtemp(join(tmpdir(), "playwright-recording-"));
   try {
-    const titleLines = title.replace(/\s+/g, " ").match(/.{1,36}(?=\s|$)|\S{1,36}/gu) ?? [title];
+    const titleLines = title.replace(/\s+/g, " ").match(/.{1,60}(?=\s|$)|\S{1,60}/gu) ?? [title];
     const headerHeight = titleLines.length * 24 + 36;
     const titleFilters = await Promise.all(
       titleLines.map(async (line, index) => {
@@ -67,7 +67,6 @@ async function convertVideo(input: string, output: string, title: string): Promi
     const filter = [
       `pad=ceil(iw/2)*2:ceil((ih+${headerHeight})/2)*2:0:${headerHeight}:color=0x202020`,
       ...titleFilters,
-      `drawtext=text='%{pts\\:hms}':fontcolor=white:fontsize=18:x=w-tw-12:y=${headerHeight - 28}`,
     ].join(",");
     await new Promise<void>((resolve, reject) => {
       const ffmpeg = spawn(
